@@ -4,9 +4,11 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: ['plugin:vue/essential', '@vue/prettier'],
+  extends: ['plugin:vue/essential', '@vue/prettier', 'plugin:vuetify/base'],
   rules: {
     'no-console': 'off',
+    'vuetify/no-deprecated-classes': 'error',
+    'vuetify/no-legacy-grid': 'error',
     // "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     // "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
     'prettier/prettier': [

@@ -1,17 +1,44 @@
 <template>
   <header>
-    <router-link to="/main" class="logo"> TIL</router-link>
+    <div>
+      <router-link :to="logoLink" class="logo">
+        TesterMatchingPlatform
+        <span v-if="isTesterLogin">by {{ $store.state.TesterNickname }}</span>
+      </router-link>
+    </div>
     <div class="navigations">
-      <router-link to="/login/tester">Tester 로그인</router-link>
-      <router-link to="/login/maker">Maker 로그인</router-link>
-      <router-link to="/signup/tester">Tester 회원가입</router-link>
-      <router-link to="/signup/maker">Maker 회원가입</router-link>
+      <template v-if="isTesterLogin">
+        <a href="javascript:" @click="logoutTester" class="logout-button">
+          Logout
+        </a>
+      </template>
+      <template v-else>
+        <router-link to="/login/tester">Tester 로그인</router-link>
+        <router-link to="/login/maker">Maker 로그인</router-link>
+        <router-link to="/signup/tester">Tester 회원가입</router-link>
+        <router-link to="/signup/maker">Maker 회원가입</router-link>
+      </template>
     </div>
   </header>
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    isTesterLogin() {
+      return this.$store.getters.isTesterLogin;
+    },
+    logoLink() {
+      return this.$store.getters.isTesterLogin ? '/main' : '/login/tester';
+    },
+  },
+  methods: {
+    logoutTester() {
+      this.$store.commit('clearTesterNickname');
+      this.$store.commit('clearToken');
+    },
+  },
+};
 </script>
 
 <style scoped>

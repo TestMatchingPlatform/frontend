@@ -1,10 +1,14 @@
 <template>
-  <div>TesterLoginPage</div>
+  <TesterLoginForm></TesterLoginForm>
 </template>
 
 <script>
+import TesterLoginForm from '@/components/form/TesterLoginForm';
+
 export default {
-  name: 'TesterLoginPage',
+  components: {
+    TesterLoginForm,
+  },
 };
 </script>
 

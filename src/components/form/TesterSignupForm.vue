@@ -1,6 +1,6 @@
 <template>
   <div class="contents">
-    <div class="form-wrapper">
+    <div class="form-wrapper form-wrapper-sm">
       <form @submit.prevent="submitForm" class="form">
         <div>
           <label for="email">email: </label>
@@ -114,7 +114,6 @@ export default {
       // execute API
       const { data } = await testerRegister(userData);
       console.log(data.nickname);
-      this.logMessage = 'Tester로 가입 성공';
       this.initForm();
     },
 

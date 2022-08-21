@@ -6,4 +6,9 @@ function testerRegister(userData) {
   return instance.post('/testers', userData);
 }
 
-export { testerRegister };
+// Tester 로그인 API
+function testerLogin(userData) {
+  return instance.post('testers/login', userData);
+}
+
+export { testerRegister, testerLogin };
