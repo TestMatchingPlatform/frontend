@@ -21,7 +21,7 @@
           type="submit"
           class="btn"
         >
-          테스터 로그인
+          메이커 로그인
         </button>
       </form>
       <p class="log">{{ logMessage }}</p>
@@ -33,7 +33,7 @@
 import { validateEmail } from '@/utils/validation';
 
 export default {
-  name: 'TesterLoginForm',
+  name: 'MakerLoginForm',
   data() {
     return {
       // form values
@@ -56,18 +56,15 @@ export default {
   methods: {
     async submitForm() {
       try {
-        console.log('method execute');
-        // 이름을 백엔드에서 받기 편하도록 만들어서 전송
         const userData = {
           email: this.email,
           password: this.password,
         };
-        // test json
         console.log(userData);
-        // execute API
-        // await this.$store.dispatch('TesterLogin', userData);
-        const { data } = await this.$store.dispatch('TesterLogin', userData);
+
+        const { data } = await this.$store.dispatch('MakerLogin', userData);
         console.log(data);
+
         await this.$router.push('/main');
       } catch (error) {
         console.log(error);

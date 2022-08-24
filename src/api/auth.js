@@ -11,4 +11,14 @@ function testerLogin(userData) {
   return instance.post('testers/login', userData);
 }
 
-export { testerRegister, testerLogin };
+// Maker 로그인 API
+function makerRegister(userData) {
+  return instance.post('/accounts/questMakers/signup', userData);
+}
+
+// Maker 회원가입 API
+function makerLogin(userData) {
+  return instance.post('/accounts/questMaker/login', userData);
+}
+
+export { testerRegister, testerLogin, makerLogin, makerRegister };

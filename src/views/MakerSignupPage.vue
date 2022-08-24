@@ -1,5 +1,10 @@
 <template>
-  <MakerSignupForm></MakerSignupForm>
+  <div>
+    <h1>메이커 회원가입 페이지 입니다.</h1>
+    <div class="form-container">
+      <MakerSignupForm></MakerSignupForm>
+    </div>
+  </div>
 </template>
 
 <script>
