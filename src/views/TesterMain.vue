@@ -1,12 +1,16 @@
 <template>
   <div class="main">
-    <h1>테스터 Main Page</h1>
+    <h1>TesterMain</h1>
+    <TesterHeader></TesterHeader>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import TesterHeader from '@/components/common/TesterHeader';
 export default {
-  name: 'TesterPage',
+  name: 'TesterMain',
+  components: { TesterHeader },
 };
 </script>
 

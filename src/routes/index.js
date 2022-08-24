@@ -14,6 +14,14 @@ const router = new VueRouter({
       redirect: '/main',
     },
     {
+      path: '/tester',
+      component: () => import('@/views/TesterMain.vue'),
+    },
+    {
+      path: '/maker',
+      component: () => import('@/views/MakerMain.vue'),
+    },
+    {
       path: '/login/tester',
       component: () => import('@/views/TesterLoginPage.vue'),
     },

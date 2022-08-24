@@ -12,11 +12,12 @@
           Logout
         </a>
       </template>
+      <!--      <template v-else-if="isMakerLogin">-->
+      <!--        -->
+      <!--      </template>-->
       <template v-else>
-        <router-link to="/login/tester">Tester 로그인</router-link>
-        <router-link to="/login/maker">Maker 로그인</router-link>
-        <router-link to="/signup/tester">Tester 회원가입</router-link>
-        <router-link to="/signup/maker">Maker 회원가입</router-link>
+        <router-link to="/tester">Tester로 시작하기</router-link>
+        <router-link to="/maker">Maker로 시작하기</router-link>
       </template>
     </div>
   </header>
