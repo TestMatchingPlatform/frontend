@@ -38,12 +38,16 @@ const router = new VueRouter({
       component: () => import('@/views/MakerSignupPage.vue'),
     },
     {
-      path: '/quest',
-      component: () => import('@/views/QuestListPage.vue'),
+      path: '/testers/:id',
+      component: () => import('@/views/TesterInfoPage.vue'),
     },
     {
-      path: '/quest/:id',
-      component: () => import('@/views/QuestPage.vue'),
+      path: '/testers/:id/apply',
+      component: () => import('@/views/TesterApplyQuestPage'),
+    },
+    {
+      path: '/testers/:id/quests',
+      component: () => import('@/views/TesterMyQuestPage'),
     },
     {
       path: '/main',

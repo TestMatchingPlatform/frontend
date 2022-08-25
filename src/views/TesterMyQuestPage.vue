@@ -1,10 +1,12 @@
 <template>
-  <div>QuestPage</div>
+  <div>
+    <h2>TesterMyQuestPage</h2>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'QuestPage',
+  name: 'TesterMyQuestPage',
 };
 </script>
 

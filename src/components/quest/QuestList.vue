@@ -1,10 +1,12 @@
 <template>
-  <div>QuestListPage</div>
+  <div>
+    <h3>QuestListComponent</h3>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'QuestListPage',
+  name: 'QuestList',
 };
 </script>
 
