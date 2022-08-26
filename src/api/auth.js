@@ -7,8 +7,10 @@ function testerRegister(userData) {
 }
 
 // Tester 로그인 API
-function testerLogin(userData) {
-  return instance.post('testers/login', userData);
+async function testerLogin(userData) {
+  const response = await instance.post('testers/login', userData);
+  console.log(response);
+  return response;
 }
 
 // Maker 로그인 API

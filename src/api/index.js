@@ -6,4 +6,12 @@ function createInstance() {
   });
 }
 
+function createInstanceWithAuth(url) {
+  const instance = axios.create({
+    baseURL: `${process.env.VUE_APP_API_URL}${url}`,
+    withCredentials: true,
+  });
+  return setInterceptors(instance);
+}
+
 export const instance = createInstance();

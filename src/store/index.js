@@ -1,6 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+import {
+  saveSessionToCookie,
+  saveTesterToCookie,
+  saveMakerToCookie,
+  getSessionFromCookie,
+  getTesterFromCookie,
+  getMakerFromCookie,
+} from '@/utils/cookies';
 import { testerLogin, makerLogin } from '@/api/auth';
 
 Vue.use(Vuex);
@@ -9,7 +16,7 @@ export default new Vuex.Store({
   state: {
     TesterNickname: '',
     MakerNickname: '',
-    sessionId: '',
+    JSESSIONID: '',
   },
   getters: {
     isTesterLogin(state) {
@@ -17,6 +24,9 @@ export default new Vuex.Store({
     },
     isMakerLogin(state) {
       return state.MakerNickname !== '';
+    },
+    isSessionExist(state) {
+      return state.JSESSIONID !== '';
     },
   },
   mutations: {
@@ -26,20 +36,25 @@ export default new Vuex.Store({
     setMakerNickname(state, username) {
       state.MakerNickname = username;
     },
+    setSession(state, JSESSIONID) {
+      state.JSESSIONID = JSESSIONID;
+    },
     clearTesterNickname(state) {
       state.TesterNickname = '';
     },
-    setSession(state, sessionId) {
-      state.sessionId = sessionId;
+    clearMakerNickname(state) {
+      state.MakerNickname = '';
     },
     clearSession(state) {
-      state.token = '';
+      state.JSESSIONID = '';
     },
   },
   actions: {
     async TesterLogin({ commit }, userData) {
       const { data } = await testerLogin(userData);
       commit('setTesterNickname', data.nickname);
+      // ..?
+      // commit('setSession');
       console.log('store/index.js' + data);
       console.log(data);
       // commit('setToken', data.token);
