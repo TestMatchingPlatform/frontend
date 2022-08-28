@@ -66,7 +66,7 @@ export default {
         console.log(userData);
         // execute API
         // await this.$store.dispatch('TesterLogin', userData);
-        const { data } = await this.$store.dispatch('TesterLogin', userData);
+        const data = await this.$store.dispatch('TesterLogin', userData);
         console.log(data);
         await this.$router.push('/main');
       } catch (error) {

@@ -10,6 +10,7 @@ function testerRegister(userData) {
 async function testerLogin(userData) {
   const response = await instance.post('testers/login', userData);
   console.log(response);
+  console.log('auth Test execute');
   return response;
 }
 
