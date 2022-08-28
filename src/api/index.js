@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-axios.defaults.withCredentials = true;
-
 function createInstance() {
   return axios.create({
     baseURL: process.env.VUE_APP_API_URL,
+    withCredentials: true,
   });
 }
 
