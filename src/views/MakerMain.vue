@@ -1,9 +1,9 @@
 <template>
-  <div class="main">
+  <v-container>
     <h1>MakerMain</h1>
     <MakerHeader></MakerHeader>
     <router-view></router-view>
-  </div>
+  </v-container>
 </template>
 
 <script>

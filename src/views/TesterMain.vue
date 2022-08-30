@@ -1,9 +1,9 @@
 <template>
-  <div class="main">
+  <v-container>
     <h1>TesterMain</h1>
     <TesterHeader></TesterHeader>
     <router-view></router-view>
-  </div>
+  </v-container>
 </template>
 
 <script>
