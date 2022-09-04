@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>TesterMain</h1>
+    <h1>TesterMainPage</h1>
     <TesterHeader></TesterHeader>
     <router-view></router-view>
   </v-container>
@@ -9,7 +9,7 @@
 <script>
 import TesterHeader from '@/components/common/TesterHeader';
 export default {
-  name: 'TesterMain',
+  name: 'TesterMainPage',
   components: { TesterHeader },
 };
 </script>

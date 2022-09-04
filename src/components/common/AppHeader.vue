@@ -1,26 +1,28 @@
 <template>
-  <header>
-    <div>
-      <router-link :to="logoLink" class="logo">
-        TesterMatchingPlatform
-        <span v-if="isTesterLogin">by {{ $store.state.TesterNickname }}</span>
-      </router-link>
-    </div>
-    <div class="navigations">
-      <template v-if="isTesterLogin">
-        <a href="javascript:" @click="logoutTester" class="logout-button">
-          Logout
-        </a>
-      </template>
-      <!--      <template v-else-if="isMakerLogin">-->
-      <!--        -->
-      <!--      </template>-->
-      <template v-else>
-        <router-link to="/tester">Tester로 시작하기</router-link>
-        <router-link to="/maker">Maker로 시작하기</router-link>
-      </template>
-    </div>
-  </header>
+  <v-navigation-drawer app>
+    <template>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="text-h6"> Tester </v-list-item-title>
+          <v-list-item-subtitle> Tester Menu </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense nav>
+        <v-list-item v-for="item in items" :key="item.title" link :to="item.to">
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </template>
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -29,9 +31,6 @@ export default {
     isTesterLogin() {
       return this.$store.getters.isTesterLogin;
     },
-    logoLink() {
-      return this.$store.getters.isTesterLogin ? '/main' : '/login/tester';
-    },
   },
   methods: {
     logoutTester() {
@@ -39,26 +38,17 @@ export default {
       this.$store.commit('clearToken');
     },
   },
+  components: {},
+
+  data: () => ({
+    items: [
+      { title: 'Login', icon: 'mdi-account', to: '/login/tester' },
+      { title: 'Register', icon: 'mdi-account-badge', to: '/signup/tester' },
+      { title: 'Administer', icon: 'mdi-account-cog', to: '/administer' },
+    ],
+    right: null,
+  }),
 };
 </script>
 
-<style scoped>
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #927dfc;
-  z-index: 2;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05);
-}
-
-.logo > span {
-  font-size: 14px;
-  font-weight: normal;
-}
-
-.navigations a {
-  margin-left: 10px;
-}
-</style>
+<style scoped></style>

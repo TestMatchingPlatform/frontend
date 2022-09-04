@@ -1,135 +1,139 @@
 <template>
-  <div class="contents">
-    <div class="form-wrapper form-wrapper-sm">
-      <form @submit.prevent="submitForm" class="form">
-        <div>
-          <label for="email">email: </label>
-          <input id="email" type="text" v-model="email" />
-          <p class="validation-text">
-            <span class="warning" v-if="!isEmailValid && email">
-              Please enter an email address
-            </span>
-          </p>
-        </div>
-        <div>
-          <label for="password">password: </label>
-          <input id="password" type="text" v-model="password" />
-        </div>
-        <div>
-          <label for="nickname">nickname: </label>
-          <input id="nickname" type="text" v-model="nickname" />
-        </div>
-        <div>
-          <label for="phone_number">phone_number: </label>
-          <input id="phone_number" type="text" v-model="phone_number" />
-        </div>
-        <div>
-          <label for="prefer_category_name">prefer_category_name: </label>
-          <select id="prefer_category_name" v-model="prefer_category_id">
-            <option value="1">게임테스트</option>
-            <option value="2">트래픽테스트</option>
-            <option value="3">동작 API 테스트</option>
-          </select>
-        </div>
-        <div>
-          <label for="intro_message">intro_message: </label>
-          <input id="intro_message" type="text" v-model="intro_message" />
-        </div>
-        <div>
-          <label for="intro_picture">intro_picture: </label>
-          <input
-            id="intro_picture"
-            type="file"
-            ref="intro_picture"
-            accept="image/*"
-            v-on:change="fileSelect()"
-          />
-        </div>
-        <button
-          :disabled="!isActiveButton"
-          :class="!isActiveButton ? 'disabled' : null"
-          type="submit"
-          class="btn"
-        >
-          테스터 회원가입
-        </button>
-      </form>
-      <p class="log">{{ logMessage }}</p>
-    </div>
-  </div>
+  <v-container>
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <v-text-field
+        v-model="email"
+        :counter="10"
+        :rules="emailRules"
+        label="E-mail"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="password"
+        :rules="passwordRules"
+        label="Password"
+        type="password"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="nickname"
+        :rules="nicknameRules"
+        label="Nickname"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="phoneNumber"
+        :rules="phoneNumberRules"
+        label="phoneNumber"
+        required
+      ></v-text-field>
+
+      <v-select
+        v-model="preferCategory"
+        :hint="`${preferCategory.state}, ${preferCategory.index}`"
+        :items="preferCategoryItems"
+        item-text="state"
+        item-value="index"
+        :rules="preferCategoryRules"
+        label="preferCategory"
+        persistent-hint
+        return-object
+        required
+      ></v-select>
+
+      <v-file-input
+        v-model="introPicture"
+        :rules="introPictureRules"
+        @change="fileInput"
+        accept="image/*"
+        label="File input"
+      ></v-file-input>
+
+      <v-text-field
+        v-model="introMessage"
+        :rules="introMessageRules"
+        label="introMessage"
+        required
+      ></v-text-field>
+
+      <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
+        Validate
+      </v-btn>
+
+      <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
+    </v-form>
+  </v-container>
 </template>
 
 <script>
 import { testerRegister } from '@/api/auth';
-import { validateEmail } from '@/utils/validation';
 
 export default {
+  name: 'TesterLoginForm',
   data() {
     return {
-      // form values
+      valid: true,
       email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
       password: '',
+      passwordRules: [v => !!v || 'Password is required'],
       nickname: '',
-      phone_number: '',
-      prefer_category_id: '',
-      intro_message: '',
-      intro_picture: '',
-
-      // log
-      logMessage: '',
+      nicknameRules: [v => !!v || 'Nickname is required'],
+      phoneNumber: '',
+      phoneNumberRules: [v => !!v || 'Phone Number is required'],
+      preferCategory: { state: 'Game Test', index: 1 },
+      preferCategoryItems: [
+        { state: 'Game Test', index: 1 },
+        { state: 'Traffic Test', index: 2 },
+        { state: 'Function Test', index: 3 },
+      ],
+      preferCategoryRules: [v => !!v || 'Prefer Category is required'],
+      introPicture: [],
+      introPictureRules: [v => !!v || 'Profile Image is required'],
+      introMessage: '',
+      introMessageRules: [v => !!v || 'Introduction Message is required'],
     };
   },
-  computed: {
-    isEmailValid() {
-      return validateEmail(this.email);
-    },
-    // 필요조건 완성 시 Button 활성화
-    isActiveButton() {
-      console.log(this.email);
-      return (
-        this.email &&
-        this.password &&
-        this.nickname &&
-        this.phone_number &&
-        this.intro_picture
-      );
-    },
-  },
+
+  computed: {},
+
   methods: {
-    async submitForm() {
-      console.log('method execute');
-      // 이름을 백엔드에서 받기 편하도록 만들어서 전송
-      const userData = new FormData();
-      userData.append('email', this.email);
-      userData.append('password', this.password);
-      userData.append('nickname', this.nickname);
-      userData.append('phoneNumber', this.phone_number);
-      userData.append('preferCategoryId', this.prefer_category_id);
-      userData.append('introMessage', this.intro_message);
-      userData.append('introPicture', this.intro_picture);
-      // test FormData
-      for (let key of userData.entries()) {
-        console.log(`${key}`);
+    async validate() {
+      this.$refs.form.validate();
+      try {
+        console.log('method execute');
+        // 이름을 백엔드에서 받기 편하도록 만들어서 전송
+        const userData = new FormData();
+        userData.append('email', this.email);
+        userData.append('password', this.password);
+        userData.append('nickname', this.nickname);
+        userData.append('phoneNumber', this.phoneNumber);
+        userData.append('preferCategoryId', this.preferCategory.index);
+        userData.append('introMessage', this.introMessage);
+        userData.append('introPicture', this.introPicture);
+        // test FormData
+        for (let key of userData.entries()) {
+          console.log(`${key}`);
+        }
+        // execute API
+        const { data } = await testerRegister(userData);
+        console.log(data.id);
+        await this.$router.push('/login/tester');
+      } catch (error) {
+        console.log(error);
       }
-      // execute API
-      const { data } = await testerRegister(userData);
-      console.log(data.nickname);
-      this.initForm();
     },
-
-    fileSelect() {
-      console.log(this.$refs);
-      this.intro_picture = this.$refs.intro_picture.files[0];
+    reset() {
+      this.$refs.form.reset();
     },
-
-    initForm() {
-      this.email = '';
-      this.password = '';
-      this.nickname = '';
-      this.phone_number = '';
-      this.prefer_category_id = '';
-      this.intro_message = '';
-      this.intro_picture = '';
+    fileInput(file) {
+      this.introPicture = file;
     },
   },
 };

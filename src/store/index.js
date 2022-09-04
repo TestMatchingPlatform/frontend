@@ -1,43 +1,53 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {
-  saveSessionToCookie,
-  saveTesterToCookie,
-  saveMakerToCookie,
-  getSessionFromCookie,
-  getTesterFromCookie,
-  getMakerFromCookie,
-} from '@/utils/cookies';
+
 import { testerLogin, makerLogin } from '@/api/auth';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    UserType: '',
     TesterNickname: '',
     MakerNickname: '',
-    JSESSIONID: '',
+    UserID: null,
+    Token: '',
   },
   getters: {
+    isUserType(state) {
+      return state.UserType !== '';
+    },
     isTesterLogin(state) {
       return state.TesterNickname !== '';
     },
     isMakerLogin(state) {
       return state.MakerNickname !== '';
     },
-    isSessionExist(state) {
-      return state.JSESSIONID !== '';
+    isTokenExist(state) {
+      return state.Token !== '';
+    },
+    isUserID(state) {
+      return state.UserID !== null;
     },
   },
   mutations: {
+    setUserType(state, userType) {
+      state.UserType = userType;
+    },
     setTesterNickname(state, username) {
       state.TesterNickname = username;
     },
     setMakerNickname(state, username) {
       state.MakerNickname = username;
     },
-    setSession(state, JSESSIONID) {
-      state.JSESSIONID = JSESSIONID;
+    setToken(state, JSESSIONID) {
+      state.Token = JSESSIONID;
+    },
+    setUserID(state, id) {
+      state.UserID = id;
+    },
+    clearUserType(state) {
+      state.UserType = '';
     },
     clearTesterNickname(state) {
       state.TesterNickname = '';
@@ -45,20 +55,20 @@ export default new Vuex.Store({
     clearMakerNickname(state) {
       state.MakerNickname = '';
     },
-    clearSession(state) {
-      state.JSESSIONID = '';
+    clearToken(state) {
+      state.Token = '';
+    },
+    clearUserID(state, id) {
+      state.UserID = id;
     },
   },
   actions: {
     async TesterLogin({ commit }, userData) {
       const { data } = await testerLogin(userData);
       commit('setTesterNickname', data.nickname);
-      // ..?
-      // commit('setSession');
-      console.log('store/index.js' + data);
-      console.log(data);
-      // commit('setToken', data.token);
-      // commit('setUsername', data.user.username);
+      commit('setUserID', data.id);
+      let splitToken = data.token.split(' ');
+      commit('setToken', splitToken[1]);
       return data;
     },
     async MakerLogin({ commit }, userData) {
@@ -67,6 +77,11 @@ export default new Vuex.Store({
       console.log('store/index.js' + data);
       console.log(data);
       return data;
+    },
+    async UserTypeChoice({ commit }, userData) {
+      const data = userData;
+      commit('setUserType', data);
+      console.log(data);
     },
   },
 });

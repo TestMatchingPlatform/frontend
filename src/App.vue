@@ -1,81 +1,90 @@
 <template>
   <v-app>
     <!--    뷰티파이 상단 코드 부분-->
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="secondary" dark>
       <div class="d-flex align-center">
         <v-img
-          alt="Vuetify Logo"
+          alt="Project Logo"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          src="@/assets/logo.png"
           transition="scale-transition"
           width="40"
         />
 
         <v-img
-          alt="Vuetify Name"
+          alt="Project Name"
           class="shrink mt-1 hidden-sm-and-down"
           contain
           min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
+          src="@/assets/logo-string.png"
+          width="400"
         />
       </div>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
+      <v-btn @click="mainPageClear" target="_blank" text>
+        <span class="mr-2">초기 화면으로 돌아가기</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer app>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6"> User </v-list-item-title>
-          <v-list-item-subtitle> 사용자 종류 선택 </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list dense nav>
-        <v-list-item v-for="item in items" :key="item.title" link :to="item.to">
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
     <v-main>
-      <v-container> <router-view></router-view></v-container>
+      <v-container>
+        <TesterMainPage v-if="isTester"></TesterMainPage>
+        <MakerMainPage v-else-if="isMaker"></MakerMainPage>
+        <AdminMainPage v-else-if="isAdmin"></AdminMainPage>
+        <MainForm v-else v-on:choiceUserType="convertView"></MainForm>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import MainForm from '@/components/form/MainForm';
+import TesterMainPage from '@/views/TesterMainPage';
+import MakerMainPage from '@/views/MakerMainPage';
+import AdminMainPage from '@/views/AdminMainPage';
 export default {
   name: 'App',
-
-  components: {},
-
-  data: () => ({
-    items: [
-      { title: 'Tester', icon: 'mdi-account', to: '/tester' },
-      { title: 'Maker', icon: 'mdi-account-badge', to: '/maker' },
-      { title: 'Administer', icon: 'mdi-account-cog', to: '/administer' },
-    ],
-    right: null,
-  }),
+  components: {
+    MainForm,
+    TesterMainPage,
+    MakerMainPage,
+    AdminMainPage,
+  },
+  computed: {
+    isTester() {
+      return this.userType === 'tester';
+    },
+    isMaker() {
+      return this.userType === 'maker';
+    },
+    isAdmin() {
+      return this.userType === 'admin';
+    },
+  },
+  data: function () {
+    return {
+      userType: '',
+    };
+  },
+  methods: {
+    mainPageClear() {
+      this.$store.commit('clearUserType');
+      this.$store.commit('clearTesterNickname');
+      this.$store.commit('clearMakerNickname');
+      this.$store.commit('clearToken');
+      this.$store.commit('clearUserID');
+      this.clearUser();
+    },
+    convertView() {
+      this.userType = this.$store.state.UserType;
+    },
+    clearUser() {
+      this.userType = '';
+    },
+  },
 };
 </script>

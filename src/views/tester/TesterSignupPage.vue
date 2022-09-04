@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <h1>테스터 회원가입 페이지입니다.</h1>
-    <div class="form-container">
-      <TesterSignupForm></TesterSignupForm>
-    </div>
-  </div>
+  <v-container>
+    <span class="text-md-h2">테스터 회원가입 페이지 입니다.</span>
+    <TesterSignupForm></TesterSignupForm>
+  </v-container>
 </template>
 
 <script>

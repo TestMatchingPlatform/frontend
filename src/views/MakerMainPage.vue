@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>MakerMain</h1>
+    <h1>MakerMainPage</h1>
     <MakerHeader></MakerHeader>
     <router-view></router-view>
   </v-container>
