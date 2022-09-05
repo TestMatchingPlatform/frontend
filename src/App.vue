@@ -12,14 +12,7 @@
           width="40"
         />
 
-        <v-img
-          alt="Project Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="@/assets/logo-string.png"
-          width="400"
-        />
+        <span class="text-md-h4 cyan--text">Tester Matching Platform</span>
       </div>
 
       <v-spacer></v-spacer>
