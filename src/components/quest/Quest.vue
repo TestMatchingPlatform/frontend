@@ -1,10 +1,12 @@
 <template>
-  <div>MakerLoginPage</div>
+  <div>
+    <h3>QuestComponent</h3>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'MakerLoginPage',
+  name: 'QuestPage',
 };
 </script>
 

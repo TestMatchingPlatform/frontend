@@ -1,10 +1,12 @@
 <template>
-  <div>TesterLoginPage</div>
+  <div>
+    <h3>TesterInfo Form</h3>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'TesterLoginPage',
+  name: 'TesterInfoForm',
 };
 </script>
 

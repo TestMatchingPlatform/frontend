@@ -1,10 +1,12 @@
 <template>
-  <div>MakerSignupPage</div>
+  <div>
+    <h2>TesterMyQuestPage</h2>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'MakerSignupPage.vue',
+  name: 'TesterMyQuestPage',
 };
 </script>
 

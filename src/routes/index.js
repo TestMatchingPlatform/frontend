@@ -14,32 +14,48 @@ const router = new VueRouter({
       redirect: '/main',
     },
     {
+      path: '/tester',
+      component: () => import('@/views/TesterMainPage.vue'),
+    },
+    {
+      path: '/maker',
+      component: () => import('@/views/MakerMainPage.vue'),
+    },
+    {
       path: '/login/tester',
-      component: () => import('@/views/TesterLoginPage.vue'),
+      component: () => import('@/views/tester/TesterLoginPage.vue'),
     },
     {
       path: '/login/maker',
-      component: () => import('@/views/MakerLoginPage.vue'),
+      component: () => import('@/views/maker/MakerLoginPage.vue'),
     },
     {
       path: '/signup/tester',
-      component: () => import('@/views/TesterSignupPage.vue'),
+      component: () => import('@/views/tester/TesterSignupPage.vue'),
     },
     {
       path: '/signup/maker',
-      component: () => import('@/views/MakerSignupPage.vue'),
+      component: () => import('@/views/maker/MakerSignupPage.vue'),
     },
     {
-      path: '/quest',
-      component: () => import('@/views/QuestListPage.vue'),
+      path: '/start/tester',
+      component: () => import('@/views/tester/TesterStartPage.vue'),
     },
     {
-      path: '/quest/:id',
+      path: '/testers/:id',
+      component: () => import('@/views/tester/TesterInfoPage.vue'),
+    },
+    {
+      path: '/info/tester',
+      component: () => import('@/views/tester/TesterInfoPage.vue'),
+    },
+    {
+      path: '/quests',
       component: () => import('@/views/QuestPage.vue'),
     },
     {
-      path: '/main',
-      component: () => import('@/views/MainPage.vue'),
+      path: '/testers/:id/quests',
+      component: () => import('@/views/tester/TesterMyQuestPage'),
     },
     {
       path: '/*',
