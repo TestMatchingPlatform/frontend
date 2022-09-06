@@ -29,6 +29,11 @@ function getTesterProfileImage(profileURL) {
   return url;
 }
 
+// Quest 정보를 가져오는 API
+function fetchQuestList() {
+  return instance.get('/quests');
+}
+
 // Maker 로그인 API
 function makerRegister(userData) {
   return instance.post('/accounts/questMakers/signup', userData);
@@ -46,4 +51,5 @@ export {
   makerRegister,
   testerInformation,
   getTesterProfileImage,
+  fetchQuestList,
 };

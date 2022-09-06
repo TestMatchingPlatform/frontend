@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import QuestList from '@/components/quest/QuestList';
+import QuestList from '@/components/quest/QuestListItem';
 export default {
   name: 'QuestPage',
   components: {

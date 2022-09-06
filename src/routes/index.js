@@ -50,8 +50,8 @@ const router = new VueRouter({
       component: () => import('@/views/tester/TesterInfoPage.vue'),
     },
     {
-      path: '/quests',
-      component: () => import('@/views/QuestPage.vue'),
+      path: '/apply/quests',
+      component: () => import('@/views/tester/TesterFindQuestPage.vue'),
     },
     {
       path: '/testers/:id/quests',
