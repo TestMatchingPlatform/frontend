@@ -1,12 +1,14 @@
 <template>
   <v-container>
     <span class="text-h2">퀘스트 찾기 페이지</span>
-    <QuestListItem
-      v-for="questItem in questItems"
-      :key="questItem._id"
-      :questItem="questItem"
-      @refresh="fetchQuests"
-    ></QuestListItem>
+    <v-row>
+      <v-col v-for="questItem in questItems" :key="questItem.id" cols="4"
+        ><QuestListItem
+          :questItem="questItem"
+          @refresh="fetchQuests"
+        ></QuestListItem
+      ></v-col>
+    </v-row>
   </v-container>
 </template>
 
