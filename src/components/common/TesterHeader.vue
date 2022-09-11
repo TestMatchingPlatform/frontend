@@ -73,7 +73,7 @@ export default {
     ],
     afterLoginItems: [
       { title: '내 정보 보기', icon: 'mdi-account', to: '/info/tester' },
-      { title: '퀘스트 신청하기', icon: 'mdi-account', to: '/quests' },
+      { title: '퀘스트 신청하기', icon: 'mdi-account', to: '/apply/quests' },
       {
         title: '내가 신청한 퀘스트 보기',
         icon: 'mdi-account',

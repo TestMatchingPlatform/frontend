@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <h2>QuestPage</h2>
-    <QuestList></QuestList>
-  </div>
+  <v-container>
+    <span class="text-h2 text--primary"> QuestPage </span>
+    <Quest></Quest>
+  </v-container>
 </template>
 
 <script>
-import QuestList from '@/components/quest/QuestList';
+import Quest from '@/components/quest/Quest';
 export default {
   name: 'QuestPage',
-  components: {
-    QuestList,
-  },
+  components: { Quest },
 };
 </script>
 

@@ -3,7 +3,7 @@ import { instance } from './index';
 
 // Tester 회원가입 API
 function testerRegister(userData) {
-  return instance.post('/testers', userData);
+  return instance.post('testers', userData);
 }
 
 // Tester 로그인 API
@@ -29,6 +29,16 @@ function getTesterProfileImage(profileURL) {
   return url;
 }
 
+// Quest List 정보를 가져오는 API
+function fetchQuestList() {
+  return instance.get('quests');
+}
+
+// Quest 정보를 가져오는 API
+function fetchQuest(questId) {
+  return instance.get('quests/quest', { params: { quest_id: questId } });
+}
+
 // Maker 로그인 API
 function makerRegister(userData) {
   return instance.post('/accounts/questMakers/signup', userData);
@@ -46,4 +56,6 @@ export {
   makerRegister,
   testerInformation,
   getTesterProfileImage,
+  fetchQuestList,
+  fetchQuest,
 };
