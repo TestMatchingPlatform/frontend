@@ -2,26 +2,32 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { testerLogin, makerLogin } from '@/api/auth';
+import {
+  getAuthToCookie,
+  getUserIdToCookie,
+  getUserNicknameToCookie,
+  getUserTypeToCookie,
+  saveAuthToCookie,
+  saveUserIdToCookie,
+  saveUserNicknameToCookie,
+  saveUserTypeToCookie,
+} from '@/utils/cookies';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    UserType: '',
-    TesterNickname: '',
-    MakerNickname: '',
-    UserID: null,
-    Token: '',
+    UserType: getUserTypeToCookie() || '',
+    Nickname: getUserNicknameToCookie() || '',
+    UserID: getUserIdToCookie() || null,
+    Token: getAuthToCookie() || '',
   },
   getters: {
     isUserType(state) {
       return state.UserType !== '';
     },
-    isTesterLogin(state) {
-      return state.TesterNickname !== '';
-    },
-    isMakerLogin(state) {
-      return state.MakerNickname !== '';
+    isNickname(state) {
+      return state.Nickname !== '';
     },
     isTokenExist(state) {
       return state.Token !== '';
@@ -34,11 +40,8 @@ export default new Vuex.Store({
     setUserType(state, userType) {
       state.UserType = userType;
     },
-    setTesterNickname(state, username) {
-      state.TesterNickname = username;
-    },
-    setMakerNickname(state, username) {
-      state.MakerNickname = username;
+    setNickname(state, username) {
+      state.Nickname = username;
     },
     setToken(state, JSESSIONID) {
       state.Token = JSESSIONID;
@@ -49,11 +52,8 @@ export default new Vuex.Store({
     clearUserType(state) {
       state.UserType = '';
     },
-    clearTesterNickname(state) {
-      state.TesterNickname = '';
-    },
-    clearMakerNickname(state) {
-      state.MakerNickname = '';
+    clearNickname(state) {
+      state.Nickname = '';
     },
     clearToken(state) {
       state.Token = '';
@@ -65,10 +65,15 @@ export default new Vuex.Store({
   actions: {
     async TesterLogin({ commit }, userData) {
       const { data } = await testerLogin(userData);
-      commit('setTesterNickname', data.nickname);
+      commit('setNickname', data.nickname);
+      commit('setUserType', 'tester');
       commit('setUserID', data.id);
-      let splitToken = data.token.split(' ');
+      const splitToken = data.token.split(' ');
       commit('setToken', splitToken[1]);
+      saveUserIdToCookie(data.id);
+      saveUserTypeToCookie('tester');
+      saveUserNicknameToCookie(data.nickname);
+      saveAuthToCookie(splitToken[1]);
       return data;
     },
     async MakerLogin({ commit }, userData) {
