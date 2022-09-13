@@ -39,6 +39,7 @@ import MainForm from '@/components/form/MainForm';
 import TesterMainPage from '@/views/TesterMainPage';
 import MakerMainPage from '@/views/MakerMainPage';
 import AdminMainPage from '@/views/AdminMainPage';
+import { deleteCookie } from '@/utils/cookies';
 export default {
   name: 'App',
   components: {
@@ -66,10 +67,13 @@ export default {
   methods: {
     mainPageClear() {
       this.$store.commit('clearUserType');
-      this.$store.commit('clearTesterNickname');
-      this.$store.commit('clearMakerNickname');
+      this.$store.commit('clearNickname');
       this.$store.commit('clearToken');
       this.$store.commit('clearUserID');
+      deleteCookie('user_type');
+      deleteCookie('nickname');
+      deleteCookie('user_id');
+      deleteCookie('jwt_token');
       this.clearUser();
     },
     convertView() {

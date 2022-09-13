@@ -10,7 +10,7 @@
 
       <v-divider></v-divider>
 
-      <v-list dense nav v-if="!isTesterLogin">
+      <v-list dense nav v-if="!isLogin">
         <v-list-item
           v-for="item in beforeLoginItems"
           :key="item.title"
@@ -27,7 +27,7 @@
         </v-list-item>
       </v-list>
 
-      <v-list dense nav v-if="isTesterLogin">
+      <v-list dense nav v-else>
         <v-btn @click="logoutTester" target="_blank" text>
           <span class="mr-2">로그아웃하기</span>
           <v-icon>mdi-star</v-icon>
@@ -52,15 +52,22 @@
 </template>
 
 <script>
+import { deleteCookie } from '@/utils/cookies';
+
 export default {
   computed: {
-    isTesterLogin() {
-      return this.$store.getters.isTesterLogin;
+    isLogin() {
+      return this.$store.getters.isNickname;
     },
   },
   methods: {
     logoutTester() {
-      this.$store.commit('clearTesterNickname');
+      this.$store.commit('clearNickname');
+      this.$store.commit('clearToken');
+      this.$store.commit('clearUserID');
+      deleteCookie('nickname');
+      deleteCookie('user_id');
+      deleteCookie('jwt_token');
       this.$router.push('/login/tester');
     },
   },

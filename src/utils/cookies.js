@@ -1,32 +1,38 @@
-function saveSessionToCookie(value) {
-  document.cookie = `JSESSIONID=${value}`;
+function saveAuthToCookie(value) {
+  document.cookie = `jwt_token=${value}`;
+}
+function saveUserNicknameToCookie(value) {
+  document.cookie = `nickname=${value}`;
+}
+function saveUserTypeToCookie(value) {
+  document.cookie = `user_type=${value}`;
+}
+function saveUserIdToCookie(value) {
+  document.cookie = `user_id=${value}`;
 }
 
-function saveTesterToCookie(value) {
-  document.cookie = `TesterNickname=${value}`;
-}
-
-function saveMakerToCookie(value) {
-  document.cookie = `MakerNickname=${value}`;
-}
-
-function getSessionFromCookie(value) {
+function getAuthToCookie() {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)JSESSIONID\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)jwt_token\s*=\s*([^;]*).*$)|^.*$/,
+    '$1',
+  );
+}
+function getUserNicknameToCookie() {
+  return document.cookie.replace(
+    /(?:(?:^|.*;\s*)nickname\s*=\s*([^;]*).*$)|^.*$/,
+    '$1',
+  );
+}
+function getUserTypeToCookie() {
+  return document.cookie.replace(
+    /(?:(?:^|.*;\s*)user_type\s*=\s*([^;]*).*$)|^.*$/,
     '$1',
   );
 }
 
-function getTesterFromCookie(value) {
+function getUserIdToCookie() {
   return document.cookie.replace(
-    /(?:(?:^|.*;\s*)TesterNickname\s*=\s*([^;]*).*$)|^.*$/,
-    '$1',
-  );
-}
-
-function getMakerFromCookie(value) {
-  return document.cookie.replace(
-    /(?:(?:^|.*;\s*)MakerNickname\s*=\s*([^;]*).*$)|^.*$/,
+    /(?:(?:^|.*;\s*)user_id\s*=\s*([^;]*).*$)|^.*$/,
     '$1',
   );
 }
@@ -36,11 +42,13 @@ function deleteCookie(value) {
 }
 
 export {
-  saveSessionToCookie,
-  saveTesterToCookie,
-  saveMakerToCookie,
-  getSessionFromCookie,
-  getTesterFromCookie,
-  getMakerFromCookie,
+  saveAuthToCookie,
+  saveUserNicknameToCookie,
+  saveUserTypeToCookie,
+  saveUserIdToCookie,
+  getUserNicknameToCookie,
+  getAuthToCookie,
+  getUserIdToCookie,
+  getUserTypeToCookie,
   deleteCookie,
 };
