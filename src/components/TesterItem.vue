@@ -44,31 +44,48 @@
           {{ testerItem.introMessage }}
         </span>
       </div>
-      <v-img :src="profileImage" contain max-width="250" max-height="150">
+      <v-img :src="profileImageURL" contain max-width="250" max-height="150">
       </v-img>
     </v-sheet>
   </div>
 </template>
 
 <script>
-import { getTesterProfileImage } from '@/api/auth';
+import { getTesterProfileImage, testerInformation } from '@/api/auth';
 
 export default {
   name: 'TesterComponent',
-  props: {
-    testerItem: {
-      type: Object,
-      required: true,
-    },
-  },
   data() {
     return {
-      profileImage: '',
+      testerItem: {
+        type: Object,
+        required: true,
+      },
+      profileImageURL: '',
     };
   },
+  methods: {
+    async fetchTester() {
+      try {
+        const userID = this.$store.state.UserID;
+        console.log('check1');
+        const { data } = await testerInformation(userID);
+        console.log('check2');
+        console.log(data);
+        this.testerItem = data;
+        console.log(this.testerItem.introPictureRef);
+        this.profileImageURL = getTesterProfileImage(
+          this.testerItem.introPictureRef,
+        );
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+
   created() {
-    this.profileImage = getTesterProfileImage();
-    console.log(this.profileImage);
+    this.fetchTester();
   },
 };
 </script>
