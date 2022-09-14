@@ -17,9 +17,7 @@ function testerLogin(userData) {
 // Tester 정보 API
 function testerInformation(userData) {
   const url = 'testers/' + userData;
-  const response = instance.get(url);
-  console.log(response);
-  return response;
+  return instance.get(url);
 }
 
 // Tester 프로필 사진을 가져오는 API URL 반환
