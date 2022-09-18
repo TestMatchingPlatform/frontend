@@ -84,7 +84,7 @@ export default {
       {
         title: '내가 신청한 퀘스트 보기',
         icon: 'mdi-account',
-        to: '/quests/apply/tester',
+        to: '/testers/apply/quests',
       },
     ],
     right: null,

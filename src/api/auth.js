@@ -37,6 +37,18 @@ function fetchQuest(questId) {
   return instance.get('quests/quest', { params: { quest_id: questId } });
 }
 
+// Quest Apply 하는 API
+function applyQuest(testerId, submitInformation) {
+  const url = 'testers/' + testerId + '/apply';
+  return instance.post(url, submitInformation);
+}
+
+// Tester의 Apply Quest 가져오는 API
+function fetchApplyQuest(testerId) {
+  const url = 'testers/' + testerId + '/apply';
+  return instance.get(url);
+}
+
 // Maker 로그인 API
 function makerRegister(userData) {
   return instance.post('/accounts/questMakers/signup', userData);
@@ -56,4 +68,6 @@ export {
   getTesterProfileImage,
   fetchQuestList,
   fetchQuest,
+  applyQuest,
+  fetchApplyQuest,
 };
