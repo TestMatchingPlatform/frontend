@@ -19,13 +19,52 @@
       <v-col v-for="taskItem in taskItems" :key="taskItem.id" cols="12">
         <TaskListItem :taskItem="taskItem"></TaskListItem>
       </v-col>
-      <v-btn>신청하기</v-btn>
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" dark v-bind="attrs" v-on="on"> 신청하 </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">User Profile</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-file-input
+                    v-model="requireConditionSubmit"
+                    :rules="requireConditionSubmitRules"
+                    @change="requireFileInput"
+                    accept="image/*"
+                    label="Require Condition Submit"
+                  ></v-file-input>
+                </v-col>
+                <v-col cols="12">
+                  <v-file-input
+                    v-model="preferenceConditionSubmit"
+                    @change="preferFileInput"
+                    accept="image/*"
+                    label="Prefer Condition Submit"
+                  ></v-file-input>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false"
+              >Close</v-btn
+            >
+            <v-btn color="primary" text @click="apply">Apply</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-row>
   </v-card>
 </template>
 
 <script>
-import { fetchQuest } from '@/api/auth';
+import { fetchQuest, applyQuest } from '@/api/auth';
 import TaskListItem from '@/components/quest/TaskListItem';
 
 export default {
@@ -51,6 +90,12 @@ export default {
       requireCondition: '',
       reward: 0,
       taskItems: [],
+      dialog: false,
+      requireConditionSubmit: [],
+      requireConditionSubmitRules: [
+        v => !!v || 'require Condition is required',
+      ],
+      preferenceConditionSubmit: [],
     };
   },
   methods: {
@@ -78,13 +123,29 @@ export default {
     },
     async apply() {
       const testerId = this.$store.state.UserID;
-      const questId = this.id;
-      const { data } = await applyQuest(testerId, questId);
+      const submitFormData = new FormData();
+      submitFormData.append('questId', this.id);
+      submitFormData.append(
+        'requireConditionSubmit',
+        this.requireConditionSubmit,
+      );
+      submitFormData.append(
+        'preferenceConditionSubmit',
+        this.preferenceConditionSubmit,
+      );
+      console.log(submitFormData);
+      const { data } = await applyQuest(testerId, submitFormData);
       if (data == null) {
         alert('Fail Apply');
       } else {
         await this.$router.push('/quests/apply/tester');
       }
+    },
+    requireFileInput(file) {
+      this.requireConditionSubmit = file;
+    },
+    preferFileInput(file) {
+      this.preferenceConditionSubmit = file;
     },
   },
   created() {
