@@ -1,5 +1,5 @@
 <template>
-  <v-card class="text-md-h5">
+  <v-card class="text-md-h5" @click="routeDetailApplyInfo">
     <div>
       <span>Quest Name: </span>
       <span class="text-h5 blue--text">
@@ -22,6 +22,13 @@ export default {
     applyItem: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    routeDetailApplyInfo() {
+      const id = this.applyItem.id;
+      console.log(id);
+      this.$router.push(`/apply/${id}`);
     },
   },
 };

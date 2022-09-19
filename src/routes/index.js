@@ -23,7 +23,7 @@ const router = new VueRouter({
     },
     {
       path: '/login/tester',
-      component: () => import('@/views/tester/TesterLoginPage.vue'),
+      component: () => import('@/views/tester/before-auth/TesterLoginPage.vue'),
     },
     {
       path: '/login/maker',
@@ -31,7 +31,8 @@ const router = new VueRouter({
     },
     {
       path: '/signup/tester',
-      component: () => import('@/views/tester/TesterSignupPage.vue'),
+      component: () =>
+        import('@/views/tester/before-auth/TesterSignupPage.vue'),
     },
     {
       path: '/signup/maker',
@@ -43,23 +44,28 @@ const router = new VueRouter({
     },
     {
       path: '/testers/:id',
-      component: () => import('@/views/tester/TesterInfoPage.vue'),
+      component: () => import('@/views/tester/after-auth/TesterInfoPage.vue'),
     },
     {
       path: '/info/tester',
-      component: () => import('@/views/tester/TesterInfoPage.vue'),
+      component: () => import('@/views/tester/after-auth/TesterInfoPage.vue'),
     },
     {
       path: '/apply/quests',
-      component: () => import('@/views/tester/TesterFindQuestPage.vue'),
+      component: () =>
+        import('@/views/tester/after-auth/TesterFindQuestPage.vue'),
     },
     {
-      path: '/quests/:id/',
-      component: () => import('@/views/QuestPage.vue'),
+      path: '/quests/:id',
+      component: () => import('@/views/tester/after-auth/QuestPage.vue'),
+    },
+    {
+      path: '/apply/:id',
+      component: () => import('@/views/tester/after-auth/ApplyPage.vue'),
     },
     {
       path: '/testers/apply/quests',
-      component: () => import('@/views/tester/TesterApplyQuestPage'),
+      component: () => import('@/views/tester/after-auth/TesterApplyQuestPage'),
     },
     {
       path: '/*',

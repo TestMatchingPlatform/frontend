@@ -44,8 +44,14 @@ function applyQuest(testerId, submitInformation) {
 }
 
 // Tester의 Apply Quest 가져오는 API
-function fetchApplyQuest(testerId) {
+function fetchApplyQuestFromTesterId(testerId) {
   const url = 'testers/' + testerId + '/apply';
+  return instance.get(url);
+}
+
+// Apply Id 를 이용해서 Apply 정보를 가져오는 API
+function fetchApplyQuest(applyId) {
+  const url = 'apply/' + applyId;
   return instance.get(url);
 }
 
@@ -69,5 +75,6 @@ export {
   fetchQuestList,
   fetchQuest,
   applyQuest,
+  fetchApplyQuestFromTesterId,
   fetchApplyQuest,
 };
