@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <span class="text-h2 ma-5"> 테스터 로그인 페이지입니다. </span>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="email"
@@ -28,7 +29,7 @@
 
 <script>
 export default {
-  name: 'TesterLoginForm',
+  name: 'TesterLoginPage',
   data() {
     return {
       valid: true,

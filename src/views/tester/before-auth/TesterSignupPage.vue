@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <span class="text-md-h2">테스터 회원가입 페이지 입니다.</span>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="email"
@@ -72,7 +73,6 @@
 import { testerRegister } from '@/api/auth';
 
 export default {
-  name: 'TesterLoginForm',
   data() {
     return {
       valid: true,
