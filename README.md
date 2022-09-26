@@ -36,7 +36,7 @@
 
 [API 문서](https://www.notion.so/kukjun/API-ac017f3405604a1ca63614e471f9db14)
 
-### Frontend 구조 설계 및 개발 진행 - 미구현
+### Frontend 구조 설계 및 개발 진행 - 미구현
 
 ### 보안 / 인가 절차 적용 - 미구현
 
