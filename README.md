@@ -56,7 +56,7 @@
 **Frontend 구조 설계 - 초안 [Frontend 구조 설계 초안 문서](https://kukjun.notion.site/Frontend-fa27b85427844107ad7eb75d2aae8116)**
 
 **개발 진행 현황**
-1. Frontend 구조로 틀 제작 하기 - 미구현
+1. Frontend 구현(Backend API 연결 없이) [Frontend 구조](https://www.notion.so/kukjun/Frontend-UI-c7c736c484b742e9bfa10b2628b1ad9e)
 
 <br>
 
