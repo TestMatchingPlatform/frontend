@@ -19,14 +19,22 @@
     <v-btn>Donate</v-btn>
 
     <v-spacer></v-spacer>
-    <v-btn>Login</v-btn>
-    <v-btn>Signup</v-btn>
+    <v-btn @click="routeLogin">Login</v-btn>
+    <v-btn @click="routeRegister">Signup</v-btn>
   </v-app-bar>
 </template>
 
 <script>
 export default {
   name: 'AppHeader',
+  methods: {
+    routeRegister() {
+      this.$router.push('/register');
+    },
+    routeLogin() {
+      this.$router.push('/login');
+    },
+  },
 };
 </script>
 
