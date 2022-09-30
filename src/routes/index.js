@@ -26,6 +26,10 @@ const router = new VueRouter({
       component: () => import('@/views/RegisterView.vue'),
     },
     {
+      path: '/test/:id',
+      component: () => import('@/views/TestView'),
+    },
+    {
       path: '/tester',
       component: () => import('@/views/TesterMainPage.vue'),
     },

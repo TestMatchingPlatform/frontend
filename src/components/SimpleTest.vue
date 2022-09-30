@@ -1,18 +1,20 @@
 <template>
-  <v-card>
+  <v-card @click="routeTestView">
     <v-img :src="symbol_image_root" :aspect-ratio="16 / 9" :width="250">
     </v-img>
     <v-card-text>
       <v-row>
         <v-col cols="12"> {{ maker_nickname }} / {{ company }}</v-col>
         <v-col cols="12" class="text--primary"> title : {{ title }} </v-col>
-        <v-col cols="12"> 지급 Point : {{ reward }}p </v-col>
-        <v-col cols="12">
+        <v-col cols="12" class="text--primary">
+          지급 Point : {{ reward }}p
+        </v-col>
+        <v-col cols="12" class="text--primary">
           신청/모집 인원 : {{ apply }}/{{ participant_capacity }}
         </v-col>
         <v-col cols="4"></v-col>
         <v-col cols="4"></v-col>
-        <v-col cols="4" class="grey lighten-1 text-center">
+        <v-col cols="4" class="grey lighten-1 text-center text--primary">
           D-{{ deadline_remain }}</v-col
         >
       </v-row>
@@ -48,6 +50,9 @@ export default {
       this.participant_capacity = 100;
       this.symbol_image_root =
         'https://cdn.vuetifyjs.com/images/parallax/material.jpg';
+    },
+    routeTestView() {
+      this.$router.push(`/test/${this.id}`);
     },
   },
   created() {
