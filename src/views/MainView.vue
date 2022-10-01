@@ -22,8 +22,15 @@
               <v-col cols="12">
                 <div class="text-h5 pa-5">마감임박 Test</div>
               </v-col>
-              <v-col v-for="n in 4" :key="n" cols="6">
-                <SimpleTest></SimpleTest>
+              <v-col
+                v-for="simpleTest in deadLineTests"
+                :key="simpleTest.id"
+                cols="6"
+              >
+                <SimpleTest
+                  :simpleTest="simpleTest"
+                  @refresh="fetchDeadLineTests"
+                ></SimpleTest>
               </v-col>
             </v-row>
           </v-card>
@@ -36,8 +43,15 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col v-for="n in 4" :key="n" cols="6">
-                <SimpleTest></SimpleTest>
+              <v-col
+                v-for="simpleTest in popularTests"
+                :key="simpleTest.id"
+                cols="6"
+              >
+                <SimpleTest
+                  :simpleTest="simpleTest"
+                  @refresh="fetchPopularTests"
+                ></SimpleTest>
               </v-col>
             </v-row>
           </v-card>
@@ -97,6 +111,8 @@
 
 <script>
 import SimpleTest from '@/components/SimpleTest';
+import { findCounts, findDeadLineTests, findPopularTests } from '@/api/auth';
+
 export default {
   name: 'MainView',
   components: { SimpleTest },
@@ -106,6 +122,8 @@ export default {
       makerCount: 0,
       continueTestCount: 0,
       completeTestCount: 0,
+      deadLineTests: [],
+      popularTests: [],
     };
   },
   methods: {
@@ -115,15 +133,29 @@ export default {
     routeRegisterToMaker() {
       this.$router.push('/register');
     },
-    initMockValue() {
-      this.testerCount = 100;
-      this.makerCount = 50;
-      this.continueTestCount = 20;
-      this.completeTestCount = 5;
+    async initValue() {
+      const counts = await findCounts();
+      console.log(counts.data);
+      this.testerCount = counts.data.testerCount;
+      this.makerCount = counts.data.makerCount;
+      this.continueTestCount = counts.data.continueTestCount;
+      this.completeTestCount = counts.data.completeTestCount;
+    },
+    async fetchDeadLineTests() {
+      const deadLineTestsData = await findDeadLineTests();
+      console.log(deadLineTestsData.data);
+      this.deadLineTests = deadLineTestsData.data;
+    },
+    async fetchPopularTests() {
+      const popularTestsData = await findPopularTests();
+      console.log(popularTestsData.data);
+      this.popularTests = popularTestsData.data;
     },
   },
   created() {
-    this.initMockValue();
+    this.initValue();
+    this.fetchDeadLineTests();
+    this.fetchPopularTests();
   },
 };
 </script>

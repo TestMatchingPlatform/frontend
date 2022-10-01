@@ -130,7 +130,7 @@
 </template>
 
 <script>
-import { testerRegister } from '@/api/auth';
+import { makerRegister } from '@/api/auth';
 
 export default {
   name: 'RegisterView',
@@ -147,8 +147,9 @@ export default {
       passwordRules: [v => !!v || '비밀번호를 꼭 입력해야 합니다.'],
       passwordConfirm: '',
       passwordConfirmRules: [
-        this.passwordConfirm === this.password ||
-          '비밀번호와 확인하느 코드가 다릅니다.',
+        v =>
+          this.password === this.passwordConfirm ||
+          '비밀번호, 비밀번호 확인에 작성한 내용이 다릅니다.',
       ],
       nickname: '',
       nicknameRules: [v => !!v || '닉네임을 꼭 입력해야 합니다.'],
@@ -166,22 +167,21 @@ export default {
       try {
         console.log('method execute');
         // 이름을 백엔드에서 받기 편하도록 만들어서 전송
-        const userData = new FormData();
-        userData.append('email', this.email);
-        userData.append('password', this.password);
-        userData.append('nickname', this.nickname);
-        userData.append('phoneNumber', this.phoneNumber);
-        userData.append('preferCategoryId', this.preferCategory.index);
-        userData.append('introMessage', this.introMessage);
-        userData.append('introPicture', this.introPicture);
-        // test FormData
-        for (let key of userData.entries()) {
-          console.log(`${key}`);
+        if (this.userType === 'maker') {
+          const request = {
+            email: this.email,
+            password: this.password,
+            nickname: this.nickname,
+            phoneNumber: this.phoneNumber,
+            company: this.company,
+          };
+          console.log(request);
+          console.log('\n');
+
+          const { data } = await makerRegister(request);
+          console.log(data);
         }
-        // execute API
-        const { data } = await testerRegister(userData);
-        console.log(data.id);
-        await this.$router.push('/login/tester');
+        // await this.$router.push('/login/tester');
       } catch (error) {
         console.log(error);
       }

@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { testerRegister } from '@/api/auth';
+import { makerRegister } from '@/api/auth';
 
 export default {
   data() {
@@ -122,7 +122,7 @@ export default {
           console.log(`${key}`);
         }
         // execute API
-        const { data } = await testerRegister(userData);
+        const { data } = await makerRegister(userData);
         console.log(data.id);
         await this.$router.push('/login/tester');
       } catch (error) {
