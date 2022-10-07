@@ -121,12 +121,6 @@ export default {
     };
   },
   methods: {
-    // routeRegisterToTester() {
-    //   this.$router.push('/register');
-    // },
-    // routeRegisterToMaker() {
-    //   this.$router.push('/register');
-    // },
     async initValue() {
       const counts = await findCounts();
       console.log(counts.data);

@@ -193,7 +193,7 @@ export default {
           const { data } = await testerRegister(request);
           console.log(data);
         }
-        await this.$router.push('/login/tester');
+        await this.$router.push('/main');
       } catch (error) {
         console.log(error);
       }
