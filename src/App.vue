@@ -22,7 +22,8 @@ export default {
   },
   computed: {},
   created() {
-    this.$router.push('/');
+    // this.$router.push('/');
+    this.$router.push('/testers/1/tests');
   },
 };
 </script>

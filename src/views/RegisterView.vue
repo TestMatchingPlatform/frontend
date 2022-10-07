@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <div>Register</div>
     <v-row>
       <v-col cols="12">
         <span class="text-h3">테스터 회원가입 페이지 입니다.</span>
@@ -130,8 +131,7 @@
 </template>
 
 <script>
-import { makerRegister } from '@/api/auth';
-
+import { testerRegister, makerRegister } from '@/api/auth';
 export default {
   name: 'RegisterView',
   data() {
@@ -166,7 +166,8 @@ export default {
       this.$refs.form.validate();
       try {
         console.log('method execute');
-        // 이름을 백엔드에서 받기 편하도록 만들어서 전송
+
+        // execute API
         if (this.userType === 'maker') {
           const request = {
             email: this.email,
@@ -177,11 +178,22 @@ export default {
           };
           console.log(request);
           console.log('\n');
-
           const { data } = await makerRegister(request);
           console.log(data);
+        } else if (this.userType === 'tester') {
+          const request = {
+            email: this.email,
+            password: this.password,
+            nickname: this.nickname,
+            phoneNumber: this.phoneNumber,
+            introMessage: this.introMessage,
+          };
+          console.log(request);
+          console.log('\n');
+          const { data } = await testerRegister(request);
+          console.log(data);
         }
-        // await this.$router.push('/login/tester');
+        await this.$router.push('/login/tester');
       } catch (error) {
         console.log(error);
       }
@@ -189,11 +201,6 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    fileInput(file) {
-      this.introPicture = file;
-    },
   },
 };
 </script>
-
-<style scoped></style>
