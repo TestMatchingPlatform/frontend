@@ -1,53 +1,102 @@
 <template>
-  <v-navigation-drawer app>
-    <template>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6"> Tester </v-list-item-title>
-          <v-list-item-subtitle> Tester Menu </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+  <v-app-bar app color="secondary" dark>
+    <div class="d-flex align-center">
+      <v-img
+        alt="Project Logo"
+        class="shrink mr-2"
+        contain
+        src="@/assets/logo.png"
+        transition="scale-transition"
+        width="40"
+      />
 
-      <v-divider></v-divider>
+      <span class="text-md-h4 cyan--text">Tester Matching Platform</span>
+    </div>
 
-      <v-list dense nav>
-        <v-list-item v-for="item in items" :key="item.title" link :to="item.to">
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+    <template v-if="getStoreUserType === 'tester'">
+      <v-spacer></v-spacer>
+      <v-btn @click="routeFindTest">Test 찾아보기</v-btn>
+      <v-btn @click="routeApplyTest">내가 신청한 Test 관리하기</v-btn>
+      <v-btn @click="routePoint">Point 교환하기</v-btn>
+      <v-spacer></v-spacer>
+      <v-avatar>
+        <img
+          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+          alt="John"
+        />
+      </v-avatar>
+      <v-btn>
+        {{ getStoreNickname }}
+      </v-btn>
     </template>
-  </v-navigation-drawer>
+
+    <template v-else-if="getStoreUserType === 'maker'">
+      <v-spacer></v-spacer>
+      <v-btn @click="routeCreatedTest">Test 생성하기</v-btn>
+      <v-btn @click="routeMadeTest">내가 생성한 Test 관리하기</v-btn>
+      <v-btn @click="routePoint">Point 교환하기</v-btn>
+      <v-spacer></v-spacer>
+      <v-avatar>
+        <img
+          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+          alt="John"
+        />
+      </v-avatar>
+      <v-btn>
+        {{ getStoreNickname }}
+      </v-btn>
+    </template>
+
+    <template v-else>
+      <v-spacer></v-spacer>
+      <v-btn>About</v-btn>
+      <v-btn>How Work?</v-btn>
+      <v-btn>Donate</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn @click="routeLogin">Login</v-btn>
+      <v-btn @click="routeRegister">Signup</v-btn>
+    </template>
+  </v-app-bar>
 </template>
 
 <script>
 export default {
+  name: 'AppHeader',
+  data() {
+    return {};
+  },
   computed: {
-    isTesterLogin() {
-      return this.$store.getters.isTesterLogin;
+    getStoreUserType() {
+      console.log(this.$store.state.UserType);
+      return this.$store.state.UserType;
+    },
+    getStoreNickname() {
+      return this.$store.state.Nickname;
     },
   },
   methods: {
-    logoutTester() {
-      this.$store.commit('clearTesterNickname');
-      this.$store.commit('clearToken');
+    routeRegister() {
+      this.$router.push('/register');
+    },
+    routeLogin() {
+      this.$router.push('/login');
+    },
+    routePoint() {
+      this.$router.push('/point');
+    },
+    routeMadeTest() {
+      this.$router.push(`/makers/${this.$store.state.UserID}/tests`);
+    },
+    routeCreatedTest() {
+      this.$router.push('/tests/form');
+    },
+    routeFindTest() {
+      this.$router.push('/tests/find');
+    },
+    routeApplyTest() {
+      this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
     },
   },
-  components: {},
-
-  data: () => ({
-    items: [
-      { title: 'Login', icon: 'mdi-account', to: '/login/tester' },
-      { title: 'Register', icon: 'mdi-account-badge', to: '/signup/tester' },
-      { title: 'Administer', icon: 'mdi-account-cog', to: '/administer' },
-    ],
-    right: null,
-  }),
 };
 </script>
 

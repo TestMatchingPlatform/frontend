@@ -30,62 +30,32 @@ const router = new VueRouter({
       component: () => import('@/views/TestView'),
     },
     {
-      path: '/tester',
-      component: () => import('@/views/TesterMainPage.vue'),
+      path: '/point',
+      component: () => import('@/views/MyPointView'),
     },
     {
-      path: '/maker',
-      component: () => import('@/views/MakerMainPage.vue'),
+      path: '/makers/:id/tests',
+      component: () => import('@/views/MyTestView'),
     },
     {
-      path: '/login/tester',
-      component: () => import('@/views/tester/before-auth/TesterLoginPage.vue'),
+      path: '/testers/:id/tests',
+      component: () => import('@/views/MyApplyView'),
     },
     {
-      path: '/login/maker',
-      component: () => import('@/views/maker/MakerLoginPage.vue'),
+      path: '/tests/form',
+      component: () => import('@/views/CreateTestView'),
     },
     {
-      path: '/signup/tester',
-      component: () =>
-        import('@/views/tester/before-auth/TesterSignupPage.vue'),
+      path: '/tests/find',
+      component: () => import('@/views/FindTestView'),
     },
     {
-      path: '/signup/maker',
-      component: () => import('@/views/maker/MakerSignupPage.vue'),
-    },
-    {
-      path: '/start/tester',
-      component: () => import('@/views/tester/TesterStartPage.vue'),
-    },
-    {
-      path: '/testers/:id',
-      component: () => import('@/views/tester/after-auth/TesterInfoPage.vue'),
-    },
-    {
-      path: '/info/tester',
-      component: () => import('@/views/tester/after-auth/TesterInfoPage.vue'),
-    },
-    {
-      path: '/apply/quests',
-      component: () =>
-        import('@/views/tester/after-auth/TesterFindQuestPage.vue'),
-    },
-    {
-      path: '/quests/:id',
-      component: () => import('@/views/tester/after-auth/QuestPage.vue'),
-    },
-    {
-      path: '/apply/:id',
-      component: () => import('@/views/tester/after-auth/ApplyPage.vue'),
-    },
-    {
-      path: '/testers/apply/quests',
-      component: () => import('@/views/tester/after-auth/TesterApplyQuestPage'),
+      path: '/tests/:id',
+      component: () => import('@/views/TestView'),
     },
     {
       path: '/*',
-      component: () => import('@/views/NotFoundPage.vue'),
+      component: () => import('@/views/NotFoundView.vue'),
     },
   ],
 });

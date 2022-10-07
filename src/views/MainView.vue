@@ -7,14 +7,11 @@
             >Tester Matching Platform에 오신것을 환영합니다.</span
           >
         </v-col>
-        <v-col cols="8">
+        <v-col cols="12">
           <span
             >Tester Matching Platform에서 한번에 여러 테스트 공모에 참여하고,
             현금처럼 사용할 수 있는 보상을 받아보세요.
           </span>
-        </v-col>
-        <v-col cols="4">
-          <v-btn @click="routeRegisterToTester"> Tester로 시작하기</v-btn>
         </v-col>
         <v-col cols="6">
           <v-card class="pa-5">
@@ -64,13 +61,10 @@
         <v-col cols="12">
           <span class="text-h3">혹시 Test를 제작하고자 하시나요?</span>
         </v-col>
-        <v-col cols="8">
+        <v-col cols="12">
           <span
-            >간편하고 효율적으로 Tester들을 모으고 기능들을 시험해보세요
+            >간편하고 효율적으로 Tester들을 모으고 기능들을 시험해보세요.
           </span>
-        </v-col>
-        <v-col cols="4">
-          <v-btn @click="routeRegisterToMaker"> Maker로 시작하기</v-btn>
         </v-col>
       </v-row>
       <v-card class="pa-3">
@@ -127,12 +121,6 @@ export default {
     };
   },
   methods: {
-    routeRegisterToTester() {
-      this.$router.push('/register');
-    },
-    routeRegisterToMaker() {
-      this.$router.push('/register');
-    },
     async initValue() {
       const counts = await findCounts();
       console.log(counts.data);

@@ -62,22 +62,28 @@ export default {
   methods: {
     async validate() {
       this.$refs.form.validate();
-      // try {
-      //   console.log('method execute');
-      //   // 이름을 백엔드에서 받기 편하도록 만들어서 전송
-      //   const userData = {
-      //     email: this.email,
-      //     password: this.password,
-      //   };
-      //   console.log(userData);
-      //   // execute API
-      //   const data = await this.$store.dispatch('TesterLogin', userData);
-      //   console.log(data);
-      //
-      //   await this.$router.push('/start/tester');
-      // } catch (error) {
-      //   console.log(error);
-      // }
+      if (this.userType === 'maker') {
+        const request = {
+          email: this.email,
+          password: this.password,
+        };
+        console.log(request);
+        console.log('\n');
+
+        const data = await this.$store.dispatch('MakerLogin', request);
+        console.log(data);
+      } else if (this.userType === 'tester') {
+        const request = {
+          email: this.email,
+          password: this.password,
+        };
+        console.log(request);
+        console.log('\n');
+
+        const data = await this.$store.dispatch('TesterLogin', request);
+        console.log(data);
+      }
+      await this.$router.push('/main');
     },
     reset() {
       this.$refs.form.reset();
