@@ -25,9 +25,8 @@
           alt="John"
         />
       </v-avatar>
-      <v-btn>
-        {{ getStoreNickname }}
-      </v-btn>
+      <div class="ma-2 font-weight-bold">{{ getStoreNickname }}</div>
+      <v-btn @click="logout"> Logout </v-btn>
     </template>
 
     <template v-else-if="getStoreUserType === 'maker'">
@@ -42,9 +41,8 @@
           alt="John"
         />
       </v-avatar>
-      <v-btn>
-        {{ getStoreNickname }}
-      </v-btn>
+      <div class="ma-2 font-weight-bold">{{ getStoreNickname }}</div>
+      <v-btn @click="logout"> Logout </v-btn>
     </template>
 
     <template v-else>
@@ -75,6 +73,10 @@ export default {
     },
   },
   methods: {
+    async logout() {
+      await this.$store.dispatch('Logout');
+      await this.$router.push('/main');
+    },
     routeRegister() {
       this.$router.push('/register');
     },

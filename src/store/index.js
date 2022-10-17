@@ -47,7 +47,6 @@ export default new Vuex.Store({
     clearToken(state) {
       state.Token = '';
     },
-
     clearUserID(state, id) {
       state.UserID = id;
     },
@@ -70,6 +69,12 @@ export default new Vuex.Store({
       commit('setUserID', data.id);
       commit('setToken', data.token);
       return data;
+    },
+    async Logout({ commit }) {
+      commit('clearUserType');
+      commit('clearNickname');
+      commit('clearUserID');
+      commit('clearToken');
     },
   },
 });
