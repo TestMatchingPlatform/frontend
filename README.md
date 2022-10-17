@@ -60,6 +60,8 @@
 
 <br>
 
+2. Frontend, Backend 연동 완료
+
 ### 보안 / 인가 절차 적용 - 미구현
 
 <br>
