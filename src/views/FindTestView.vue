@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import { findDeadLineTests, findPopularTests } from '@/api/auth';
-import SimpleTest from '@/components/SimpleTest';
+import { findTests, findPopularTests } from '@/api/auth';
+import SimpleTest from '@/components/test/SimpleTest';
 
 export default {
   name: 'FindTestView',
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     async initMockValue() {
-      const mockData = await findDeadLineTests();
+      const mockData = await findTests();
       console.log(mockData.data);
       this.tests = mockData.data;
     },

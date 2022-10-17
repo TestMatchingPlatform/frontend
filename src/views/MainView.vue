@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import SimpleTest from '@/components/SimpleTest';
+import SimpleTest from '@/components/test/SimpleTest';
 import { findCounts, findDeadLineTests, findPopularTests } from '@/api/auth';
 
 export default {

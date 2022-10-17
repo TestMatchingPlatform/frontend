@@ -2,10 +2,13 @@
   <v-container>
     <v-row class="ma-5 pa-3">
       <v-col cols="2">
-        <v-card class="grey lighten-2 text-h4 text-center"
-          >D-{{ deadLine }}</v-card
-        ></v-col
-      >
+        <v-card class="grey lighten-2 text-h4 text-center" v-if="isApply"
+          >D-{{ deadLine }}
+        </v-card>
+        <v-card class="grey lighten-2 text-h4 text-center" v-else
+          >{{ state }}
+        </v-card>
+      </v-col>
       <v-col cols="10">
         <div class="text-h4">{{ title }}</div>
       </v-col>
@@ -13,10 +16,7 @@
     <v-divider></v-divider>
     <v-row class="ma-5 pa-3">
       <v-col cols="6">
-        <v-img
-          src="https://picsum.photos/510/300?random"
-          :aspect-ratio="16 / 9"
-        ></v-img>
+        <v-img :src="symbolImageURL" :aspect-ratio="16 / 9"></v-img>
       </v-col>
       <v-col cols="6">
         <v-row>
@@ -24,7 +24,7 @@
             <div>주최/주관</div>
           </v-col>
           <v-col cols="9">
-            <div>{{ testerNickname }} / {{ company }}</div>
+            <div>{{ makerNickname }} / {{ company }}</div>
           </v-col>
           <v-col cols="3">
             <div>지원기간</div>
@@ -48,79 +48,224 @@
             <div>신청/모집인원</div>
           </v-col>
           <v-col cols="9">
-            <div>{{ applyCount }} / {{ participantCapacity }}</div>
+            <div>{{ apply }} / {{ participantCapacity }}</div>
           </v-col>
         </v-row>
+
         <v-col cols="6">
-          <v-btn class="primary">신청하기</v-btn>
+          <v-btn class="primary" v-if="isApply" @click="testerApply"
+            >신청하기</v-btn
+          >
+          <v-btn class="primary" v-else-if="isTesterApply">신청 취소하기</v-btn>
+          <v-btn class="primary" v-else-if="isTesterApprove"
+            >완료 / 미 완료</v-btn
+          >
+          <v-btn
+            class="primary"
+            v-else-if="isTesterComplete"
+            @click="showReviewMaker"
+            >보상받기 / 테스트 미수행</v-btn
+          >
+          <v-btn class="primary" v-else-if="isMakerApply" @click="makerTestFix"
+            >수정하기</v-btn
+          >
+          <v-btn
+            class="primary"
+            v-else-if="isMakerApprove"
+            @click="showApplyTesters"
+            >테스터 선정하기</v-btn
+          >
+          <v-btn
+            class="primary"
+            v-else-if="isMakerProgress"
+            @click="showPerformTesters"
+            >테스터 수행인원 정보보기 + 완료 처리하기</v-btn
+          >
+          <v-btn
+            class="primary"
+            v-else-if="isMakerComplete"
+            @click="showReviewTesters"
+            >테스터 리뷰 작성하기</v-btn
+          >
         </v-col>
       </v-col>
-
-      <v-col cols="12">
-        <v-divider></v-divider>
-        <div class="text-h3 ma-5">상세 설명</div>
-        <div>{{ content }}</div>
-      </v-col>
     </v-row>
+    <v-col cols="12" v-if="this.contentState === ''">
+      <v-divider></v-divider>
+      <div class="text-h3 ma-5">상세 설명</div>
+      <div>{{ content }}</div>
+    </v-col>
+    <v-col cols="12" v-else-if="this.contentState === 'approve'">
+      <v-divider></v-divider>
+      <div class="text-h3 ma-5">신청자 명단</div>
+      <TesterApprove :applyTesters="applyTesters" :testId="id"></TesterApprove>
+    </v-col>
+    <v-col cols="12" v-else-if="this.contentState === 'perform'">
+      <v-divider></v-divider>
+      <div class="text-h3 ma-5">수행인원 명단</div>
+      <TesterPerform
+        :performTesters="performTesters"
+        :testId="id"
+      ></TesterPerform>
+    </v-col>
+    <v-col cols="12" v-else-if="this.contentState === 'reviewFromMaker'">
+      <v-divider></v-divider>
+      <div class="text-h3 ma-5">수행인원 명단</div>
+      <TesterReview :completeTesters="completeTesters"></TesterReview>
+    </v-col>
+    <v-col cols="12" v-else-if="this.contentState === 'reviewFromTester'">
+      <v-divider></v-divider>
+      <div class="text-h3 ma-5">수행인원 명단</div>
+      <MakerReview :id="applyInformationId"></MakerReview>
+    </v-col>
   </v-container>
 </template>
 
 <script>
+import {
+  findDetailTest,
+  getImage,
+  applyTest,
+  findApplyTesters,
+  findPerformTesters,
+  findCompleteTesters,
+  findApplyInformationId,
+} from '@/api/auth';
+import TesterApprove from '@/components/content/TesterApprove';
+import TesterPerform from '@/components/content/TesterPerform';
+import TesterReview from '@/components/content/TesterReview';
+
 export default {
   name: 'TestView',
+  components: { TesterReview, TesterPerform, TesterApprove },
   data() {
     return {
-      id: 0,
+      id: '',
       deadLine: 0,
       title: '',
-      testerNickname: '',
+      makerNickname: '',
       company: '',
       recruitmentTimeStart: '',
       recruitmentTimeLimit: '',
       durationTimeStart: '',
       durationTimeLimit: '',
       participantCapacity: 0,
-      applyCount: 0,
+      apply: 0,
       reward: 0,
       content: '',
+      symbolImageURL: '',
+      state: '',
+      contentState: '',
+      applyTesters: [],
+      performTesters: [],
+      completeTesters: [],
+      applyInformationId: '',
     };
   },
   methods: {
-    insertMockValue() {
-      this.id = this.$route.params.id;
-      this.deadLine = 23;
-      this.title = 'DOR 게임 하이라이트 영상 녹화 베타테스터 모집';
-      this.testerNickname = 'Kukjun';
-      this.company = 'KukjunCompany';
-      this.recruitmentTimeStart = '2022-10-01';
-      this.recruitmentTimeLimit = '2022-11-01';
-      this.durationTimeStart = '2022-12-01';
-      this.durationTimeLimit = '2022-12-30';
-      this.reward = 5000;
-      this.participantCapacity = 100;
-      this.applyCount = 58;
-      this.content =
-        '"크아아아아"\n' +
-        '드래곤중에서도 최강의 투명드래곤이 울부짓었다\n' +
-        '투명드래곤은 졸라짱쎄서 드래곤중에서 최강이엇다\n' +
-        '신이나 마족도 이겼따 다덤벼도 이겼따 투명드래곤은\n' +
-        '새상에서 하나였다 어쨌든 걔가 울부짓었다\n' +
-        '"으악 제기랄 도망가자"\n' +
-        '발록들이 도망갔다 투명드래곤이 짱이었따\n' +
-        '그래서 발록들은 도망간 것이다' +
-        '투명드래곤은 심심햇다\n' +
-        '그래서 신을죽이기로 햇다\n' +
-        '그래서 신들은 비상이걸렸따\n' +
-        '"투명드래곤이 쳐들어온대"\n' +
-        '"그래 싸우자"\n' +
-        '하지만 투명드래곤은 투명드래곤이라서 투명했따\n' +
-        '그래서 안보여서 신들은결국 다 죽고말았따\n' +
-        '투명드래곤은 이새계가심심해서 다른새계로\n' +
-        '가기로하였따';
+    async insertValue() {
+      const testId = this.$route.params.id;
+      this.state = this.$route.params.state;
+
+      console.log(testId);
+      const detailTest = await findDetailTest(testId);
+      console.log(detailTest);
+      const detailTestData = detailTest.data;
+      console.log(detailTestData);
+      this.id = detailTestData.id;
+      this.deadLine = detailTestData.deadLine;
+      this.title = detailTestData.title;
+      this.makerNickname = detailTestData.makerNickname;
+      this.company = detailTestData.company;
+      this.recruitmentTimeStart = detailTestData.recruitmentTimeStart;
+      this.recruitmentTimeLimit = detailTestData.recruitmentTimeLimit;
+      this.durationTimeStart = detailTestData.durationTimeStart;
+      this.durationTimeLimit = detailTestData.durationTimeLimit;
+      this.reward = detailTestData.reward;
+      this.participantCapacity = detailTestData.participantCapacity;
+      this.apply = detailTestData.apply;
+      console.log(this.apply);
+      this.content = detailTestData.content;
+      this.symbolImageURL = getImage(detailTestData.symbolImageRoot);
+    },
+    async testerApply() {
+      const testData = {
+        testId: this.id,
+      };
+      const applyResponse = await applyTest(this.$store.state.UserID, testData);
+      const applyResponseData = applyResponse.data;
+      console.log(applyResponseData);
+      await this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
+    },
+    async makerTestFix() {
+      await this.$router.push(`/tests/${this.id}/fix`);
+    },
+    async showApplyTesters() {
+      const applyTestersResponse = await findApplyTesters(this.id);
+      console.log(applyTestersResponse.data);
+      this.applyTesters = applyTestersResponse.data;
+      this.contentState = 'approve';
+    },
+    async showPerformTesters() {
+      const performTesterResponse = await findPerformTesters(this.id);
+      console.log(performTesterResponse.data);
+      this.performTesters = performTesterResponse.data;
+      this.contentState = 'perform';
+    },
+    async showReviewTesters() {
+      const completeTesterResponse = await findCompleteTesters(this.id);
+      console.log(completeTesterResponse.data);
+      this.completeTesters = completeTesterResponse.data;
+      this.contentState = 'reviewFromMaker';
+    },
+    async showReviewMaker() {
+      const applyInformationResponse = await findApplyInformationId(
+        this.$store.state.UserID,
+        this.id,
+      );
+      console.log(applyInformationResponse.data);
+      this.applyInformationId = applyInformationResponse.data;
+      this.contentState = 'reviewFromTester';
     },
   },
   created() {
-    this.insertMockValue();
+    this.insertValue();
+  },
+  computed: {
+    isApply() {
+      return (
+        this.$store.state.UserType === 'tester' && this.state === 'require'
+      );
+    },
+    isTesterApply() {
+      return this.$store.state.UserType === 'tester' && this.state === 'apply';
+    },
+    isTesterApprove() {
+      return (
+        this.$store.state.UserType === 'tester' && this.state === 'approve'
+      );
+    },
+    isTesterComplete() {
+      return (
+        this.$store.state.UserType === 'tester' && this.state === 'complete'
+      );
+    },
+    isMakerApply() {
+      return this.$store.state.UserType === 'maker' && this.state === 'apply';
+    },
+    isMakerApprove() {
+      return this.$store.state.UserType === 'maker' && this.state === 'approve';
+    },
+    isMakerProgress() {
+      return (
+        this.$store.state.UserType === 'maker' && this.state === 'progress'
+      );
+    },
+    isMakerComplete() {
+      return (
+        this.$store.state.UserType === 'maker' && this.state === 'complete'
+      );
+    },
   },
 };
 </script>

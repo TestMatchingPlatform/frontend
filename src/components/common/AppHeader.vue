@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="secondary" dark>
+  <v-app-bar app color="secondary" height="100px" dark>
     <div class="d-flex align-center">
       <v-img
         alt="Project Logo"
@@ -7,7 +7,7 @@
         contain
         src="@/assets/logo.png"
         transition="scale-transition"
-        width="40"
+        width="60"
       />
 
       <span class="text-md-h4 cyan--text">Tester Matching Platform</span>
