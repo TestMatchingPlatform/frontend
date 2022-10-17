@@ -30,6 +30,10 @@ const router = new VueRouter({
       component: () => import('@/views/TestView'),
     },
     {
+      path: '/test/:id/state/:state',
+      component: () => import('@/views/TestView'),
+    },
+    {
       path: '/point',
       component: () => import('@/views/MyPointView'),
     },
@@ -44,6 +48,10 @@ const router = new VueRouter({
     {
       path: '/tests/form',
       component: () => import('@/views/CreateTestView'),
+    },
+    {
+      path: '/tests/:id/fix',
+      component: () => import('@/views/FixTestView'),
     },
     {
       path: '/tests/find',

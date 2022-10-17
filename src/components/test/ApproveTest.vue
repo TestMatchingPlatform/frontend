@@ -4,23 +4,18 @@
     <v-card-text>
       <v-row>
         <v-col cols="12">
-          {{ simpleTest.makerNickName }} / {{ simpleTest.company }}</v-col
+          {{ approveTest.makerNickname }} / {{ approveTest.company }}</v-col
         >
         <v-col cols="12" class="text--primary">
-          title : {{ simpleTest.title }}
+          title : {{ approveTest.title }}
         </v-col>
         <v-col cols="12" class="text--primary">
-          지급 Point : {{ simpleTest.reward }}p
-        </v-col>
-        <v-col cols="12" class="text--primary">
-          신청/모집 인원 : {{ simpleTest.apply }}/{{
-            simpleTest.participantCapacity
-          }}
+          지급 Point : {{ approveTest.reward }}p
         </v-col>
         <v-col cols="4"></v-col>
         <v-col cols="4"></v-col>
         <v-col cols="4" class="grey lighten-1 text-center text--primary">
-          D-{{ simpleTest.deadlineRemain }}</v-col
+          {{ approveTest.status }}</v-col
         >
       </v-row>
     </v-card-text>
@@ -31,9 +26,9 @@
 import { getImage } from '@/api/auth';
 
 export default {
-  name: 'SimpleTest',
+  name: 'ApproveTest',
   props: {
-    simpleTest: {
+    approveTest: {
       type: Object,
       required: true,
     },
@@ -49,10 +44,11 @@ export default {
         'https://cdn.vuetifyjs.com/images/parallax/material.jpg';
     },
     makeImageGetURL() {
-      this.symbolImageRoot = getImage(this.simpleTest.symbolImageRoot);
+      this.symbolImageRoot = getImage(this.approveTest.symbolImageRoot);
     },
     routeTestView() {
-      this.$router.push(`/test/${this.id}`);
+      console.log(this.approveTest.id);
+      this.$router.push(`/test/${this.approveTest.id}/state/approve`);
     },
   },
   created() {

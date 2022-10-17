@@ -9,18 +9,63 @@
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item">
-        <v-card class="pa-5">
+      <v-tab-item v-for="item in items" :key="item.title">
+        <v-card class="pa-5" v-if="item.title === '신청기간의 Test'">
           <v-row>
             <v-col
-              v-for="simpleTest in item.component"
-              :key="simpleTest.id"
+              v-for="applyPeriodTest in item.component"
+              :key="applyPeriodTest.id"
               cols="3"
             >
-              <SimpleTest
-                :simpleTest="simpleTest"
-                @refresh="fetchDeadLineTests"
-              ></SimpleTest>
+              <ApplyPeriodTest
+                :applyPeriodTest="applyPeriodTest"
+                @refresh="fetchMyTests"
+              ></ApplyPeriodTest>
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-card
+          class="pa-5"
+          v-if="item.title === '신청기간 후 수행인원 선발이 필요한 Test'"
+        >
+          <v-row>
+            <v-col
+              v-for="approvePeriodTest in item.component"
+              :key="approvePeriodTest.id"
+              cols="3"
+            >
+              <ApprovePeriodTest
+                :approvePeriodTest="approvePeriodTest"
+                @refresh="fetchMyTests"
+              ></ApprovePeriodTest>
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-card class="pa-5" v-if="item.title === '진행중인 Test'">
+          <v-row>
+            <v-col
+              v-for="progressPeriodTest in item.component"
+              :key="progressPeriodTest.id"
+              cols="3"
+            >
+              <ProgressPeriodTest
+                :progressPeriodTest="progressPeriodTest"
+                @refresh="fetchMyTests"
+              ></ProgressPeriodTest>
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-card class="pa-5" v-if="item.title === '완료한 Test'">
+          <v-row>
+            <v-col
+              v-for="completePeriodTest in item.component"
+              :key="completePeriodTest.id"
+              cols="3"
+            >
+              <CompletePeriodTest
+                :completePeriodTest="completePeriodTest"
+                @refresh="fetchMyTests"
+              ></CompletePeriodTest>
             </v-col>
           </v-row>
         </v-card>
@@ -30,12 +75,21 @@
 </template>
 
 <script>
-import { findDeadLineTests } from '@/api/auth';
-import SimpleTest from '@/components/SimpleTest';
+import { findMyTests } from '@/api/auth';
+import SimpleTest from '@/components/test/SimpleTest';
+import ApprovePeriodTest from '@/components/test/ApprovePeriodTest';
+import ProgressPeriodTest from '@/components/test/ProgressPeriodTest';
+import CompletePeriodTest from '@/components/test/CompletePeriodTest';
+import ApplyPeriodTest from '@/components/test/ApplyPeriodTest';
 
 export default {
   name: 'MyTestView',
-  components: { SimpleTest },
+  components: {
+    ApplyPeriodTest,
+    CompletePeriodTest,
+    ProgressPeriodTest,
+    ApprovePeriodTest,
+  },
   data() {
     return {
       tab: null,
@@ -60,17 +114,18 @@ export default {
     };
   },
   methods: {
-    async fetchDeadLineTests() {
-      const deadLineTestsData = await findDeadLineTests();
-      console.log(deadLineTestsData.data);
-      this.items[0].component = deadLineTestsData.data;
-      this.items[1].component = deadLineTestsData.data;
-      this.items[2].component = deadLineTestsData.data;
-      this.items[3].component = deadLineTestsData.data;
+    async fetchMyTests() {
+      const myTests = await findMyTests(this.$store.state.UserID);
+      console.log(myTests.data);
+      const myTestsData = myTests.data;
+      this.items[0].component = myTestsData.applyPeriodTestList;
+      this.items[1].component = myTestsData.approvePeriodTestList;
+      this.items[2].component = myTestsData.progressPeriodTestList;
+      this.items[3].component = myTestsData.completePeriodTestList;
     },
   },
   created() {
-    this.fetchDeadLineTests();
+    this.fetchMyTests();
   },
 };
 </script>
