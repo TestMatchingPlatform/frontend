@@ -131,7 +131,8 @@
 </template>
 
 <script>
-import { testerRegister, makerRegister } from '@/api/auth';
+import { makerRegister } from '@/api/makerAuth';
+import { testerRegister } from '@/api/testerAuth';
 export default {
   name: 'RegisterView',
   data() {

@@ -58,10 +58,10 @@
 </template>
 
 <script>
-import { findApplyTests } from '@/api/auth';
-import ApproveTest from '@/components/test/ApproveTest';
-import QuitTest from '@/components/test/QuitTest';
-import ApplyTest from '@/components/test/ApplyTest';
+import { findApplyTests } from '@/api/testerAuth';
+import ApproveTest from '@/components/test/tester/ApproveTest';
+import QuitTest from '@/components/test/tester/QuitTest';
+import ApplyTest from '@/components/test/tester/ApplyTest';
 
 export default {
   name: 'MyApplyView',

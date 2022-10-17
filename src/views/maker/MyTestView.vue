@@ -75,12 +75,12 @@
 </template>
 
 <script>
-import { findMyTests } from '@/api/auth';
-import SimpleTest from '@/components/test/SimpleTest';
-import ApprovePeriodTest from '@/components/test/ApprovePeriodTest';
-import ProgressPeriodTest from '@/components/test/ProgressPeriodTest';
-import CompletePeriodTest from '@/components/test/CompletePeriodTest';
-import ApplyPeriodTest from '@/components/test/ApplyPeriodTest';
+import { findMyTests } from '@/api/makerAuth';
+
+import ApprovePeriodTest from '@/components/test/maker/ApprovePeriodTest';
+import ProgressPeriodTest from '@/components/test/maker/ProgressPeriodTest';
+import CompletePeriodTest from '@/components/test/maker/CompletePeriodTest';
+import ApplyPeriodTest from '@/components/test/maker/ApplyPeriodTest';
 
 export default {
   name: 'MyTestView',
