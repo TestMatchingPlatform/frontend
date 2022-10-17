@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { testerLogin, makerLogin } from '@/api/auth';
+import { makerLogin } from '@/api/makerAuth';
+import { testerLogin } from '@/api/testerAuth';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({

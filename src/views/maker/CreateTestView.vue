@@ -91,14 +91,13 @@
 </template>
 
 <script>
-import { updateTest, findDetailTest } from '@/api/auth';
+import { createTest } from '@/api/makerAuth';
 
 export default {
-  name: 'FixTestView',
+  name: 'CreateTestView',
   data() {
     return {
       valid: null,
-      id: '',
       title: '',
       recruitmentTimeStart: '',
       recruitmentTimeLimit: '',
@@ -131,11 +130,7 @@ export default {
         for (let key of testData.entries()) {
           console.log(`${key}`);
         }
-        const response = await updateTest(
-          this.$store.state.UserID,
-          this.id,
-          testData,
-        );
+        const response = await createTest(this.$store.state.UserID, testData);
         console.log(response.data);
 
         await this.$router.push('/main');
@@ -183,24 +178,6 @@ export default {
       }
       this.overlay = false;
     },
-    async initValue() {
-      const detailTest = await findDetailTest(this.$route.params.id);
-      const detailTestData = detailTest.data;
-      console.log(detailTestData);
-
-      this.id = detailTestData.id;
-      this.title = detailTestData.title;
-      this.recruitmentTimeStart = detailTestData.recruitmentTimeStart;
-      this.recruitmentTimeLimit = detailTestData.recruitmentTimeLimit;
-      this.durationTimeStart = detailTestData.durationTimeStart;
-      this.durationTimeLimit = detailTestData.durationTimeLimit;
-      this.participantCapacity = detailTestData.participantCapacity;
-      this.reward = detailTestData.reward;
-      this.content = detailTestData.content;
-    },
-  },
-  created() {
-    this.initValue();
   },
 };
 </script>

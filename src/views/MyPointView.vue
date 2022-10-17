@@ -71,7 +71,8 @@
 </template>
 
 <script>
-import { showPointFromTester, showPointFromMaker } from '@/api/auth';
+import { showPointFromMaker } from '@/api/makerAuth';
+import { showPointFromTester } from '@/api/testerAuth';
 
 export default {
   name: 'MyPointView',

@@ -44,7 +44,8 @@
 </template>
 
 <script>
-import { findTests, findPopularTests } from '@/api/auth';
+import { findPopularTests } from '@/api/auth';
+import { findTests } from '@/api/testerAuth';
 import SimpleTest from '@/components/test/SimpleTest';
 
 export default {

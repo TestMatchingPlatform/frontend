@@ -39,23 +39,23 @@ const router = new VueRouter({
     },
     {
       path: '/makers/:id/tests',
-      component: () => import('@/views/MyTestView'),
+      component: () => import('@/views/maker/MyTestView'),
     },
     {
       path: '/testers/:id/tests',
-      component: () => import('@/views/MyApplyView'),
+      component: () => import('@/views/tester/MyApplyView'),
     },
     {
       path: '/tests/form',
-      component: () => import('@/views/CreateTestView'),
+      component: () => import('@/views/maker/CreateTestView'),
     },
     {
       path: '/tests/:id/fix',
-      component: () => import('@/views/FixTestView'),
+      component: () => import('@/views/maker/FixTestView'),
     },
     {
       path: '/tests/find',
-      component: () => import('@/views/FindTestView'),
+      component: () => import('@/views/tester/FindTestView'),
     },
     {
       path: '/tests/:id',

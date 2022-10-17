@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { createMakerReview } from '@/api/auth';
+import { createMakerReview } from '@/api/testerAuth';
 
 export default {
   name: 'MakerReview',

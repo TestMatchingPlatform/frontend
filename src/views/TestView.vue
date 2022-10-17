@@ -122,22 +122,24 @@
 </template>
 
 <script>
+import { findDetailTest, getImage } from '@/api/auth';
+
 import {
-  findDetailTest,
-  getImage,
-  applyTest,
   findApplyTesters,
   findPerformTesters,
   findCompleteTesters,
-  findApplyInformationId,
-} from '@/api/auth';
+} from '@/api/makerAuth';
+
+import { applyTest, findApplyInformationId } from '@/api/testerAuth';
+
 import TesterApprove from '@/components/content/TesterApprove';
 import TesterPerform from '@/components/content/TesterPerform';
 import TesterReview from '@/components/content/TesterReview';
+import MakerReview from '@/components/content/MakerReview';
 
 export default {
   name: 'TestView',
-  components: { TesterReview, TesterPerform, TesterApprove },
+  components: { TesterReview, TesterPerform, TesterApprove, MakerReview },
   data() {
     return {
       id: '',
