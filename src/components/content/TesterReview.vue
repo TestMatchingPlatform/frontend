@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { reviewTesters } from '@/api/auth';
+import { reviewTesters } from '@/api/makerAuth';
 
 export default {
   name: 'TesterReview',

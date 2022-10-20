@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { completeTesters } from '@/api/auth';
+import { completeTesters } from '@/api/makerAuth';
 
 export default {
   name: 'TesterPerform',

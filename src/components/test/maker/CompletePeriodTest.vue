@@ -16,7 +16,7 @@
         <v-col cols="4"></v-col>
         <v-col cols="4"></v-col>
         <v-col cols="4" class="grey lighten-1 text-center text--primary">
-          {{ completePeriodTest.status }}</v-col
+          {{ completePeriodTest.state }}</v-col
         >
       </v-row>
     </v-card-text>
@@ -39,6 +39,7 @@ export default {
       symbolImageRoot: '',
     };
   },
+
   methods: {
     insertMockValue() {
       this.symbolImageRoot =
