@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 import { makerLogin } from '@/api/makerAuth';
 import { testerLogin } from '@/api/testerAuth';
@@ -7,11 +8,13 @@ import { testerLogin } from '@/api/testerAuth';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     UserType: '',
     Nickname: '',
     UserID: '',
-    Token: '',
+    RefreshToken: '',
+    AccessToken: '',
   },
   getters: {
     isUserType(state) {
@@ -23,8 +26,11 @@ export default new Vuex.Store({
     isUserID(state) {
       return state.UserID !== '';
     },
-    isToken(state) {
-      return state.Token !== '';
+    isRefreshToken(state) {
+      return state.RefreshToken !== '';
+    },
+    isAccessToken(state) {
+      return state.AccessToken !== '';
     },
   },
   mutations: {

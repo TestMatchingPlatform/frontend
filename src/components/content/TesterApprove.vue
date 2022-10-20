@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { approveTesters } from '@/api/auth';
+import { approveTesters } from '@/api/makerAuth';
 
 export default {
   name: 'TesterApprove',

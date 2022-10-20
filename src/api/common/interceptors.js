@@ -1,10 +1,11 @@
 import store from '@/store/index';
 
+// 요청 하기 전, 값을 미리 꺼내서 Request Header 설정해주기
 export function setInterceptors(instance) {
-  // 요청하기 전, 미리 JSESSIONID를 쿠키에서 꺼내서 request header에 반영
   instance.interceptors.request.use(
     function (config) {
-      config.headers.JSESSIONID = store.state.sessionId;
+      config.headers.REFRESH_TOKEN = store.state.RefreshToken;
+      config.headers.ACCESS_TOKEN = store.state.AccessToken;
       return config;
     },
     function (error) {
@@ -12,11 +13,16 @@ export function setInterceptors(instance) {
     },
   );
 
-  // 반환되는 값을 미리 가공
+  // Response 중에서 set Cookie 값이 있는 경우에는 해당 값을 Persisted state 연동한 store 에 저장
   instance.interceptors.response.use(
     function (response) {
       if (response.headers['set-cookie'] != null) {
         console.log(response.headers['set-cookie']);
+        // 받아온 값들은 store 값으로 매칭해야 하는데, string[]값이 response 되므로, 이를 한번더 가공해야 합니다
+        //:( 값을 가공하는 방식은 값을 직접 받아보는게 아니면 확인하기가 힘들 것 같아서 보류하겠습니다.
+
+        // store.state.RefreshToken =
+        // store.state.AccessToken =
       }
       return response;
     },
