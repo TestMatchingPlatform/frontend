@@ -40,9 +40,6 @@ export default new Vuex.Store({
     setNickname(state, username) {
       state.Nickname = username;
     },
-    setToken(state, token) {
-      state.Token = token;
-    },
     setUserID(state, id) {
       state.UserID = id;
     },
@@ -52,11 +49,11 @@ export default new Vuex.Store({
     clearNickname(state) {
       state.Nickname = '';
     },
-    clearToken(state) {
-      state.Token = '';
+    clearAccessToken(state) {
+      state.AccessToken = '';
     },
-    clearUserID(state, id) {
-      state.UserID = id;
+    clearRefreshToken(state) {
+      state.RefreshToken = '';
     },
   },
   actions: {
@@ -66,7 +63,6 @@ export default new Vuex.Store({
       commit('setNickname', data.nickname);
       commit('setUserType', 'tester');
       commit('setUserID', data.id);
-      commit('setToken', data.token);
       return data;
     },
     async MakerLogin({ commit }, userData) {
@@ -75,14 +71,13 @@ export default new Vuex.Store({
       commit('setNickname', data.nickname);
       commit('setUserType', 'maker');
       commit('setUserID', data.id);
-      commit('setToken', data.token);
       return data;
     },
     async Logout({ commit }) {
       commit('clearUserType');
       commit('clearNickname');
       commit('clearUserID');
-      commit('clearToken');
+      commit('clear');
     },
   },
 });
