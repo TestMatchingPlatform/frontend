@@ -105,7 +105,7 @@
 
 <script>
 import SimpleTest from '@/components/test/SimpleTest';
-import { findCounts, findDeadLineTests, findPopularTests } from '@/api/auth';
+import { findCounts, findDeadLineTests, findPopularTests } from '@/api/noAuth';
 
 export default {
   name: 'MainView',

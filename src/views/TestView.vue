@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import { findDetailTest, getImage } from '@/api/auth';
+import { findDetailTest, getImage } from '@/api/noAuth';
 
 import {
   findApplyTesters,

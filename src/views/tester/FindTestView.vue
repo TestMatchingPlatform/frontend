@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { findPopularTests } from '@/api/auth';
+import { findPopularTests } from '@/api/noAuth';
 import { findTests } from '@/api/testerAuth';
 import SimpleTest from '@/components/test/SimpleTest';
 

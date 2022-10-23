@@ -77,7 +77,8 @@ export default new Vuex.Store({
       commit('clearUserType');
       commit('clearNickname');
       commit('clearUserID');
-      commit('clear');
+      commit('clearAccessToken');
+      commit('clearRefreshToken');
     },
   },
 });
