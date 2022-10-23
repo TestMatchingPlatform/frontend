@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { getImage } from '@/api/auth';
+import { getImage } from '@/api/noAuth';
 
 export default {
   name: 'approvePeriodTest',
@@ -53,9 +53,18 @@ export default {
     makeImageGetURL() {
       this.symbolImageRoot = getImage(this.approvePeriodTest.symbolImageRoot);
     },
-    routeTestView() {
+    async routeTestView() {
       console.log(this.approvePeriodTest.id);
-      this.$router.push(`/test/${this.approvePeriodTest.id}/state/approve`);
+      if (this.approvePeriodTest.state === 'Approve') {
+        await this.$dialog.error({
+          title: '중복 선정 방지',
+          text: '이미 Tester를 선정하셨습니다.',
+        });
+      } else {
+        await this.$router.push(
+          `/test/${this.approvePeriodTest.id}/state/approve`,
+        );
+      }
     },
   },
   created() {

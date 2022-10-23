@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getImage } from '@/api/auth';
+import { getImage } from '@/api/noAuth';
 
 export default {
   name: 'progressPeriodTest',

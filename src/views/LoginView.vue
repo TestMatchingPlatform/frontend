@@ -68,22 +68,44 @@ export default {
           password: this.password,
         };
         console.log(request);
-        console.log('\n');
 
-        const data = await this.$store.dispatch('MakerLogin', request);
-        console.log(data);
+        this.$store
+          .dispatch('MakerLogin', request)
+          .then(async response => {
+            console.log(response);
+            console.log('성공');
+            await this.$router.push('/main');
+          })
+          .catch(async response => {
+            console.log(response);
+            const res = await this.$dialog.error({
+              text: '해당하는 Maker를 찾을 수 없습니다.',
+              title: '로그인 실패',
+            });
+            console.log(res);
+          });
       } else if (this.userType === 'tester') {
         const request = {
           email: this.email,
           password: this.password,
         };
         console.log(request);
-        console.log('\n');
 
-        const data = await this.$store.dispatch('TesterLogin', request);
+        this.$store
+          .dispatch('TesterLogin', request)
+          .then(async response => {
+            console.log(response);
+            await this.$router.push('/main');
+          })
+          .catch(async response => {
+            console.log(response);
+            const res = await this.$dialog.error({
+              text: '해당하는 Tester를 찾을 수 없습니다.',
+              title: '로그인 실패',
+            });
+          });
         console.log(data);
       }
-      await this.$router.push('/main');
     },
     reset() {
       this.$refs.form.reset();

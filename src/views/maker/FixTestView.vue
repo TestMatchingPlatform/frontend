@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { findDetailTest } from '@/api/auth';
+import { findDetailTest } from '@/api/noAuth';
 import { updateTest } from '@/api/makerAuth';
 
 export default {

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { getImage } from '@/api/auth';
+import { getImage } from '@/api/noAuth';
 
 export default {
   name: 'completePeriodTest',
@@ -48,9 +48,17 @@ export default {
     makeImageGetURL() {
       this.symbolImageRoot = getImage(this.completePeriodTest.symbolImageRoot);
     },
-    routeTestView() {
-      console.log(this.completePeriodTest.id);
-      this.$router.push(`/test/${this.completePeriodTest.id}/state/complete`);
+    async routeTestView() {
+      if (this.completePeriodTest.state === 'write Review') {
+        await this.$dialog.error({
+          title: '중복 리뷰 작성 방지',
+          text: '이미 리뷰를 선정하셨습니다.',
+        });
+      } else {
+        await this.$router.push(
+          `/test/${this.completePeriodTest.id}/state/complete`,
+        );
+      }
     },
   },
   created() {
