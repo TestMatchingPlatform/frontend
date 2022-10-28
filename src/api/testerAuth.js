@@ -1,35 +1,31 @@
-import { instance } from '@/api/index';
+import { testerAuthInstance } from '@/api/index';
 
 function testerRegister(userData) {
-  return instance.post('testers/register', userData);
+  return testerAuthInstance.post('/register', userData);
 }
 
 function testerLogin(userData) {
-  return instance.post('testers/login', userData);
-}
-
-function findTests() {
-  return instance.get('/tests');
+  return testerAuthInstance.post('/login', userData);
 }
 
 function showPointFromTester(testerId) {
-  return instance.get(`/testers/${testerId}/exchange`);
+  return testerAuthInstance.get(`/${testerId}/exchange`);
 }
 
 function findApplyTests(testerId) {
-  return instance.get(`/testers/${testerId}/apply`);
+  return testerAuthInstance.get(`/${testerId}/apply`);
 }
 
 function applyTest(testerId, testData) {
-  return instance.post(`/testers/${testerId}/apply`, testData);
+  return testerAuthInstance.post(`/${testerId}/apply`, testData);
 }
 
 function findApplyInformationId(testerId, testId) {
-  return instance.get(`/testers/${testerId}/tests/${testId}`);
+  return testerAuthInstance.get(`/${testerId}/tests/${testId}`);
 }
 
 function createMakerReview(applyId, makerReviewData) {
-  return instance.post(`/testers/apply/${applyId}/review`, makerReviewData);
+  return testerAuthInstance.post(`/apply/${applyId}/review`, makerReviewData);
 }
 
 export {
@@ -37,7 +33,6 @@ export {
   testerRegister,
   applyTest,
   findApplyTests,
-  findTests,
   showPointFromTester,
   findApplyInformationId,
   createMakerReview,

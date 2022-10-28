@@ -45,7 +45,7 @@
 
 <script>
 import { findPopularTests } from '@/api/noAuth';
-import { findTests } from '@/api/testerAuth';
+import { findTests } from '@/api/noAuth';
 import SimpleTest from '@/components/test/SimpleTest';
 
 export default {

@@ -22,6 +22,10 @@ function findDetailTest(testId) {
   });
 }
 
+function findTests() {
+  return instance.get('/tests');
+}
+
 // 직접적으로 API를 호출하지는 않지만 Get 요청 URL을 만들어줌
 function getImage(fileName) {
   const url = process.env.VUE_APP_API_URL + 'api/image/' + fileName;
@@ -34,5 +38,6 @@ export {
   findDeadLineTests,
   findPopularTests,
   findDetailTest,
+  findTests,
   getImage,
 };
