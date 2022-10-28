@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setInterceptors } from '@/api/common/interceptors';
 
 function createInstance() {
   return axios.create({
@@ -15,3 +16,5 @@ function createInstanceWithAuth(url) {
 }
 
 export const instance = createInstance();
+export const testerAuthInstance = createInstanceWithAuth('testers');
+export const makerAuthInstance = createInstanceWithAuth('makers');
