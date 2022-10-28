@@ -13,7 +13,7 @@ export default new Vuex.Store({
     UserType: '',
     Nickname: '',
     UserID: '',
-    RefreshToken: '',
+    // RefreshToken: '',
     AccessToken: '',
   },
   getters: {
@@ -26,9 +26,9 @@ export default new Vuex.Store({
     isUserID(state) {
       return state.UserID !== '';
     },
-    isRefreshToken(state) {
-      return state.RefreshToken !== '';
-    },
+    // isRefreshToken(state) {
+    //   return state.RefreshToken !== '';
+    // },
     isAccessToken(state) {
       return state.AccessToken !== '';
     },
@@ -49,12 +49,15 @@ export default new Vuex.Store({
     clearNickname(state) {
       state.Nickname = '';
     },
+    clearUserID(state) {
+      state.UserID = '';
+    },
     clearAccessToken(state) {
       state.AccessToken = '';
     },
-    clearRefreshToken(state) {
-      state.RefreshToken = '';
-    },
+    // clearRefreshToken(state) {
+    //   state.RefreshToken = '';
+    // },
   },
   actions: {
     async TesterLogin({ commit }, userData) {
@@ -78,7 +81,7 @@ export default new Vuex.Store({
       commit('clearNickname');
       commit('clearUserID');
       commit('clearAccessToken');
-      commit('clearRefreshToken');
+      // commit('clearRefreshToken');
     },
   },
 });

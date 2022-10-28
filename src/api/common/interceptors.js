@@ -20,12 +20,8 @@ export function setInterceptors(instance) {
     function (response) {
       console.log(response);
       store.state.AccessToken = response.headers.access_token;
-
-      // 받아온 값들은 store 값으로 매칭해야 하는데, string[]값이 response 되므로, 이를 한번더 가공해야 합니다
-      //:( 값을 가공하는 방식은 값을 직접 받아보는게 아니면 확인하기가 힘들 것 같아서 보류하겠습니다.
-
       // store.state.RefreshToken =
-      // store.state.AccessToken =
+
       return response;
     },
     function (error) {
