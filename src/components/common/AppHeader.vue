@@ -1,5 +1,11 @@
 <template>
-  <v-app-bar app color="secondary" height="100px" dark>
+  <v-app-bar
+    app
+    style="padding-left: 150px; padding-right: 150px"
+    height="100"
+    color="#FFFFFF"
+    elevation="1"
+  >
     <div class="d-flex align-center">
       <v-img
         alt="Project Logo"
@@ -7,52 +13,87 @@
         contain
         src="@/assets/logo.png"
         transition="scale-transition"
-        width="60"
+        width="80"
       />
 
-      <span class="text-md-h4 cyan--text">Tester Matching Platform</span>
+      <div class="text--black text-h5 font-weight-medium">Beta Matching</div>
     </div>
 
     <template v-if="getStoreUserType === 'tester'">
-      <v-spacer></v-spacer>
-      <v-btn @click="routeFindTest">Test 찾아보기</v-btn>
-      <v-btn @click="routeApplyTest">내가 신청한 Test 관리하기</v-btn>
-      <v-btn @click="routePoint">Point 교환하기</v-btn>
-      <v-spacer></v-spacer>
-      <v-avatar>
-        <img
-          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-          alt="John"
-        />
-      </v-avatar>
-      <div class="ma-2 font-weight-bold">{{ getStoreNickname }}</div>
-      <v-btn @click="logout"> Logout </v-btn>
+      <v-row align="center" justify="space-around">
+        <v-spacer></v-spacer>
+        <v-btn text class="mx-5 text-h6 font-weight-bold" @click="routeFindTest"
+          >Test 찾아보기</v-btn
+        >
+        <v-btn
+          text
+          class="mx-5 text-h6 font-weight-bold"
+          @click="routeApplyTest"
+          >내가 신청한 Test 관리하기</v-btn
+        >
+        <v-btn text class="mx-5 text-h6 font-weight-bold" @click="routePoint"
+          >Point 교환하기</v-btn
+        >
+        <v-spacer></v-spacer>
+        <v-avatar>
+          <img
+            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+            alt="John"
+          />
+        </v-avatar>
+        <div class="ma-2 font-weight-bold">{{ getStoreNickname }}</div>
+        <v-btn @click="logout"> Logout </v-btn>
+      </v-row>
     </template>
 
     <template v-else-if="getStoreUserType === 'maker'">
-      <v-spacer></v-spacer>
-      <v-btn @click="routeCreatedTest">Test 생성하기</v-btn>
-      <v-btn @click="routeMadeTest">내가 생성한 Test 관리하기</v-btn>
-      <v-btn @click="routePoint">Point 교환하기</v-btn>
-      <v-spacer></v-spacer>
-      <v-avatar>
-        <img
-          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-          alt="John"
-        />
-      </v-avatar>
-      <div class="ma-2 font-weight-bold">{{ getStoreNickname }}</div>
-      <v-btn @click="logout"> Logout </v-btn>
+      <v-row align="center" justify="space-around">
+        <v-spacer></v-spacer>
+        <v-btn
+          text
+          class="mx-5 text-h6 font-weight-bold"
+          @click="routeCreatedTest"
+          >Test 생성하기</v-btn
+        >
+        <v-btn text class="mx-5 text-h6 font-weight-bold" @click="routeMadeTest"
+          >내가 생성한 Test 관리하기</v-btn
+        >
+        <v-btn text class="mx-5 text-h6 font-weight-bold" @click="routePoint"
+          >Point 교환하기</v-btn
+        >
+        <v-spacer></v-spacer>
+        <v-avatar>
+          <img
+            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+            alt="John"
+          />
+        </v-avatar>
+        <div class="ma-2 font-weight-bold">{{ getStoreNickname }}</div>
+        <v-btn text @click="logout"> Logout </v-btn>
+      </v-row>
     </template>
 
     <template v-else>
-      <v-spacer></v-spacer>
-      <v-btn>About</v-btn>
-      <v-btn>How Work?</v-btn>
-      <v-btn>Donate</v-btn>
-      <v-spacer></v-spacer>
-      <v-btn @click="routeLogin">Login</v-btn>
-      <v-btn @click="routeRegister">Signup</v-btn>
+      <v-row align="center" justify="space-around">
+        <v-spacer></v-spacer>
+        <v-btn text class="mx-5 text-h6 font-weight-bold">About</v-btn>
+        <v-btn text class="mx-5 text-h6 font-weight-bold">How Work?</v-btn>
+        <v-btn text class="mx-5 text-h6 font-weight-bold">Donate</v-btn>
+        <v-spacer></v-spacer>
+        <v-btn
+          text
+          class="mx-5 text-subtitle-1 font-weight-medium"
+          @click="routeLogin"
+          >Login</v-btn
+        >
+        <div class="mx-5 text-h6">|</div>
+        <v-btn
+          text
+          class="mx-5 text-subtitle-1 font-weight-medium"
+          @click="routeRegister"
+          >Signup</v-btn
+        >
+      </v-row>
     </template>
   </v-app-bar>
 </template>
