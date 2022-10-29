@@ -20,6 +20,13 @@ const vuetify = new Vuetify({
   icons: {
     iconfont: 'md',
   },
+  theme: {
+    themes: {
+      light: {
+        primary: '#56c1a8',
+      },
+    },
+  },
 });
 Vue.config.productionTip = false;
 

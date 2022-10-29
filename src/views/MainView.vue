@@ -1,20 +1,22 @@
 <template>
-  <v-container>
+  <v-container style="padding-top: 50px">
     <div class="pa-10">
       <v-row>
         <v-col cols="12">
-          <span class="text-h3"
-            >Tester Matching Platform에 오신것을 환영합니다.</span
-          >
+          <div class="text-center text-h3">
+            <span class="font-weight-bold">게임</span><span>부터 </span>
+            <span class="font-weight-bold">어플리케이션 서비스</span
+            ><span
+              >까지 <br />
+              모든 TEST 신청은
+            </span>
+            <span class="font-weight-bold">BM</span><span>으로</span>
+          </div>
         </v-col>
-        <v-col cols="12">
-          <span
-            >Tester Matching Platform에서 한번에 여러 테스트 공모에 참여하고,
-            현금처럼 사용할 수 있는 보상을 받아보세요.
-          </span>
-        </v-col>
+      </v-row>
+      <v-row>
         <v-col cols="6">
-          <v-card class="pa-5">
+          <v-card class="pa-5 elevation-0">
             <v-row>
               <v-col cols="12">
                 <div class="text-h5 pa-5">마감임박 Test</div>
@@ -33,7 +35,7 @@
           </v-card>
         </v-col>
         <v-col cols="6">
-          <v-card class="pa-5">
+          <v-card class="pa-5 elevation-0">
             <v-row>
               <v-col cols="12">
                 <div class="text-h5 pa-5">인기있는 Test</div>
@@ -67,7 +69,7 @@
           </span>
         </v-col>
       </v-row>
-      <v-card class="pa-3">
+      <v-card class="pa-3 elevation-0">
         <v-row>
           <v-col cols="6">
             <v-card>
