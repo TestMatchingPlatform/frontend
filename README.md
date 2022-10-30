@@ -4,6 +4,9 @@
 
 ## 소개
 
+* MainPage
+<img width="2032" alt="스크린샷 2022-10-31 오전 12 20 52" src="https://user-images.githubusercontent.com/63409722/198886671-bfb0211c-c51f-4039-aebb-c06ae9445f4b.png">
+
 ---
 
 <br>
