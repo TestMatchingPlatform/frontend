@@ -50,7 +50,7 @@
 <br>
 
 
-### Frontend 구조 설계 및 개발 진행 - 구현 진행 중
+### Frontend 구조 설계 및 개발 진행
 
 
 **Frontend 구조 설계 - 초안 [Frontend 구조 설계 초안 문서](https://kukjun.notion.site/Frontend-fa27b85427844107ad7eb75d2aae8116)**
@@ -62,8 +62,12 @@
 
 2. Frontend, Backend 연동 완료
 
-### 보안 / 인가 절차 적용 - 미구현
+### 보안 / 인가 절차 적용 - 구현
+
+* 인가를 위해 Backend로부터 JWT를 정보를 받아서 응답 Header에 추가하는 방향으로 진행
 
 <br>
 
-### 추가 구현 사항 - 미구현
+### 추가 구현 사항 - 구현중
+
+1. 디자인 수정 [디자인 수정현황](https://kukjun.notion.site/Frontend-Design-4d740fdac9af4aa1bc74a57d702e3931)
