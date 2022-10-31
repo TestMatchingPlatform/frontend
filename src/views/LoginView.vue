@@ -1,31 +1,40 @@
 <template>
-  <v-container style="padding-top: 50px" class="pa-10">
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-radio-group v-model="userType" column>
-        <v-radio label="Tester" color="primary" value="tester"> </v-radio>
-        <v-radio label="Maker" color="primary" value="maker"> </v-radio>
-      </v-radio-group>
-      <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="E-mail"
-        required
-      ></v-text-field>
+  <v-container style="padding-top: 100px">
+    <v-row justify="center">
+      <v-col cols="6">
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-radio-group v-model="userType" column>
+            <v-radio label="Tester" color="primary" value="tester"> </v-radio>
+            <v-radio label="Maker" color="primary" value="maker"> </v-radio>
+          </v-radio-group>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="E-mail"
+            required
+          ></v-text-field>
 
-      <v-text-field
-        v-model="password"
-        :rules="passwordRules"
-        label="Password"
-        type="password"
-        required
-      ></v-text-field>
+          <v-text-field
+            v-model="password"
+            :rules="passwordRules"
+            label="Password"
+            type="password"
+            required
+          ></v-text-field>
 
-      <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
-        로그인
-      </v-btn>
+          <v-btn
+            :disabled="!valid"
+            color="success"
+            class="mr-4"
+            @click="validate"
+          >
+            로그인
+          </v-btn>
 
-      <v-btn color="error" class="mr-4" @click="reset"> 초기화 </v-btn>
-    </v-form>
+          <v-btn color="error" class="mr-4" @click="reset"> 초기화 </v-btn>
+        </v-form>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

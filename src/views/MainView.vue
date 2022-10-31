@@ -1,6 +1,6 @@
 <template>
-  <v-container style="padding-top: 50px">
-    <div class="pa-10">
+  <v-container>
+    <div class="blank-10">
       <v-row justify="center">
         <v-col cols="12">
           <div class="text-center text-h3">
@@ -14,7 +14,7 @@
             ><span>으로</span>
           </div>
         </v-col>
-        <v-col cols="5">
+        <v-col cols="5" class="blank-10">
           <v-card>
             <v-row justify="center">
               <v-col cols="8">
@@ -30,26 +30,41 @@
                 <v-card-text
                   class="text-subtitle-1 pa-3 teal--text text--accent-5"
                 >
-                  <div>
-                    <span class="material-icons"> done </span> 플랫폼 내부에서
-                    Tester를 선발하는 절차를 통해서 인력 낭비를 줄일 수
-                    있습니다.
-                  </div>
-                  <div>
-                    <span class="material-icons"> done </span> 수행인원 선정 시,
-                    신청 인원들의 이전 수행에 대한 리뷰를 확인할 수 있습니다.
-                  </div>
-                  <div>
-                    <span class="material-icons"> done </span> Reward 제공을
-                    플랫폼 내 재화로 통일하고, 그에 따라 리워드 지급을 간소화할
-                    수 있습니다.
-                  </div>
+                  <v-row>
+                    <v-col cols="1">
+                      <span class="material-icons"> done </span>
+                    </v-col>
+                    <v-col cols="11">
+                      <div>
+                        플랫폼 내부에서 Tester를 선발하는 절차를 통해서 인력
+                        낭비를 줄일 수 있습니다.
+                      </div>
+                    </v-col>
+                    <v-col cols="1">
+                      <span class="material-icons"> done </span>
+                    </v-col>
+                    <v-col cols="11">
+                      <div>
+                        수행인원 선정 시, 신청 인원들의 이전 수행에 대한 리뷰를
+                        확인할 수 있습니다.
+                      </div>
+                    </v-col>
+                    <v-col cols="1">
+                      <span class="material-icons"> done </span>
+                    </v-col>
+                    <v-col cols="11">
+                      <div>
+                        Reward 제공을 플랫폼 내 재화로 통일하고, 그에 따라
+                        리워드 지급을 간소화할 수 있습니다.
+                      </div>
+                    </v-col>
+                  </v-row>
                 </v-card-text>
               </v-col>
             </v-row>
           </v-card>
         </v-col>
-        <v-col cols="5">
+        <v-col cols="5" class="blank-10">
           <v-card>
             <v-row justify="center">
               <v-col cols="8">
@@ -66,26 +81,43 @@
                 <v-card-text
                   class="text-subtitle-1 pa-3 teal--text text--accent-5"
                 >
-                  <div>
-                    <span class="material-icons"> done </span> 테스터 모집
-                    공모를 플랫폼 내부에서 보고 바로 신청할 수 있습니다.
-                  </div>
-                  <div>
-                    <span class="material-icons"> done </span> 테스터 모집 시,
-                    경쟁률을 파악해서 보다 선정이 잘 될 수 있는 테스트를 신청할
-                    수 있습니다.
-                  </div>
-                  <div>
-                    <span class="material-icons"> done </span> 플랫폼 재화인
-                    Point를 지급 받고, 이를 현금으로 전환해서 자유롭게 사용할 수
-                    있습니다.
-                  </div>
+                  <v-row>
+                    <v-col cols="1">
+                      <span class="material-icons"> done </span>
+                    </v-col>
+                    <v-col cols="11">
+                      <div>
+                        테스터 모집 공모를 플랫폼 내부에서 보고 바로 신청할 수
+                        있습니다.
+                      </div>
+                    </v-col>
+                    <v-col cols="1">
+                      <span class="material-icons"> done </span>
+                    </v-col>
+                    <v-col cols="11">
+                      <div>
+                        테스터 모집 시, 경쟁률을 파악해서 보다 선정이 잘 될 수
+                        있는 테스트를 신청할 수 있습니다.
+                      </div>
+                    </v-col>
+                    <v-col cols="1">
+                      <span class="material-icons"> done </span>
+                    </v-col>
+                    <v-col cols="11">
+                      <div>
+                        플랫폼 재화인 Point를 지급 받고, 이를 현금으로 전환해서
+                        자유롭게 사용할 수 있습니다.
+                      </div>
+                    </v-col>
+                  </v-row>
                 </v-card-text>
               </v-col>
             </v-row>
           </v-card>
         </v-col>
       </v-row>
+    </div>
+    <div class="blank-10">
       <v-row>
         <v-col cols="6">
           <v-card class="pa-5 elevation-0">
@@ -130,15 +162,14 @@
       </v-row>
     </div>
 
-    <div class="pa-10">
+    <div class="blank-10">
       <v-row>
         <v-col cols="12">
-          <span class="text-h3">혹시 Test를 제작하고자 하시나요?</span>
-        </v-col>
-        <v-col cols="12">
-          <span
-            >간편하고 효율적으로 Tester들을 모으고 기능들을 시험해보세요.
-          </span>
+          <span class="text-h3"
+            >현재
+            <span class="font-weight-bold teal--text text--accent-5">BM</span>을
+            이용하는 사람들</span
+          >
         </v-col>
       </v-row>
       <v-card class="pa-3 elevation-0">
@@ -222,4 +253,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.blank-10 {
+  padding-top: 10em;
+}
+</style>

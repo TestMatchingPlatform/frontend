@@ -1,26 +1,44 @@
 <template>
   <v-card @click="routeTestView">
-    <v-img :src="symbolImageRoot" :aspect-ratio="16 / 9" :width="250"> </v-img>
-    <v-card-text>
+    <v-img :src="symbolImageRoot" :aspect-ratio="1 / 1" :width="250"> </v-img>
+    <v-card-text class="text-subtitle-1">
       <v-row>
         <v-col cols="12">
           {{ approvePeriodTest.makerNickname }} /
           {{ approvePeriodTest.company }}</v-col
         >
         <v-col cols="12" class="text--primary">
-          title : {{ approvePeriodTest.title }}
+          <div
+            class="text-subtitle-1 font-weight-bold align-baseline"
+            style="
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+            "
+          >
+            <span class="text-subtitle-1">제목:</span>
+            {{ approvePeriodTest.title }}
+          </div>
         </v-col>
         <v-col cols="12" class="text--primary">
-          지급 Point : {{ approvePeriodTest.reward }}p
+          <div class="font-weight-bold align-baseline">
+            <span class="font-weight-medium">Reward Point:</span>
+            {{ approvePeriodTest.reward }}P
+          </div>
         </v-col>
         <v-col cols="12" class="text--primary">
-          신청/모집 인원 : {{ approvePeriodTest.apply }}/{{
-            approvePeriodTest.participantCapacity
-          }}
+          <div class="font-weight-bold align-baseline">
+            <span class="font-weight-medium">신청/모집 인원:</span>
+            {{ approvePeriodTest.apply }}/
+            {{ approvePeriodTest.participantCapacity }}
+          </div>
         </v-col>
         <v-col cols="4"></v-col>
         <v-col cols="4"></v-col>
-        <v-col cols="4" class="grey lighten-1 text-center text--primary">
+        <v-col
+          cols="4"
+          class="grey lighten-1 text-subtitle-2 text-center text--primary font-weight-bold"
+        >
           {{ approvePeriodTest.state }}</v-col
         >
       </v-row>
