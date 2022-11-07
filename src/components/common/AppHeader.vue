@@ -1,22 +1,23 @@
 <template>
   <v-app-bar app height="100" color="#FFFFFF" elevation="1">
-    <v-row>
+    <v-row align-content="center">
       <v-col cols="1"></v-col>
-      <v-col cols="10">
-        <div class="d-flex align-center">
+      <v-col cols="2">
+        <div class="d-flex align-baseline fill-height">
           <v-img
             alt="Project Logo"
             class="shrink mr-2"
             contain
             src="@/assets/logo.png"
             transition="scale-transition"
-            width="80"
+            width="50"
           />
-          <div class="text--black text-h5 font-weight-medium">
+          <div class="text--black text-h6 font-weight-medium">
             Beta Matching
           </div>
         </div>
-
+      </v-col>
+      <v-col cols="8" style="padding-top: 1.5em">
         <template v-if="getStoreUserType === 'tester'">
           <v-row align="center" justify="space-around">
             <v-spacer></v-spacer>
@@ -51,23 +52,23 @@
         </template>
 
         <template v-else-if="getStoreUserType === 'maker'">
-          <v-row align="center" justify="space-around">
+          <v-row align="center">
             <v-spacer></v-spacer>
             <v-btn
               text
-              class="mx-5 text-h6 font-weight-bold"
+              class="mx-5 text-subtitle-1 font-weight-bold"
               @click="routeCreatedTest"
               >Test 생성하기</v-btn
             >
             <v-btn
               text
-              class="mx-5 text-h6 font-weight-bold"
+              class="mx-5 text-subtitle-1 font-weight-bold"
               @click="routeMadeTest"
               >내가 생성한 Test 관리하기</v-btn
             >
             <v-btn
               text
-              class="mx-5 text-h6 font-weight-bold"
+              class="mx-5 text-subtitle-1 font-weight-bold"
               @click="routePoint"
               >Point 교환하기</v-btn
             >

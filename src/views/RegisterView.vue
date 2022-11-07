@@ -1,24 +1,16 @@
 <template>
   <v-container>
-    <div>Register</div>
-    <v-row>
-      <v-col cols="12">
-        <span class="text-h3">테스터 회원가입 페이지 입니다.</span>
-      </v-col>
-      <v-col cols="6">
+    <v-row justify="center" style="padding-top: 100px">
+      <v-col cols="3">
         <v-btn @click="userType = 'tester'">Tester로 회원가입하기</v-btn>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="3">
         <v-btn @click="userType = 'maker'">Maker로 회원가입하기</v-btn>
       </v-col>
-
-      <v-col cols="12">
-        <v-form
-          ref="form"
-          v-if="userType === 'tester'"
-          v-model="valid"
-          lazy-validation
-        >
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="6" v-if="userType === 'tester'">
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
             v-model="email"
             :counter="10"
@@ -63,19 +55,14 @@
             class="mr-4"
             @click="validate"
           >
-            Validate
+            회원가입하기
           </v-btn>
-          <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
+          <v-btn color="error" class="mr-4" @click="reset"> 초기화 </v-btn>
         </v-form>
       </v-col>
 
-      <v-col cols="12">
-        <v-form
-          ref="form"
-          v-if="userType === 'maker'"
-          v-model="valid"
-          lazy-validation
-        >
+      <v-col cols="6" v-if="userType === 'maker'">
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
             v-model="email"
             :counter="10"
@@ -121,9 +108,9 @@
             class="mr-4"
             @click="validate"
           >
-            Validate
+            회원가입하기
           </v-btn>
-          <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
+          <v-btn color="error" class="mr-4" @click="reset"> 초기화하기 </v-btn>
         </v-form>
       </v-col>
     </v-row>

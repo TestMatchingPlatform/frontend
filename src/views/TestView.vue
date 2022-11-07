@@ -16,7 +16,7 @@
     <v-divider></v-divider>
     <v-row class="ma-5 pa-3">
       <v-col cols="6">
-        <v-img :src="symbolImageURL"></v-img>
+        <v-img :src="symbolImageURL" :aspect-ratio="1 / 1" :width="500"></v-img>
       </v-col>
       <v-col cols="6">
         <v-row>
