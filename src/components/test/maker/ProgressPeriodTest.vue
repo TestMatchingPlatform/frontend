@@ -26,6 +26,11 @@
             {{ progressPeriodTest.reward }}P
           </div>
         </v-col>
+        <v-col cols="4"></v-col>
+        <v-col cols="3"></v-col>
+        <v-col cols="5" class="grey lighten-1 text-center text--primary">
+          {{ progressPeriodTest.state }}</v-col
+        >
       </v-row>
     </v-card-text>
   </v-card>
