@@ -1,12 +1,12 @@
 <template>
   <v-card @click="routeTestView">
-    <v-img :src="symbolImageRoot" :aspect-ratio="1 / 1" :width="250"> </v-img>
+    <v-img :src="symbolImageRoot" :aspect-ratio="1 / 1" :width="250"></v-img>
     <v-card-text class="text-subtitle-1">
       <v-row>
         <v-col cols="12">
           {{ progressPeriodTest.makerNickname }} /
-          {{ progressPeriodTest.company }}</v-col
-        >
+          {{ progressPeriodTest.company }}
+        </v-col>
         <v-col cols="12" class="text--primary">
           <div
             class="text-subtitle-1 font-weight-bold align-baseline"
@@ -28,9 +28,12 @@
         </v-col>
         <v-col cols="4"></v-col>
         <v-col cols="3"></v-col>
-        <v-col cols="5" class="grey lighten-1 text-center text--primary">
-          {{ progressPeriodTest.state }}</v-col
+        <v-col
+          cols="5"
+          class="grey lighten-1 text-center font-weight-bold text--primary"
         >
+          {{ progressPeriodTest.state }}
+        </v-col>
       </v-row>
     </v-card-text>
   </v-card>
@@ -60,9 +63,18 @@ export default {
     makeImageGetURL() {
       this.symbolImageRoot = getImage(this.progressPeriodTest.symbolImageRoot);
     },
-    routeTestView() {
+    async routeTestView() {
       console.log(this.progressPeriodTest.id);
-      this.$router.push(`/test/${this.progressPeriodTest.id}/state/progress`);
+      if (this.progressPeriodTest.state === 'Complete') {
+        await this.$dialog.error({
+          title: '중복 선정 방지',
+          text: '이미 완료처리를 진행하셨습니다.',
+        });
+      } else {
+        await this.$router.push(
+          `/test/${this.progressPeriodTest.id}/state/progress`,
+        );
+      }
     },
   },
   created() {

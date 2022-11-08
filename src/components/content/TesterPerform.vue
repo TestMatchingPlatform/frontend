@@ -52,7 +52,7 @@ export default {
       completeTesters(this.testId, request)
         .then(async response => {
           console.log(response.data);
-          await this.$router.push(`makers/${this.$store.state.UserID}/tests`);
+          await this.$router.push(`/makers/${this.$store.state.UserID}/tests`);
         })
         .catch(async response => {
           console.log(response);

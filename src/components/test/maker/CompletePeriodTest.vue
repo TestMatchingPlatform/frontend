@@ -28,7 +28,10 @@
         </v-col>
         <v-col cols="4"></v-col>
         <v-col cols="4"></v-col>
-        <v-col cols="4" class="grey lighten-1 text-center text--primary">
+        <v-col
+          cols="4"
+          class="grey lighten-1 text-center font-weight-bold text--primary"
+        >
           {{ completePeriodTest.state }}</v-col
         >
       </v-row>
@@ -62,7 +65,7 @@ export default {
       this.symbolImageRoot = getImage(this.completePeriodTest.symbolImageRoot);
     },
     async routeTestView() {
-      if (this.completePeriodTest.state === 'write Review') {
+      if (this.completePeriodTest.state === 'Write Review') {
         await this.$dialog.error({
           title: '중복 리뷰 작성 방지',
           text: '이미 리뷰를 선정하셨습니다.',
