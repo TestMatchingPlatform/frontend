@@ -17,37 +17,55 @@
           {{ applyTester.status }}
         </v-col>
         <v-col cols="6">
-          <v-btn color="success" @click="overlay = !overlay" dense>
+          <v-btn color="success" @click="changeOverlay(applyTester)" dense>
             이전 정보보기
           </v-btn>
         </v-col>
-
-        <v-overlay :value="overlay">
-          <v-col
-            v-for="beforeTest in applyTester.beforeTests"
-            :key="beforeTest.title"
-            dense
-            cols="12"
-          >
-            <v-row>
-              <v-col cols="3">
-                {{ beforeTest.title }}
-              </v-col>
-              <v-col cols="2">
-                {{ beforeTest.starPoint }}
-              </v-col>
-              <v-col cols="7">
-                {{ beforeTest.comment }}
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-btn color="success" @click="overlay = false"> 닫기 </v-btn>
-        </v-overlay>
       </v-row>
     </v-col>
     <v-col cols="12">
       <v-btn @click="approveEvent">선정하기</v-btn>
     </v-col>
+
+    <v-overlay :value="overlay" :opacity="0.8">
+      <v-container>
+        <v-row justify="center">
+          <v-col
+            v-for="beforeTest in approveTester.beforeTests"
+            :key="beforeTest.title"
+            cols="12"
+          >
+            <v-card class="grey darken-3 pa-1" outlined>
+              <v-row justify="center" align="center">
+                <v-col cols="3">
+                  <div>
+                    {{ beforeTest.title }}
+                  </div>
+                </v-col>
+                <v-col cols="3">
+                  <div>
+                    <v-rating
+                      background-color="grey lighten-1"
+                      color="green"
+                      length="5"
+                      readonly
+                      size="20"
+                      :value="beforeTest.starPoint"
+                    ></v-rating>
+                  </div>
+                </v-col>
+                <v-col cols="6">
+                  <div>
+                    {{ beforeTest.comment }}
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+          <v-btn color="success" @click="overlay = false"> 닫기 </v-btn>
+        </v-row>
+      </v-container>
+    </v-overlay>
   </v-row>
 </template>
 
@@ -69,6 +87,7 @@ export default {
   data() {
     return {
       approveId: [],
+      approveTester: {},
       overlay: false,
     };
   },
@@ -81,6 +100,11 @@ export default {
       const response = await approveTesters(this.testId, request);
       console.log(response.data);
       await this.$router.push(`/makers/${this.$store.state.UserID}/tests`);
+    },
+    changeOverlay(approveTester) {
+      this.overlay = true;
+      this.approveTester = approveTester;
+      console.log(approveTester);
     },
   },
 };
