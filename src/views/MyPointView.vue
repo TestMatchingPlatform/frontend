@@ -5,8 +5,8 @@
         <div class="text-h4 primary--text">보유 포인트 현금으로 전환하기</div>
       </v-col>
       <v-col cols="4">
-        <v-card class="grey lighten-1 pa-5">
-          <v-card-text class="text-center text--primary"
+        <v-card class="primary lighten-5 pa-5">
+          <v-card-text class="text-center text--primary text-h6"
             >보유 포인트
           </v-card-text>
           <v-card class="pa-5">
@@ -17,9 +17,9 @@
         </v-card>
       </v-col>
       <v-col cols="8">
-        <v-card class="grey lighten-1 pa-5">
-          <v-card-text class="text-center text--primary"
-            >전환하고자 하는 계좌
+        <v-card class="primary lighten-5 pa-5">
+          <v-card-text class="text-center text--primary text-h6"
+            >등록 계좌
           </v-card-text>
           <v-row>
             <v-col cols="8">
@@ -30,7 +30,7 @@
               </v-card>
             </v-col>
             <v-col cols="4">
-              <v-btn>계좌 등록 / 변경</v-btn>
+              <v-btn class="secondary">계좌 등록 / 변경</v-btn>
             </v-col>
           </v-row>
         </v-card>
@@ -39,15 +39,17 @@
         <v-spacer></v-spacer>
       </v-col>
       <v-col cols="12">
-        <v-card class="grey lighten-1 pa-5">
-          <v-card-text class="text-center text--primary">전환</v-card-text>
-          <v-row>
+        <v-card class="primary lighten-2 pa-10">
+          <v-card-text class="text-center text--primary text-h5"
+            >전환하기</v-card-text
+          >
+          <v-row justify="center">
             <v-col cols="6">
               <v-card class="pa-5">
                 <v-text-field
                   v-model="changePoint"
                   :rules="changePointRules"
-                  label="전환할 포인트 입력"
+                  label="전환할 포인트를 입력해주세요."
                   type="number"
                 >
                 </v-text-field>
@@ -60,10 +62,8 @@
                 </v-card-text>
               </v-card>
             </v-col>
+            <v-btn class="align-center secondary">전환하기</v-btn>
           </v-row>
-          <v-col cols="12">
-            <v-btn class="align-center">전환하기</v-btn>
-          </v-col>
         </v-card>
       </v-col>
     </v-row>

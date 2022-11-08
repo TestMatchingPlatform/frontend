@@ -3,7 +3,7 @@
     <div class="text-h3 ma-5">Test 생성하기</div>
     <v-divider></v-divider>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <v-row>
+      <v-row justify="center">
         <v-col cols="6">
           <v-file-input
             v-model="representImage"
@@ -75,16 +75,17 @@
             label="상세 설명"
             auto-grow
           ></v-textarea>
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
-          >
-            생성하기
-          </v-btn>
-          <v-btn color="error" class="mr-4" @click="reset"> 초기화하기 </v-btn>
         </v-col>
+
+        <v-btn
+          :disabled="!valid"
+          color="success"
+          class="mr-4"
+          @click="validate"
+        >
+          생성하기
+        </v-btn>
+        <v-btn color="error" class="mr-4" @click="reset"> 초기화하기 </v-btn>
       </v-row>
     </v-form>
   </v-container>
@@ -130,10 +131,21 @@ export default {
         for (let key of testData.entries()) {
           console.log(`${key}`);
         }
-        const response = await createTest(this.$store.state.UserID, testData);
-        console.log(response.data);
 
-        await this.$router.push('/main');
+        createTest(this.$store.state.UserID, testData)
+          .then(async response => {
+            console.log(response.data);
+            console.log('성공');
+            await this.$router.push('/main');
+          })
+          .catch(async response => {
+            console.log(response.response.data);
+            const res = await this.$dialog.error({
+              text: response.response.data.message[0],
+              title: '테스트 생성 실패',
+            });
+            console.log(res);
+          });
       } catch (error) {
         console.log(error);
       }

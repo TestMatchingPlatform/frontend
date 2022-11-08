@@ -48,9 +48,19 @@ export default {
         completeTesterIdDTOList: this.performId,
       };
       console.log(request);
-      const response = await completeTesters(this.testId, request);
-      console.log(response.data);
-      await this.$router.push(`makers/${this.$store.state.UserID}/tests`);
+
+      completeTesters(this.testId, request)
+        .then(async response => {
+          console.log(response.data);
+          await this.$router.push(`/makers/${this.$store.state.UserID}/tests`);
+        })
+        .catch(async response => {
+          console.log(response);
+          const res = await this.$dialog.error({
+            title: '중복된 완료처리',
+            text: response.response.data.message[0],
+          });
+        });
     },
   },
 };

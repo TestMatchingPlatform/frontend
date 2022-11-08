@@ -57,14 +57,12 @@
             >신청하기</v-btn
           >
           <v-btn class="primary" v-else-if="isTesterApply">신청 취소하기</v-btn>
-          <v-btn class="primary" v-else-if="isTesterApprove"
-            >완료 / 미 완료</v-btn
-          >
+          <v-btn class="primary" v-else-if="isTesterApprove"> 미구현 </v-btn>
           <v-btn
             class="primary"
             v-else-if="isTesterComplete"
             @click="showReviewMaker"
-            >보상받기 / 테스트 미수행</v-btn
+            >리뷰 작성하기</v-btn
           >
           <v-btn class="primary" v-else-if="isMakerApply" @click="makerTestFix"
             >수정하기</v-btn
@@ -115,7 +113,7 @@
     </v-col>
     <v-col cols="12" v-else-if="this.contentState === 'reviewFromTester'">
       <v-divider></v-divider>
-      <div class="text-h3 ma-5">수행인원 명단</div>
+      <div class="text-h3 ma-5">Maker Review 작성</div>
       <MakerReview :id="applyInformationId"></MakerReview>
     </v-col>
   </v-container>
