@@ -3,7 +3,7 @@
     <div class="text-h3 ma-5">Test 생성하기</div>
     <v-divider></v-divider>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <v-row>
+      <v-row justify="center">
         <v-col cols="6">
           <v-file-input
             v-model="representImage"
@@ -75,16 +75,17 @@
             label="상세 설명"
             auto-grow
           ></v-textarea>
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
-          >
-            생성하기
-          </v-btn>
-          <v-btn color="error" class="mr-4" @click="reset"> 초기화하기 </v-btn>
         </v-col>
+
+        <v-btn
+          :disabled="!valid"
+          color="success"
+          class="mr-4"
+          @click="validate"
+        >
+          생성하기
+        </v-btn>
+        <v-btn color="error" class="mr-4" @click="reset"> 초기화하기 </v-btn>
       </v-row>
     </v-form>
   </v-container>

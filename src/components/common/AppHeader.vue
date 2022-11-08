@@ -3,7 +3,7 @@
     <v-row align-content="center">
       <v-col cols="1"></v-col>
       <v-col cols="2">
-        <div class="d-flex align-baseline fill-height">
+        <div class="d-flex align-baseline fill-height" @click="routeMainView">
           <v-img
             alt="Project Logo"
             class="shrink mr-2"
@@ -152,6 +152,9 @@ export default {
     },
     routeApplyTest() {
       this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
+    },
+    routeMainView() {
+      this.$router.push('/main');
     },
   },
 };
