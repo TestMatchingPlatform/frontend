@@ -40,9 +40,20 @@ export default {
         starPoint: this.starPoint,
         comment: this.comment,
       };
-      const response = await createMakerReview(this.id, request);
+      createMakerReview(this.id, request)
+        .then(async response => {
+          console.log(response);
+          await this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
+        })
+        .catch(async response => {
+          console.log(response);
+          await this.$dialog.error({
+            title: 'Maker에 대한 리뷰 작성 실패',
+            text: 'Backend 오류',
+            // text: response.response.data.message[0],
+          });
+        });
       console.log(response.data);
-      await this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
     },
   },
 };

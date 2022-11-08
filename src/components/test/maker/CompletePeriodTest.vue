@@ -68,7 +68,7 @@ export default {
       if (this.completePeriodTest.state === 'Write Review') {
         await this.$dialog.error({
           title: '중복 리뷰 작성 방지',
-          text: '이미 리뷰를 선정하셨습니다.',
+          text: '이미 리뷰를 작성하셨습니다.',
         });
       } else {
         await this.$router.push(
