@@ -132,14 +132,20 @@ export default {
         for (let key of testData.entries()) {
           console.log(`${key}`);
         }
-        const response = await updateTest(
-          this.$store.state.UserID,
-          this.id,
-          testData,
-        );
-        console.log(response.data);
-
-        await this.$router.push('/main');
+        updateTest(this.$store.state.UserID, this.id, testData)
+          .then(async response => {
+            console.log(response.data);
+            console.log('성공');
+            await this.$router.push('/main');
+          })
+          .catch(async response => {
+            console.log(response);
+            console.log(response.response.data);
+            const res = await this.$dialog.error({
+              title: '테스트 수정 실패',
+              text: response.response.data.message[0],
+            });
+          });
       } catch (error) {
         console.log(error);
       }

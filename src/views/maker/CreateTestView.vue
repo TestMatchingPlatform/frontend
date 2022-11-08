@@ -130,10 +130,21 @@ export default {
         for (let key of testData.entries()) {
           console.log(`${key}`);
         }
-        const response = await createTest(this.$store.state.UserID, testData);
-        console.log(response.data);
 
-        await this.$router.push('/main');
+        createTest(this.$store.state.UserID, testData)
+          .then(async response => {
+            console.log(response.data);
+            console.log('성공');
+            await this.$router.push('/main');
+          })
+          .catch(async response => {
+            console.log(response.response.data);
+            const res = await this.$dialog.error({
+              text: response.response.data.message[0],
+              title: '테스트 생성 실패',
+            });
+            console.log(res);
+          });
       } catch (error) {
         console.log(error);
       }
