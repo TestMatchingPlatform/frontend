@@ -6,8 +6,8 @@ export function setInterceptors(instance) {
   instance.interceptors.request.use(
     function (config) {
       // config.headers.REFRESH_TOKEN = store.state.RefreshToken;
-      console.log(config.headers.ACCESS_TOKEN);
       config.headers.ACCESS_TOKEN = store.state.AccessToken;
+      console.log(config.headers.ACCESS_TOKEN);
       return config;
     },
     function (error) {

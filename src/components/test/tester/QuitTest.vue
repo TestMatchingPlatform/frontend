@@ -24,11 +24,10 @@
             {{ quitTest.reward }}P
           </div>
         </v-col>
-        <v-col cols="4"></v-col>
-        <v-col cols="4"></v-col>
+        <v-col cols="6"></v-col>
         <v-col
-          cols="4"
-          class="text-subtitle-2 text-center text--primary font-weight-bold"
+          cols="6"
+          class="yellow lighten-3 text-center text--primary font-weight-bold"
         >
           {{ quitTest.status }}</v-col
         >
@@ -61,9 +60,16 @@ export default {
     makeImageGetURL() {
       this.symbolImageRoot = getImage(this.quitTest.symbolImageRoot);
     },
-    routeTestView() {
+    async routeTestView() {
       console.log(this.quitTest.id);
-      this.$router.push(`/test/${this.quitTest.id}/state/complete`);
+      if (this.quitTest.status === '리뷰 작성완료') {
+        await this.$dialog.error({
+          title: '중복 리뷰 작성 방지',
+          text: '이미 리뷰를 작성하셨습니다.',
+        });
+      } else {
+        await this.$router.push(`/test/${this.quitTest.id}/state/complete`);
+      }
     },
   },
   created() {

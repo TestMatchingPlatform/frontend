@@ -5,66 +5,107 @@
         <div class="text-h4 primary--text">보유 포인트 현금으로 전환하기</div>
       </v-col>
       <v-col cols="4">
-        <v-card class="primary lighten-5 pa-5">
-          <v-card-text class="text-center text--primary text-h6"
-            >보유 포인트
-          </v-card-text>
-          <v-card class="pa-5">
-            <v-card-text class="text-center text--primary font-weight-bold"
-              >{{ point }} Point
+        <v-sheet outlined color="primary" rounded>
+          <v-card class="pa-5" outlined elevation="0">
+            <v-card-text class="text-center text--primary text-h6"
+              >보유 포인트
             </v-card-text>
+            <v-card class="pa-5" outlined elevation="0">
+              <v-card-text class="text-center text--primary font-weight-bold"
+                >{{ point }} Point
+              </v-card-text>
+            </v-card>
           </v-card>
-        </v-card>
+        </v-sheet>
       </v-col>
       <v-col cols="8">
-        <v-card class="primary lighten-5 pa-5">
-          <v-card-text class="text-center text--primary text-h6"
-            >등록 계좌
-          </v-card-text>
-          <v-row>
-            <v-col cols="8">
-              <v-card class="pa-5">
-                <v-card-text class="text-center text--primary font-weight-bold"
-                  >{{ accountNumber }}
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col cols="4">
-              <v-btn class="secondary">계좌 등록 / 변경</v-btn>
-            </v-col>
-          </v-row>
-        </v-card>
+        <v-sheet outlined color="primary" rounded>
+          <v-card class="pa-5" outlined elevation="0">
+            <v-card-text class="text-center text--primary text-h6"
+              >등록 계좌
+            </v-card-text>
+            <v-row>
+              <v-col cols="8">
+                <v-card class="pa-5" outlined elevation="0">
+                  <v-card-text
+                    class="text-center text--primary font-weight-bold"
+                    >{{ accountNumber }}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="4">
+                <v-btn class="secondary">계좌 등록 / 변경</v-btn>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-sheet>
       </v-col>
       <v-col cols="12">
         <v-spacer></v-spacer>
       </v-col>
       <v-col cols="12">
-        <v-card class="primary lighten-2 pa-10">
-          <v-card-text class="text-center text--primary text-h5"
-            >전환하기</v-card-text
-          >
-          <v-row justify="center">
-            <v-col cols="6">
-              <v-card class="pa-5">
-                <v-text-field
-                  v-model="changePoint"
-                  :rules="changePointRules"
-                  label="전환할 포인트를 입력해주세요."
-                  type="number"
-                >
-                </v-text-field>
-              </v-card>
-            </v-col>
-            <v-col cols="6">
-              <v-card class="pa-5">
-                <v-card-text class="text-center text--primary font-weight-bold"
-                  >{{ getMoneyFromChangePoint }}원
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-btn class="align-center secondary">전환하기</v-btn>
-          </v-row>
-        </v-card>
+        <v-sheet outlined color="primary" rounded>
+          <v-card class="pa-10" outlined elevation="0">
+            <v-card-text class="text-center text--primary text-h5"
+              >전환하기</v-card-text
+            >
+            <v-row justify="center">
+              <v-col cols="6">
+                <v-card class="pa-5" outlined elevation="0">
+                  <v-text-field
+                    v-model="changePoint"
+                    :rules="changePointRules"
+                    label="전환할 포인트를 입력해주세요."
+                    type="number"
+                  >
+                  </v-text-field>
+                </v-card>
+              </v-col>
+
+              <v-col cols="6">
+                <v-card class="pa-5" outlined elevation="0">
+                  <v-card-text
+                    class="text-center text--primary font-weight-bold"
+                    >{{ getMoneyFromChangePoint }}원
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-btn class="align-center secondary">전환하기</v-btn>
+            </v-row>
+          </v-card>
+        </v-sheet>
+      </v-col>
+      <v-col cols="12" v-if="this.$store.state.UserType === 'maker'">
+        <v-sheet outlined color="primary" rounded>
+          <v-card class="pa-10" outlined elevation="0">
+            <v-card-text class="text-center text--primary text-h5"
+              >충전하기</v-card-text
+            >
+            <v-row justify="center">
+              <v-col cols="6">
+                <v-card class="pa-5" outlined elevation="0">
+                  <v-text-field
+                    v-model="addPoint"
+                    :rules="addPointRules"
+                    label="충전할 포인트를 입력해주세요."
+                    type="number"
+                  >
+                  </v-text-field>
+                </v-card>
+              </v-col>
+
+              <v-col cols="6">
+                <v-card class="pa-5" outlined elevation="0">
+                  <v-card-text
+                    class="text-center text--primary font-weight-bold"
+                    >{{ addPoint }} Point
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-btn class="align-center secondary">충전하기</v-btn>
+            </v-row>
+          </v-card>
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>
@@ -86,8 +127,10 @@ export default {
         v =>
           this.changePoint <= this.point ||
           '전환할 포인트가 가지고 있는 포인트보다 크면 안됩니다.',
-        v => this.changePoint > 0 || '장난치지마세요',
+        v => this.changePoint > 0 || '0보다 작으면 안됩니다.',
       ],
+      addPoint: '',
+      addPointRules: [v => this.addPoint > 0 || '0보다 작으면 안됩니다.'],
     };
   },
   methods: {

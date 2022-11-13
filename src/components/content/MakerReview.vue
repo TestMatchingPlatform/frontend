@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       comment: '',
-      starPoint: '',
+      starPoint: 0,
     };
   },
   methods: {
@@ -53,7 +53,6 @@ export default {
             // text: response.response.data.message[0],
           });
         });
-      console.log(response.data);
     },
   },
 };

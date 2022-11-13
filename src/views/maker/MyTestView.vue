@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-tabs v-model="tab" align-with-title>
-      <v-tabs-slider color="blue"></v-tabs-slider>
+      <v-tabs-slider color="yellow"></v-tabs-slider>
 
       <v-tab v-for="item in items" :key="item.title">
         {{ item.title }}

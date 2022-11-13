@@ -120,44 +120,48 @@
     <div class="blank-10">
       <v-row>
         <v-col cols="6">
-          <v-card class="pa-5 elevation-0">
-            <v-row>
-              <v-col cols="12">
-                <div class="text-h5 font-weight-bold pa-5">마감임박 Test</div>
-              </v-col>
-              <v-col
-                v-for="simpleTest in deadLineTests"
-                :key="simpleTest.id"
-                cols="6"
-              >
-                <SimpleTest
-                  :simpleTest="simpleTest"
-                  @refresh="fetchDeadLineTests"
-                ></SimpleTest>
-              </v-col>
-            </v-row>
-          </v-card>
+          <v-sheet outlined color="primary" rounded>
+            <v-card class="pa-5 elevation-0">
+              <v-row>
+                <v-col cols="12">
+                  <div class="text-h5 font-weight-bold pa-5">마감임박 Test</div>
+                </v-col>
+                <v-col
+                  v-for="simpleTest in deadLineTests"
+                  :key="simpleTest.id"
+                  cols="6"
+                >
+                  <SimpleTest
+                    :simpleTest="simpleTest"
+                    @refresh="fetchDeadLineTests"
+                  ></SimpleTest>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-sheet>
         </v-col>
         <v-col cols="6">
-          <v-card class="pa-5 elevation-0">
-            <v-row>
-              <v-col cols="12">
-                <div class="text-h5 font-weight-bold pa-5">인기있는 Test</div>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col
-                v-for="simpleTest in popularTests"
-                :key="simpleTest.id"
-                cols="6"
-              >
-                <SimpleTest
-                  :simpleTest="simpleTest"
-                  @refresh="fetchPopularTests"
-                ></SimpleTest>
-              </v-col>
-            </v-row>
-          </v-card>
+          <v-sheet outlined color="primary" rounded>
+            <v-card class="pa-5 elevation-0">
+              <v-row>
+                <v-col cols="12">
+                  <div class="text-h5 font-weight-bold pa-5">인기있는 Test</div>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col
+                  v-for="simpleTest in popularTests"
+                  :key="simpleTest.id"
+                  cols="6"
+                >
+                  <SimpleTest
+                    :simpleTest="simpleTest"
+                    @refresh="fetchPopularTests"
+                  ></SimpleTest>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-sheet>
         </v-col>
       </v-row>
     </div>

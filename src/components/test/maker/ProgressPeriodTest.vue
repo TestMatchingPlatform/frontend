@@ -26,11 +26,10 @@
             {{ progressPeriodTest.reward }}P
           </div>
         </v-col>
-        <v-col cols="4"></v-col>
-        <v-col cols="3"></v-col>
+        <v-col cols="6"></v-col>
         <v-col
-          cols="5"
-          class="grey lighten-1 text-center font-weight-bold text--primary"
+          cols="6"
+          class="yellow lighten-3 text-center font-weight-bold text--primary"
         >
           {{ progressPeriodTest.state }}
         </v-col>
@@ -65,7 +64,7 @@ export default {
     },
     async routeTestView() {
       console.log(this.progressPeriodTest.id);
-      if (this.progressPeriodTest.state === 'Complete') {
+      if (this.progressPeriodTest.state === '전원 수행완료') {
         await this.$dialog.error({
           title: '중복 선정 방지',
           text: '이미 완료처리를 진행하셨습니다.',

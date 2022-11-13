@@ -48,24 +48,36 @@ export default {
         testerReviewDTOList: this.completeTesters.completeTesterDTOList,
       };
       console.log(request);
-      reviewTesters(this.$store.state.UserID, request)
-        .then(async response => {
-          console.log(response.data);
-          console.log('성공');
-          await this.$router.push(`/makers/${this.$store.state.UserID}/tests`);
-        })
-        .catch(async response => {
-          console.log(response);
-          const res = this.$dialog.error({
-            title: '리뷰 중복 처리 방지',
-            text: response.response.data.message[0],
+      const res = this.$dialog.warning({
+        text: '한번 리뷰를 작성하면, 다시는 수정할 수 없습니다. 정말 이렇게 진행할까요?',
+        title: '경고',
+        actions: {
+          false: 'No',
+          true: {
+            color: 'green',
+            text: '진행하겠습니다.',
+          },
+        },
+      });
+      if (res === true) {
+        reviewTesters(this.$store.state.UserID, request)
+          .then(async response => {
+            console.log(response.data);
+            console.log('성공');
+            await this.$router.push(
+              `/makers/${this.$store.state.UserID}/tests`,
+            );
+          })
+          .catch(async response => {
+            console.log(response);
+            const res = this.$dialog.error({
+              title: '리뷰 중복 처리 방지',
+              text: response.response.data.message[0],
+            });
           });
-        });
-      console.log(response.data);
+      }
     },
   },
-  // 자식 컴포넌트에서 props 속성을 받은 다음 매핑을 진행해서 객체를 생성하고 싶은데, created 속성을 이용하면
-  // props 속성으로 받아오기 전에 객체를 생성해서 정보가 반영되지 않음 :(
 };
 </script>
 

@@ -24,11 +24,10 @@
             {{ approveTest.reward }}P
           </div>
         </v-col>
-        <v-col cols="4"></v-col>
-        <v-col cols="4"></v-col>
+        <v-col cols="6"></v-col>
         <v-col
-          cols="4"
-          class="grey lighten-1 text-subtitle-2 text-center text--primary font-weight-bold"
+          cols="6"
+          class="yellow lighten-3 text-center text--primary font-weight-bold"
         >
           {{ approveTest.status }}</v-col
         >
