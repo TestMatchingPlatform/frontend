@@ -26,11 +26,10 @@
             {{ completePeriodTest.reward }}P
           </div>
         </v-col>
-        <v-col cols="4"></v-col>
-        <v-col cols="4"></v-col>
+        <v-col cols="6"></v-col>
         <v-col
-          cols="4"
-          class="grey lighten-1 text-center font-weight-bold text--primary"
+          cols="6"
+          class="yellow lighten-3 text-center font-weight-bold text--primary"
         >
           {{ completePeriodTest.state }}</v-col
         >
@@ -65,7 +64,7 @@ export default {
       this.symbolImageRoot = getImage(this.completePeriodTest.symbolImageRoot);
     },
     async routeTestView() {
-      if (this.completePeriodTest.state === 'Write Review') {
+      if (this.completePeriodTest.state === '리뷰 완료') {
         await this.$dialog.error({
           title: '중복 리뷰 작성 방지',
           text: '이미 리뷰를 작성하셨습니다.',

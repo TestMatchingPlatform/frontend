@@ -33,11 +33,10 @@
             {{ approvePeriodTest.participantCapacity }}
           </div>
         </v-col>
-        <v-col cols="4"></v-col>
-        <v-col cols="4"></v-col>
+        <v-col cols="6"></v-col>
         <v-col
-          cols="4"
-          class="grey lighten-1 text-subtitle-2 text-center text--primary font-weight-bold"
+          cols="6"
+          class="yellow lighten-3 text-center text--primary font-weight-bold"
         >
           {{ approvePeriodTest.state }}</v-col
         >
@@ -73,7 +72,7 @@ export default {
     },
     async routeTestView() {
       console.log(this.approvePeriodTest.id);
-      if (this.approvePeriodTest.state === 'Approve') {
+      if (this.approvePeriodTest.state === '승인') {
         await this.$dialog.error({
           title: '중복 선정 방지',
           text: '이미 Tester를 선정하셨습니다.',

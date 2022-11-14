@@ -14,108 +14,132 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <v-row class="ma-5 pa-3">
+    <v-row class="ma-2 pa-2" justify="center">
       <v-col cols="6">
         <v-img :src="symbolImageURL" :aspect-ratio="1 / 1" :width="500"></v-img>
       </v-col>
+
       <v-col cols="6">
-        <v-row>
-          <v-col cols="3">
-            <div>주최/주관</div>
-          </v-col>
-          <v-col cols="9">
-            <div>{{ makerNickname }} / {{ company }}</div>
-          </v-col>
-          <v-col cols="3">
-            <div>지원기간</div>
-          </v-col>
-          <v-col cols="9">
-            <div>{{ recruitmentTimeStart }} ~ {{ recruitmentTimeLimit }}</div>
-          </v-col>
-          <v-col cols="3">
-            <div>지급 포인트</div>
-          </v-col>
-          <v-col cols="9">
-            <div>{{ reward }}P</div>
-          </v-col>
-          <v-col cols="3">
-            <div>활동 기간</div>
-          </v-col>
-          <v-col cols="9">
-            <div>{{ durationTimeStart }} ~ {{ durationTimeLimit }}</div>
-          </v-col>
-          <v-col cols="3">
-            <div>신청/모집인원</div>
-          </v-col>
-          <v-col cols="9">
-            <div>{{ apply }} / {{ participantCapacity }}</div>
+        <v-row justify="center">
+          <v-sheet outlined color="primary" rounded>
+            <v-card outlined elevation="0">
+              <v-row class="ma-2">
+                <v-col cols="3">
+                  <div>주최/주관</div>
+                </v-col>
+                <v-col cols="9">
+                  <div class="font-weight-bold">
+                    {{ makerNickname }} / {{ company }}
+                  </div>
+                </v-col>
+
+                <v-col cols="3">
+                  <div>지원기간</div>
+                </v-col>
+                <v-col cols="9">
+                  <div class="font-weight-bold">
+                    {{ recruitmentTimeStart }} ~ {{ recruitmentTimeLimit }}
+                  </div>
+                </v-col>
+                <v-col cols="3">
+                  <div>지급 포인트</div>
+                </v-col>
+                <v-col cols="9">
+                  <div class="font-weight-bold">{{ reward }}P</div>
+                </v-col>
+                <v-col cols="3">
+                  <div>활동 기간</div>
+                </v-col>
+                <v-col cols="9">
+                  <div class="font-weight-bold">
+                    {{ durationTimeStart }} ~ {{ durationTimeLimit }}
+                  </div>
+                </v-col>
+                <v-col cols="3">
+                  <div>신청/모집인원</div>
+                </v-col>
+                <v-col cols="9">
+                  <div class="font-weight-bold">
+                    {{ apply }} / {{ participantCapacity }}
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-sheet>
+
+          <v-col cols="4">
+            <v-btn class="primary" v-if="isApply" @click="testerApply"
+              >신청하기
+            </v-btn>
+            <v-btn class="primary" v-else-if="isTesterApply"
+              >신청 취소하기
+            </v-btn>
+            <v-btn class="primary" v-else-if="isTesterApprove"> 미구현</v-btn>
+            <v-btn
+              class="primary"
+              v-else-if="isTesterComplete"
+              @click="showReviewMaker"
+              >리뷰 작성하기
+            </v-btn>
+            <v-btn
+              class="primary"
+              v-else-if="isMakerApply"
+              @click="makerTestFix"
+              >수정하기
+            </v-btn>
+            <v-btn
+              class="primary"
+              v-else-if="isMakerApprove"
+              @click="showApplyTesters"
+              >테스터 선정하기
+            </v-btn>
+            <v-btn
+              class="primary"
+              v-else-if="isMakerProgress"
+              @click="showPerformTesters"
+              >테스터 수행인원 정보보기 + 완료 처리하기
+            </v-btn>
+            <v-btn
+              class="primary"
+              v-else-if="isMakerComplete"
+              @click="showReviewTesters"
+              >테스터 리뷰 작성하기
+            </v-btn>
           </v-col>
         </v-row>
-
-        <v-col cols="6">
-          <v-btn class="primary" v-if="isApply" @click="testerApply"
-            >신청하기</v-btn
-          >
-          <v-btn class="primary" v-else-if="isTesterApply">신청 취소하기</v-btn>
-          <v-btn class="primary" v-else-if="isTesterApprove"> 미구현 </v-btn>
-          <v-btn
-            class="primary"
-            v-else-if="isTesterComplete"
-            @click="showReviewMaker"
-            >리뷰 작성하기</v-btn
-          >
-          <v-btn class="primary" v-else-if="isMakerApply" @click="makerTestFix"
-            >수정하기</v-btn
-          >
-          <v-btn
-            class="primary"
-            v-else-if="isMakerApprove"
-            @click="showApplyTesters"
-            >테스터 선정하기</v-btn
-          >
-          <v-btn
-            class="primary"
-            v-else-if="isMakerProgress"
-            @click="showPerformTesters"
-            >테스터 수행인원 정보보기 + 완료 처리하기</v-btn
-          >
-          <v-btn
-            class="primary"
-            v-else-if="isMakerComplete"
-            @click="showReviewTesters"
-            >테스터 리뷰 작성하기</v-btn
-          >
-        </v-col>
       </v-col>
     </v-row>
-    <v-col cols="12" v-if="this.contentState === ''">
-      <v-divider></v-divider>
-      <div class="text-h3 ma-5">상세 설명</div>
-      <div>{{ content }}</div>
-    </v-col>
-    <v-col cols="12" v-else-if="this.contentState === 'approve'">
-      <v-divider></v-divider>
-      <div class="text-h3 ma-5">신청자 명단</div>
-      <TesterApprove :applyTesters="applyTesters" :testId="id"></TesterApprove>
-    </v-col>
-    <v-col cols="12" v-else-if="this.contentState === 'perform'">
-      <v-divider></v-divider>
-      <div class="text-h3 ma-5">수행인원 명단</div>
-      <TesterPerform
-        :performTesters="performTesters"
-        :testId="id"
-      ></TesterPerform>
-    </v-col>
-    <v-col cols="12" v-else-if="this.contentState === 'reviewFromMaker'">
-      <v-divider></v-divider>
-      <div class="text-h3 ma-5">수행인원 명단</div>
-      <TesterReview :completeTesters="completeTesters"></TesterReview>
-    </v-col>
-    <v-col cols="12" v-else-if="this.contentState === 'reviewFromTester'">
-      <v-divider></v-divider>
-      <div class="text-h3 ma-5">Maker Review 작성</div>
-      <MakerReview :id="applyInformationId"></MakerReview>
-    </v-col>
+    <v-divider></v-divider>
+    <v-sheet outlined color="primary" rounded>
+      <v-card class="pa-3" outlined elevation="0">
+        <v-col cols="12" v-if="this.contentState === ''">
+          <div class="text-h3 ma-5">상세 설명</div>
+          <div>{{ content }}</div>
+        </v-col>
+        <v-col cols="12" v-else-if="this.contentState === 'approve'">
+          <div class="text-h3 ma-5">신청자 명단</div>
+          <TesterApprove
+            :applyTesters="applyTesters"
+            :testId="id"
+          ></TesterApprove>
+        </v-col>
+        <v-col cols="12" v-else-if="this.contentState === 'perform'">
+          <div class="text-h3 ma-5">수행인원 명단</div>
+          <TesterPerform
+            :performTesters="performTesters"
+            :testId="id"
+          ></TesterPerform>
+        </v-col>
+        <v-col cols="12" v-else-if="this.contentState === 'reviewFromMaker'">
+          <div class="text-h3 ma-5">수행인원 명단</div>
+          <TesterReview :completeTesters="completeTesters"></TesterReview>
+        </v-col>
+        <v-col cols="12" v-else-if="this.contentState === 'reviewFromTester'">
+          <div class="text-h3 ma-5">Maker Review 작성</div>
+          <MakerReview :id="applyInformationId"></MakerReview>
+        </v-col>
+      </v-card>
+    </v-sheet>
   </v-container>
 </template>
 
@@ -192,10 +216,22 @@ export default {
       const testData = {
         testId: this.id,
       };
-      const applyResponse = await applyTest(this.$store.state.UserID, testData);
-      const applyResponseData = applyResponse.data;
-      console.log(applyResponseData);
-      await this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
+      applyTest(this.$store.state.UserID, testData)
+        .then(async response => {
+          console.log(response.data);
+          await this.$dialog.confirm({
+            title: '신청성공',
+            text: '정상적으로 신청에 성공하셨습니다.',
+          });
+          await this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
+        })
+        .catch(async response => {
+          console.log(response);
+          await this.$dialog.error({
+            title: '신청실패',
+            text: response.response.data.message[0],
+          });
+        });
     },
     async makerTestFix() {
       await this.$router.push(`/tests/${this.id}/fix`);
@@ -223,8 +259,8 @@ export default {
         this.$store.state.UserID,
         this.id,
       );
-      console.log(applyInformationResponse.data);
-      this.applyInformationId = applyInformationResponse.data;
+      console.log(applyInformationResponse.data.id);
+      this.applyInformationId = applyInformationResponse.data.id;
       this.contentState = 'reviewFromTester';
     },
   },

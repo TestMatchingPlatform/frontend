@@ -97,9 +97,22 @@ export default {
         approveTesterList: this.approveId,
       };
       console.log(request);
-      const response = await approveTesters(this.testId, request);
-      console.log(response.data);
-      await this.$router.push(`/makers/${this.$store.state.UserID}/tests`);
+      const res = await this.$dialog.warning({
+        text: '한번 승인절차를 거친 이후에는 수정할 수 없습니다. 정말 이렇게 선정할까요?',
+        title: '경고',
+        actions: {
+          false: 'No',
+          true: {
+            color: 'green',
+            text: '진행하겠습니다.',
+          },
+        },
+      });
+      if (res === true) {
+        const response = await approveTesters(this.testId, request);
+        console.log(response.data);
+        await this.$router.push(`/makers/${this.$store.state.UserID}/tests`);
+      }
     },
     changeOverlay(approveTester) {
       this.overlay = true;

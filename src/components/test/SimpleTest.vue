@@ -34,7 +34,7 @@
         <v-col cols="4"></v-col>
         <v-col
           cols="4"
-          class="grey lighten-1 text-subtitle-2 text-center text--primary font-weight-bold"
+          class="yellow lighten-3 text-subtitle-2 text-center text--primary font-weight-bold"
         >
           D-{{ simpleTest.deadlineRemain }}</v-col
         >

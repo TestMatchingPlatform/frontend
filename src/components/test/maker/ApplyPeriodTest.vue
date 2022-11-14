@@ -37,7 +37,7 @@
         <v-col cols="4"></v-col>
         <v-col
           cols="4"
-          class="grey lighten-1 text-center text--primary font-weight-bold"
+          class="yellow lighten-3 text-center text--primary font-weight-bold"
         >
           D-{{ applyPeriodTest.deadlineRemain }}</v-col
         >

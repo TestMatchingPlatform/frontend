@@ -91,9 +91,8 @@
 </template>
 
 <script>
-import { findDetailTest } from '@/api/noAuth';
+import { findDetailTest, getImage } from '@/api/noAuth';
 import { updateTest } from '@/api/makerAuth';
-
 export default {
   name: 'FixTestView',
   data() {
@@ -202,6 +201,7 @@ export default {
       this.durationTimeStart = detailTestData.durationTimeStart;
       this.durationTimeLimit = detailTestData.durationTimeLimit;
       this.participantCapacity = detailTestData.participantCapacity;
+      this.representImage = await getImage(detailTestData.symbolImageRoot);
       this.reward = detailTestData.reward;
       this.content = detailTestData.content;
     },

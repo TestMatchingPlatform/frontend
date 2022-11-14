@@ -27,6 +27,15 @@ const vuetify = new Vuetify({
       },
     },
   },
+  breakpoint: {
+    thresholds: {
+      xs: 600,
+      sm: 960,
+      md: 1264,
+      lg: 5000,
+    },
+    scrollBarWidth: 16,
+  },
 });
 Vue.config.productionTip = false;
 

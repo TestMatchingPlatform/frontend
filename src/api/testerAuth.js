@@ -25,6 +25,8 @@ function findApplyInformationId(testerId, testId) {
 }
 
 function createMakerReview(applyId, makerReviewData) {
+  console.log(applyId);
+
   return testerAuthInstance.post(`/apply/${applyId}/review`, makerReviewData);
 }
 
