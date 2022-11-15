@@ -34,7 +34,9 @@
                 </v-card>
               </v-col>
               <v-col cols="4">
-                <v-btn class="secondary">계좌 등록 / 변경</v-btn>
+                <v-btn @click="changeAccount" class="secondary"
+                  >계좌 등록 / 변경</v-btn
+                >
               </v-col>
             </v-row>
           </v-card>
@@ -70,7 +72,9 @@
                   </v-card-text>
                 </v-card>
               </v-col>
-              <v-btn class="align-center secondary">전환하기</v-btn>
+              <v-btn @click="exchangePoint" class="align-center secondary"
+                >전환하기</v-btn
+              >
             </v-row>
           </v-card>
         </v-sheet>
@@ -113,7 +117,11 @@
 
 <script>
 import { showPointFromMaker } from '@/api/makerAuth';
-import { showPointFromTester } from '@/api/testerAuth';
+import {
+  showPointFromTester,
+  changeAccountNumber,
+  changePointToCash,
+} from '@/api/testerAuth';
 
 export default {
   name: 'MyPointView',
@@ -151,6 +159,54 @@ export default {
         console.log(makerPointData);
         this.accountNumber = makerPointData.accountNumber;
         this.point = makerPointData.point;
+      }
+    },
+    async changeAccount() {
+      const res = await this.$dialog.prompt({
+        text: '계좌번호를 입력해주세요',
+        title: '계좌 등록/변경',
+      });
+      if (res) {
+        if (this.$store.state.UserType === 'tester') {
+          const testerRequest = {
+            account: res,
+          };
+          const response = await changeAccountNumber(
+            this.$store.state.UserID,
+            testerRequest,
+          );
+          this.accountNumber = res;
+        }
+      }
+    },
+    async exchangePoint() {
+      const process = await this.$dialog.confirm({
+        text: '정말로 전환할까요?',
+        title: '포인트를 계좌로 이동',
+      });
+      if (process) {
+        if (this.$store.state.UserType === 'tester') {
+          const testerRequest = {
+            point: this.changePoint,
+          };
+          changePointToCash(this.$store.state.UserID, testerRequest)
+            .then(async response => {
+              const text =
+                '포인트를 성공적으로 전환했습니다. 계좌로 입금된 금액: ' +
+                response.data.cash;
+              await this.$dialog.notify.info(text, {
+                timeout: 3000,
+              });
+            })
+            .catch(async response => {
+              console.log(response.response.data);
+              const res = await this.$dialog.error({
+                text: response.response.data.message[0],
+                title: '포인트 전환 실패',
+              });
+              console.log(res);
+            });
+        }
       }
     },
   },

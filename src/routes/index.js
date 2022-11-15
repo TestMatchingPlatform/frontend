@@ -18,6 +18,10 @@ const router = new VueRouter({
       component: () => import('@/views/MainView.vue'),
     },
     {
+      path: '/about',
+      component: () => import('@/views/noauth/AboutView'),
+    },
+    {
       path: '/login',
       component: () => import('@/views/LoginView.vue'),
     },

@@ -71,7 +71,10 @@
             <v-btn class="primary" v-if="isApply" @click="testerApply"
               >신청하기
             </v-btn>
-            <v-btn class="primary" v-else-if="isTesterApply"
+            <v-btn
+              class="primary"
+              v-else-if="isTesterApply"
+              @click="cancelApply"
               >신청 취소하기
             </v-btn>
             <v-btn class="primary" v-else-if="isTesterApprove"> 미구현</v-btn>
@@ -152,7 +155,11 @@ import {
   findCompleteTesters,
 } from '@/api/makerAuth';
 
-import { applyTest, findApplyInformationId } from '@/api/testerAuth';
+import {
+  applyTest,
+  findApplyInformationId,
+  cancelApplyTest,
+} from '@/api/testerAuth';
 
 import TesterApprove from '@/components/content/TesterApprove';
 import TesterPerform from '@/components/content/TesterPerform';
@@ -197,7 +204,7 @@ export default {
       const detailTestData = detailTest.data;
       console.log(detailTestData);
       this.id = detailTestData.id;
-      this.deadLine = detailTestData.deadLine;
+      this.deadline = detailTestData.deadLine;
       this.title = detailTestData.title;
       this.makerNickname = detailTestData.makerNickname;
       this.company = detailTestData.company;
@@ -216,22 +223,49 @@ export default {
       const testData = {
         testId: this.id,
       };
-      applyTest(this.$store.state.UserID, testData)
-        .then(async response => {
-          console.log(response.data);
-          await this.$dialog.confirm({
-            title: '신청성공',
-            text: '정상적으로 신청에 성공하셨습니다.',
+      const process = await this.$dialog.confirm({
+        title: '신청',
+        text: '해당 테스트를 정말로 신청하시겠습니까?.',
+      });
+      if (process) {
+        applyTest(this.$store.state.UserID, testData)
+          .then(async response => {
+            console.log(response.data);
+            await this.$router.push(
+              `/testers/${this.$store.state.UserID}/tests`,
+            );
+          })
+          .catch(async response => {
+            console.log(response);
+            await this.$dialog.error({
+              title: '신청실패',
+              text: response.response.data.message[0],
+            });
           });
-          await this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
-        })
-        .catch(async response => {
-          console.log(response);
-          await this.$dialog.error({
-            title: '신청실패',
-            text: response.response.data.message[0],
+      }
+    },
+    async cancelApply() {
+      console.log(this.id);
+      const process = await this.$dialog.confirm({
+        title: '신청취소 확인',
+        text: '정말로 해당 테스트를 취소하시겠습니까?',
+      });
+      if (process) {
+        cancelApplyTest(this.$store.state.UserID, this.id)
+          .then(async response => {
+            console.log(response.data);
+            await this.$router.push(
+              `/testers/${this.$store.state.UserID}/tests`,
+            );
+          })
+          .catch(async response => {
+            console.log(response);
+            await this.$dialog.error({
+              title: '신청취소 실패',
+              text: '해당 신청 정보를 찾을 수 없습니다.',
+            });
           });
-        });
+      }
     },
     async makerTestFix() {
       await this.$router.push(`/tests/${this.id}/fix`);

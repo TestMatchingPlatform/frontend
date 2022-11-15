@@ -5,14 +5,14 @@
         <v-row align="center">
           <v-col cols="4">
             <v-text-field
-              v-model="questName"
+              v-model="keyword"
               label="Quest 검색하기"
               hint="퀘스트 이름을 검색하세요"
             >
             </v-text-field>
           </v-col>
           <v-col cols="2">
-            <v-btn>조회</v-btn>
+            <v-btn @click="searchTests">조회</v-btn>
           </v-col>
           <v-spacer></v-spacer>
           <v-select
@@ -44,8 +44,11 @@
 </template>
 
 <script>
-import { findPopularTests } from '@/api/noAuth';
-import { findTests } from '@/api/noAuth';
+import {
+  findDeadlineTests,
+  findCreatedTests,
+  findSearchTests,
+} from '@/api/testerAuth';
 import SimpleTest from '@/components/test/SimpleTest';
 
 export default {
@@ -56,11 +59,11 @@ export default {
   data() {
     return {
       tests: [],
-      questName: '',
+      keyword: '',
       sortItems: [
         {
           state: '마감기간 순 정렬',
-          value: 'deadLine',
+          value: 'deadline',
         },
         {
           state: '인기 순 정렬',
@@ -71,27 +74,43 @@ export default {
           value: 'created',
         },
       ],
-      sort: { state: 'created', value: '생성날짜 순 정렬' },
+      sort: { state: 'deadline', value: '마감기간 순 정렬' },
     };
   },
   methods: {
     async initMockValue() {
-      const mockData = await findTests();
-      console.log(mockData.data);
-      this.tests = mockData.data;
+      const deadlineTests = await findDeadlineTests(this.$store.state.UserID);
+      console.log(deadlineTests.data);
+      this.tests = deadlineTests.data;
+    },
+    async searchTests() {
+      console.log('searching event occur');
+      const searchingTests = await findSearchTests(
+        this.$store.state.UserID,
+        this.keyword,
+      );
+      console.log(searchingTests.data);
+      this.tests = searchingTests.data;
     },
     async changeSort() {
       console.log('event occur');
       switch (this.sort.value) {
         case 'popular':
-          const mockData1 = await findPopularTests();
-          console.log(mockData1.data);
-          this.tests = mockData1.data;
+          const popularTests = await findPopularTests();
+          console.log(popularTests.data);
+          this.tests = popularTests.data;
           break;
-        case 'deadLine':
-          const mockData2 = await findDeadLineTests();
-          console.log(mockData2.data);
-          this.tests = mockData2.data;
+        case 'deadline':
+          const deadlineTests = await findDeadlineTests(
+            this.$store.state.UserID,
+          );
+          console.log(deadlineTests.data);
+          this.tests = deadlineTests.data;
+          break;
+        case 'created':
+          const createdTests = await findCreatedTests(this.$store.state.UserID);
+          console.log(createdTests.data);
+          this.tests = createdTests.data;
           break;
       }
     },

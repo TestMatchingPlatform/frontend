@@ -61,7 +61,6 @@ export default {
       symbolImageRoot: '',
     };
   },
-
   methods: {
     insertMockValue() {
       this.symbolImageRoot =

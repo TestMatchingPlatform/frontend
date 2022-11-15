@@ -87,7 +87,12 @@
         <template v-else>
           <v-row align="center" justify="space-around">
             <v-spacer></v-spacer>
-            <v-btn text class="mx-5 text-h6 font-weight-bold">About</v-btn>
+            <v-btn
+              text
+              class="mx-5 text-h6 font-weight-bold"
+              @click="routeAboutView"
+              >About</v-btn
+            >
             <v-btn text class="mx-5 text-h6 font-weight-bold">How Work?</v-btn>
             <v-btn text class="mx-5 text-h6 font-weight-bold">Donate</v-btn>
             <v-spacer></v-spacer>
@@ -155,6 +160,9 @@ export default {
     },
     routeMainView() {
       this.$router.push('/main');
+    },
+    routeAboutView() {
+      this.$router.push('/about');
     },
   },
 };
