@@ -57,7 +57,7 @@
                 >
                   <v-row>
                     <v-col cols="1">
-                      <span class="material-icons"> done </span>
+                      <span class="material-icons"> close </span>
                     </v-col>
                     <v-col cols="11">
                       <div>
@@ -66,7 +66,7 @@
                       </div>
                     </v-col>
                     <v-col cols="1">
-                      <span class="material-icons"> done </span>
+                      <span class="material-icons"> close </span>
                     </v-col>
                     <v-col cols="11">
                       <div>
@@ -75,7 +75,7 @@
                       </div>
                     </v-col>
                     <v-col cols="1">
-                      <span class="material-icons"> done </span>
+                      <span class="material-icons"> close </span>
                     </v-col>
                     <v-col cols="11">
                       <div>
@@ -107,7 +107,7 @@
                 >
                   <v-row>
                     <v-col cols="1">
-                      <span class="material-icons"> done </span>
+                      <span class="material-icons"> close </span>
                     </v-col>
                     <v-col cols="11">
                       <div>
@@ -116,7 +116,7 @@
                       </div>
                     </v-col>
                     <v-col cols="1">
-                      <span class="material-icons"> done </span>
+                      <span class="material-icons"> close </span>
                     </v-col>
                     <v-col cols="11">
                       <div>
@@ -125,7 +125,7 @@
                       </div>
                     </v-col>
                     <v-col cols="1">
-                      <span class="material-icons"> done </span>
+                      <span class="material-icons"> close </span>
                     </v-col>
                     <v-col cols="11">
                       <div>

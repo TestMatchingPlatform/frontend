@@ -49,6 +49,18 @@ function reviewTesters(makerId, reviewData) {
   return makerAuthInstance.post(`/${makerId}/tests/perform/review`, reviewData);
 }
 
+function changeAccountNumberFromMaker(makerId, accountData) {
+  return makerAuthInstance.patch(`/${makerId}/account`, accountData);
+}
+
+function changePointToCashFromMaker(makerId, pointData) {
+  return makerAuthInstance.post(`/${makerId}/exchange/point`, pointData);
+}
+
+function changeCashToPointFromMaker(makerId, cashData) {
+  return makerAuthInstance.post(`/${makerId}/add/point`, cashData);
+}
+
 export {
   makerRegister,
   makerLogin,
@@ -62,4 +74,7 @@ export {
   completeTesters,
   findCompleteTesters,
   reviewTesters,
+  changeAccountNumberFromMaker,
+  changeCashToPointFromMaker,
+  changePointToCashFromMaker,
 };

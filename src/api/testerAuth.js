@@ -45,11 +45,11 @@ function createMakerReview(applyId, makerReviewData) {
   return testerAuthInstance.post(`/apply/${applyId}/review`, makerReviewData);
 }
 
-function changeAccountNumber(testerId, accountData) {
+function changeAccountNumberFromTester(testerId, accountData) {
   return testerAuthInstance.patch(`/${testerId}/account`, accountData);
 }
 
-function changePointToCash(testerId, pointData) {
+function changePointToCashFromTester(testerId, pointData) {
   return testerAuthInstance.post(`/${testerId}/exchange/point`, pointData);
 }
 
@@ -65,6 +65,6 @@ export {
   findDeadlineTests,
   findCreatedTests,
   findSearchTests,
-  changeAccountNumber,
-  changePointToCash,
+  changeAccountNumberFromTester,
+  changePointToCashFromTester,
 };
