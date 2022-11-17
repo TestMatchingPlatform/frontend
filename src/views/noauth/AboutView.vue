@@ -9,16 +9,13 @@
               <br />
               <br />
               <br />
-              <br />
               이러한 프로그램은 우리의 삶을 좀 더 풍요롭게 해주고,
               <br />
               우리의 일의 효율성을 더 높여주기도 합니다.
               <br />
               <br />
               <br />
-              <br />
               그래서 매년 만들어지는 프로그램의 수는 계속 증가하고 있습니다.
-              <br />
               <br />
               <br />
               <br />
@@ -43,7 +40,7 @@
           <v-card>
             <v-row justify="center">
               <v-col cols="8">
-                <v-img src="@/assets/maker_introduce.png" class="fill-height">
+                <v-img src="@/assets/maker_problem.png" class="fill-height">
                 </v-img>
               </v-col>
 
@@ -94,7 +91,7 @@
           <v-card>
             <v-row justify="center">
               <v-col cols="8">
-                <v-img src="@/assets/tester_introduce.png" class="fill-height">
+                <v-img src="@/assets/tester_problem.png" class="fill-height">
                 </v-img>
               </v-col>
               <v-col cols="12">
@@ -258,6 +255,11 @@
             </v-card>
           </v-col>
         </v-row>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </v-row>
     </div>
   </v-container>
