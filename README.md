@@ -4,15 +4,20 @@
 
 ## 소개
 
-* MainPage
-<img width="2032" alt="스크린샷 2022-10-31 오전 12 20 52" src="https://user-images.githubusercontent.com/63409722/198886671-bfb0211c-c51f-4039-aebb-c06ae9445f4b.png">
+### BM?
+![소개](https://user-images.githubusercontent.com/63409722/202464271-51c09c5a-8e60-4f3b-9d4a-a7952679a3c8.png)
+
+<br>
+
+### 동작 과정
+![기대효과](https://user-images.githubusercontent.com/63409722/202464522-3d56e194-eb4c-44a4-86b5-0a42c6004015.png)
 
 ---
 
 <br>
 <br>
 
-### Tester Matching Platform 이란,
+### BM 이란,
 
 테스터를 필요로 하는 여러 프로그램 제작자, 제작 회사와 테스터간 서로의 니즈를 충족시키기 위해서 개발한 플랫폼입니다.
 
@@ -71,6 +76,11 @@
 
 <br>
 
-### 추가 구현 사항 - 구현중
+### 추가 구현 사항 - 구현
 
 1. 디자인 수정 [디자인 수정현황](https://kukjun.notion.site/Frontend-Design-4d740fdac9af4aa1bc74a57d702e3931)
+
+2. 추가 API 연동
+
+3. 소개, 동작과정 페이지 작성
+
