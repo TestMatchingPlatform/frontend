@@ -77,7 +77,9 @@
               @click="cancelApply"
               >신청 취소하기
             </v-btn>
-            <v-btn class="primary" v-else-if="isTesterApprove"> 미구현</v-btn>
+            <span class="text-h5 teal--text" v-else-if="isTesterApprove">
+              테스트 진행중 ...
+            </span>
             <v-btn
               class="primary"
               v-else-if="isTesterComplete"

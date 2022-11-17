@@ -48,6 +48,7 @@ import {
   findDeadlineTests,
   findCreatedTests,
   findSearchTests,
+  findPopularTests,
 } from '@/api/testerAuth';
 import SimpleTest from '@/components/test/SimpleTest';
 
@@ -96,7 +97,7 @@ export default {
       console.log('event occur');
       switch (this.sort.value) {
         case 'popular':
-          const popularTests = await findPopularTests();
+          const popularTests = await findPopularTests(this.$store.state.UserID);
           console.log(popularTests.data);
           this.tests = popularTests.data;
           break;

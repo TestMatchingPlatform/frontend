@@ -8,6 +8,10 @@ function findCreatedTests(testerId) {
   return testerAuthInstance.get(`/${testerId}/tests/created`);
 }
 
+function findPopularTests(testerId) {
+  return testerAuthInstance.get(`/${testerId}/tests/popular`);
+}
+
 function findSearchTests(testerId, keyword) {
   return testerAuthInstance.get(`/${testerId}/tests?title=${keyword}`);
 }
@@ -59,6 +63,7 @@ export {
   applyTest,
   cancelApplyTest,
   findApplyTests,
+  findPopularTests,
   showPointFromTester,
   findApplyInformationId,
   createMakerReview,
