@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { reviewTesters } from '@/api/makerAuth';
+import { createReviewTesters } from '@/api/makerAuth';
 
 export default {
   name: 'TesterReview',
@@ -48,7 +48,7 @@ export default {
         testerReviewDTOList: this.completeTesters.completeTesterDTOList,
       };
       console.log(request);
-      const res = this.$dialog.warning({
+      const res = await this.$dialog.warning({
         text: '한번 리뷰를 작성하면, 다시는 수정할 수 없습니다. 정말 이렇게 진행할까요?',
         title: '경고',
         actions: {
@@ -59,8 +59,8 @@ export default {
           },
         },
       });
-      if (res === true) {
-        reviewTesters(this.$store.state.UserID, request)
+      if (res) {
+        createReviewTesters(this.$store.state.UserID, request)
           .then(async response => {
             console.log(response.data);
             console.log('성공');

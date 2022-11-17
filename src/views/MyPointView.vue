@@ -34,7 +34,9 @@
                 </v-card>
               </v-col>
               <v-col cols="4">
-                <v-btn class="secondary">계좌 등록 / 변경</v-btn>
+                <v-btn @click="changeAccount" class="secondary"
+                  >계좌 등록 / 변경</v-btn
+                >
               </v-col>
             </v-row>
           </v-card>
@@ -70,7 +72,9 @@
                   </v-card-text>
                 </v-card>
               </v-col>
-              <v-btn class="align-center secondary">전환하기</v-btn>
+              <v-btn @click="exchangePoint" class="align-center secondary"
+                >전환하기</v-btn
+              >
             </v-row>
           </v-card>
         </v-sheet>
@@ -102,7 +106,9 @@
                   </v-card-text>
                 </v-card>
               </v-col>
-              <v-btn class="align-center secondary">충전하기</v-btn>
+              <v-btn class="align-center secondary" @click="exchangeCash"
+                >충전하기</v-btn
+              >
             </v-row>
           </v-card>
         </v-sheet>
@@ -112,8 +118,17 @@
 </template>
 
 <script>
-import { showPointFromMaker } from '@/api/makerAuth';
-import { showPointFromTester } from '@/api/testerAuth';
+import {
+  showPointFromMaker,
+  changePointToCashFromMaker,
+  changeAccountNumberFromMaker,
+  changeCashToPointFromMaker,
+} from '@/api/makerAuth';
+import {
+  showPointFromTester,
+  changeAccountNumberFromTester,
+  changePointToCashFromTester,
+} from '@/api/testerAuth';
 
 export default {
   name: 'MyPointView',
@@ -127,10 +142,10 @@ export default {
         v =>
           this.changePoint <= this.point ||
           '전환할 포인트가 가지고 있는 포인트보다 크면 안됩니다.',
-        v => this.changePoint > 0 || '0보다 작으면 안됩니다.',
+        v => this.changePoint >= 0 || '0보다 작으면 안됩니다.',
       ],
       addPoint: '',
-      addPointRules: [v => this.addPoint > 0 || '0보다 작으면 안됩니다.'],
+      addPointRules: [v => this.addPoint >= 0 || '0보다 작으면 안됩니다.'],
     };
   },
   methods: {
@@ -151,6 +166,115 @@ export default {
         console.log(makerPointData);
         this.accountNumber = makerPointData.accountNumber;
         this.point = makerPointData.point;
+      }
+      this.changePoint = '0';
+      this.addPoint = '0';
+    },
+    async changeAccount() {
+      const res = await this.$dialog.prompt({
+        text: '계좌번호를 입력해주세요',
+        title: '계좌 등록/변경',
+      });
+      if (res) {
+        if (this.$store.state.UserType === 'tester') {
+          const testerRequest = {
+            account: res,
+          };
+          const response = await changeAccountNumberFromTester(
+            this.$store.state.UserID,
+            testerRequest,
+          );
+          this.accountNumber = res;
+        } else if (this.$store.state.UserType === 'maker') {
+          const makerRequest = {
+            account: res,
+          };
+          const response = await changeAccountNumberFromMaker(
+            this.$store.state.UserID,
+            makerRequest,
+          );
+          this.accountNumber = res;
+        }
+        const text = '계좌가 정상적으로 등록되었습니다. 등록된 계좌: ' + res;
+        await this.$dialog.notify.info(text, {
+          timeout: 3000,
+        });
+      }
+    },
+    async exchangePoint() {
+      const process = await this.$dialog.confirm({
+        text: '정말로 전환할까요?',
+        title: '포인트를 계좌로 이동',
+      });
+      if (process) {
+        if (this.$store.state.UserType === 'tester') {
+          const testerRequest = {
+            point: this.changePoint,
+          };
+          changePointToCashFromTester(this.$store.state.UserID, testerRequest)
+            .then(async response => {
+              const text =
+                '포인트를 성공적으로 전환했습니다. 계좌로 입금된 금액: ' +
+                response.data.cash;
+              await this.$dialog.notify.info(text, {
+                timeout: 3000,
+              });
+            })
+            .catch(async response => {
+              console.log(response.response.data);
+              const res = await this.$dialog.error({
+                text: response.response.data.message[0],
+                title: '포인트 전환 실패',
+              });
+              console.log(res);
+            });
+        } else if (this.$store.state.UserType === 'maker') {
+          const makerRequest = {
+            point: this.changePoint,
+          };
+          changePointToCashFromMaker(this.$store.state.UserID, makerRequest)
+            .then(async response => {
+              const text =
+                '포인트를 성공적으로 전환했습니다. 계좌로 입금된 금액: ' +
+                response.data.cash;
+              await this.initValue();
+              await this.$dialog.notify.info(text, {
+                timeout: 3000,
+              });
+            })
+            .catch(async response => {
+              console.log(response.response.data);
+              const res = await this.$dialog.error({
+                text: response.response.data.message[0],
+                title: '포인트 전환 실패',
+              });
+              console.log(res);
+            });
+        }
+      }
+    },
+    async exchangeCash() {
+      const res = await this.$dialog.warning({
+        text: '충전 후 환불은 불가합니다. 전환을 통해서만 돌려받을 수 있습니다. 정말 충전하시겠습니까?',
+        title: 'Point 충전',
+      });
+      if (res) {
+        if (this.$store.state.UserType === 'maker') {
+          const makerRequest = {
+            cash: this.addPoint,
+          };
+          const response = await changeCashToPointFromMaker(
+            this.$store.state.UserID,
+            makerRequest,
+          );
+          console.log(response.data.point);
+          this.point = response.data.point;
+          await this.initValue();
+          const text = '충전이 완료되었습니다. 현재 Point: ' + this.point;
+          await this.$dialog.notify.info(text, {
+            timeout: 3000,
+          });
+        }
       }
     },
   },

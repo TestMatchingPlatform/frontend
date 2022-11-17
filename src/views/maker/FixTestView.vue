@@ -1,3 +1,4 @@
+<script src="../../api/makerAuth.js"></script>
 <template>
   <v-container>
     <div class="text-h3 ma-5">Test 생성하기</div>
@@ -91,8 +92,8 @@
 </template>
 
 <script>
-import { findDetailTest, getImage } from '@/api/noAuth';
-import { updateTest } from '@/api/makerAuth';
+import { findDetailTest } from '@/api/noAuth';
+import { updateTest, updateTestExceptImage } from '@/api/makerAuth';
 export default {
   name: 'FixTestView',
   data() {
@@ -116,37 +117,72 @@ export default {
   methods: {
     async validate() {
       this.$refs.form.validate();
-      try {
-        const testData = new FormData();
-        testData.append('title', this.title);
-        testData.append('recruitmentTimeStart', this.recruitmentTimeStart);
-        testData.append('recruitmentTimeLimit', this.recruitmentTimeLimit);
-        testData.append('durationTimeStart', this.durationTimeStart);
-        testData.append('durationTimeLimit', this.durationTimeLimit);
-        testData.append('content', this.content);
-        testData.append('reward', this.reward);
-        testData.append('participantCapacity', this.participantCapacity);
-        testData.append('symbolImage', this.representImage);
 
-        for (let key of testData.entries()) {
-          console.log(`${key}`);
-        }
-        updateTest(this.$store.state.UserID, this.id, testData)
-          .then(async response => {
-            console.log(response.data);
-            console.log('성공');
-            await this.$router.push('/main');
-          })
-          .catch(async response => {
-            console.log(response);
-            console.log(response.response.data);
-            const res = await this.$dialog.error({
-              title: '테스트 수정 실패',
-              text: response.response.data.message[0],
+      if (this.representImage[0]) {
+        try {
+          const testData = new FormData();
+          testData.append('title', this.title);
+          testData.append('recruitmentTimeStart', this.recruitmentTimeStart);
+          testData.append('recruitmentTimeLimit', this.recruitmentTimeLimit);
+          testData.append('durationTimeStart', this.durationTimeStart);
+          testData.append('durationTimeLimit', this.durationTimeLimit);
+          testData.append('content', this.content);
+          testData.append('reward', this.reward);
+          testData.append('participantCapacity', this.participantCapacity);
+          testData.append('symbolImage', this.representImage);
+
+          for (let key of testData.entries()) {
+            console.log(`${key}`);
+          }
+          updateTest(this.$store.state.UserID, this.id, testData)
+            .then(async response => {
+              console.log(response.data);
+              console.log('성공');
+              await this.$router.push('/main');
+            })
+            .catch(async response => {
+              console.log(response);
+              console.log(response.response.data);
+              const res = await this.$dialog.error({
+                title: '테스트 수정 실패',
+                text: response.response.data.message[0],
+              });
             });
-          });
-      } catch (error) {
-        console.log(error);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          const testData = new FormData();
+          testData.append('title', this.title);
+          testData.append('recruitmentTimeStart', this.recruitmentTimeStart);
+          testData.append('recruitmentTimeLimit', this.recruitmentTimeLimit);
+          testData.append('durationTimeStart', this.durationTimeStart);
+          testData.append('durationTimeLimit', this.durationTimeLimit);
+          testData.append('content', this.content);
+          testData.append('reward', this.reward);
+          testData.append('participantCapacity', this.participantCapacity);
+
+          for (let key of testData.entries()) {
+            console.log(`${key}`);
+          }
+          updateTestExceptImage(this.$store.state.UserID, this.id, testData)
+            .then(async response => {
+              console.log(response.data);
+              console.log('성공');
+              await this.$router.push('/main');
+            })
+            .catch(async response => {
+              console.log(response);
+              console.log(response.response.data);
+              const res = await this.$dialog.error({
+                title: '테스트 수정 실패',
+                text: response.response.data.message[0],
+              });
+            });
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
     reset() {
@@ -201,7 +237,6 @@ export default {
       this.durationTimeStart = detailTestData.durationTimeStart;
       this.durationTimeLimit = detailTestData.durationTimeLimit;
       this.participantCapacity = detailTestData.participantCapacity;
-      this.representImage = await getImage(detailTestData.symbolImageRoot);
       this.reward = detailTestData.reward;
       this.content = detailTestData.content;
     },

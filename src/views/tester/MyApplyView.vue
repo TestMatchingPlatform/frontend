@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     async fetchMockTests() {
-      const deadLineTestsData = await findDeadLineTests();
+      const deadLineTestsData = await findDeadlineTests();
       console.log(deadLineTestsData.data);
       this.items[0].component = deadLineTestsData.data;
       this.items[1].component = deadLineTestsData.data;

@@ -40,19 +40,34 @@ export default {
         starPoint: this.starPoint,
         comment: this.comment,
       };
-      createMakerReview(this.id, request)
-        .then(async response => {
-          console.log(response);
-          await this.$router.push(`/testers/${this.$store.state.UserID}/tests`);
-        })
-        .catch(async response => {
-          console.log(response);
-          await this.$dialog.error({
-            title: 'Maker에 대한 리뷰 작성 실패',
-            text: 'Backend 오류',
-            // text: response.response.data.message[0],
+      const res = await this.$dialog.warning({
+        text: '한번 리뷰를 작성하면, 다시는 수정할 수 없습니다. 정말 이렇게 진행할까요?',
+        title: '경고',
+        actions: {
+          false: 'No',
+          true: {
+            color: 'green',
+            text: '진행하겠습니다.',
+          },
+        },
+      });
+      if (res) {
+        createMakerReview(this.id, request)
+          .then(async response => {
+            console.log(response);
+            await this.$router.push(
+              `/testers/${this.$store.state.UserID}/tests`,
+            );
+          })
+          .catch(async response => {
+            console.log(response);
+            await this.$dialog.error({
+              title: 'Maker에 대한 리뷰 작성 실패',
+              // text: 'Backend 오류',
+              text: response.response.data.message[0],
+            });
           });
-        });
+      }
     },
   },
 };

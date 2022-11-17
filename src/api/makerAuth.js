@@ -21,6 +21,13 @@ function updateTest(makerId, testId, testData) {
   return makerAuthInstance.patch(`/${makerId}/tests/${testId}`, testData);
 }
 
+function updateTestExceptImage(makerId, testId, testData) {
+  return makerAuthInstance.patch(
+    `/${makerId}/tests/${testId}/noImage`,
+    testData,
+  );
+}
+
 function findMyTests(makerId) {
   return makerAuthInstance.get(`/${makerId}/tests`);
 }
@@ -45,8 +52,20 @@ function findCompleteTesters(testId) {
   return makerAuthInstance.get(`/tests/${testId}/perform/review`);
 }
 
-function reviewTesters(makerId, reviewData) {
+function createReviewTesters(makerId, reviewData) {
   return makerAuthInstance.post(`/${makerId}/tests/perform/review`, reviewData);
+}
+
+function changeAccountNumberFromMaker(makerId, accountData) {
+  return makerAuthInstance.patch(`/${makerId}/account`, accountData);
+}
+
+function changePointToCashFromMaker(makerId, pointData) {
+  return makerAuthInstance.post(`/${makerId}/exchange/point`, pointData);
+}
+
+function changeCashToPointFromMaker(makerId, cashData) {
+  return makerAuthInstance.post(`/${makerId}/add/point`, cashData);
 }
 
 export {
@@ -55,11 +74,15 @@ export {
   showPointFromMaker,
   createTest,
   updateTest,
+  updateTestExceptImage,
   findMyTests,
   findApplyTesters,
   findPerformTesters,
   approveTesters,
   completeTesters,
   findCompleteTesters,
-  reviewTesters,
+  createReviewTesters,
+  changeAccountNumberFromMaker,
+  changeCashToPointFromMaker,
+  changePointToCashFromMaker,
 };

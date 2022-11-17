@@ -41,13 +41,10 @@
             >
             <v-spacer></v-spacer>
             <v-avatar>
-              <img
-                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-                alt="John"
-              />
+              <v-icon large color="green"> directions_run </v-icon>
             </v-avatar>
             <div class="ma-2 font-weight-bold">{{ getStoreNickname }}</div>
-            <v-btn @click="logout"> Logout </v-btn>
+            <v-btn text @click="logout"> Logout </v-btn>
           </v-row>
         </template>
 
@@ -74,10 +71,7 @@
             >
             <v-spacer></v-spacer>
             <v-avatar>
-              <img
-                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-                alt="John"
-              />
+              <v-icon large color="teal lighten-2"> supervisor_account </v-icon>
             </v-avatar>
             <div class="ma-2 font-weight-bold">{{ getStoreNickname }}</div>
             <v-btn text @click="logout"> Logout </v-btn>
@@ -87,8 +81,18 @@
         <template v-else>
           <v-row align="center" justify="space-around">
             <v-spacer></v-spacer>
-            <v-btn text class="mx-5 text-h6 font-weight-bold">About</v-btn>
-            <v-btn text class="mx-5 text-h6 font-weight-bold">How Work?</v-btn>
+            <v-btn
+              text
+              class="mx-5 text-h6 font-weight-bold"
+              @click="routeAboutView"
+              >About</v-btn
+            >
+            <v-btn
+              text
+              @click="routeHowWorkView"
+              class="mx-5 text-h6 font-weight-bold"
+              >How Work?</v-btn
+            >
             <v-btn text class="mx-5 text-h6 font-weight-bold">Donate</v-btn>
             <v-spacer></v-spacer>
             <v-btn
@@ -155,6 +159,12 @@ export default {
     },
     routeMainView() {
       this.$router.push('/main');
+    },
+    routeAboutView() {
+      this.$router.push('/about');
+    },
+    routeHowWorkView() {
+      this.$router.push('/how');
     },
   },
 };
