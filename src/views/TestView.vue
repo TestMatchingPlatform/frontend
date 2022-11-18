@@ -3,7 +3,7 @@
     <v-row class="ma-5 pa-3">
       <v-col cols="2">
         <v-card class="grey lighten-2 text-h4 text-center" v-if="isApply"
-          >D-{{ deadLine }}
+          >D-{{ deadline }}
         </v-card>
         <v-card class="grey lighten-2 text-h4 text-center" v-else
           >{{ state }}
@@ -174,7 +174,7 @@ export default {
   data() {
     return {
       id: '',
-      deadLine: 0,
+      deadline: 0,
       title: '',
       makerNickname: '',
       company: '',

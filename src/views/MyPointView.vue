@@ -216,6 +216,7 @@ export default {
               const text =
                 '포인트를 성공적으로 전환했습니다. 계좌로 입금된 금액: ' +
                 response.data.cash;
+              await this.initValue();
               await this.$dialog.notify.info(text, {
                 timeout: 3000,
               });

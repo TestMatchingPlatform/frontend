@@ -10,10 +10,10 @@
           <v-checkbox v-model="approveId" :value="applyTester.id" dense>
           </v-checkbox>
         </v-col>
-        <v-col cols="2">
+        <v-col cols="2" class="text-h6">
           {{ applyTester.nickname }}
         </v-col>
-        <v-col cols="2">
+        <v-col cols="2" class="font-weight-bold">
           {{ applyTester.status }}
         </v-col>
         <v-col cols="6">
@@ -29,7 +29,16 @@
 
     <v-overlay :value="overlay" :opacity="0.8">
       <v-container>
-        <v-row justify="center">
+        <v-row justify="center" align="center">
+          <v-col cols="3">
+            <div>Title</div>
+          </v-col>
+          <v-col cols="3">
+            <div>평점</div>
+          </v-col>
+          <v-col cols="6">
+            <div>리뷰 내용</div>
+          </v-col>
           <v-col
             v-for="beforeTest in approveTester.beforeTests"
             :key="beforeTest.title"

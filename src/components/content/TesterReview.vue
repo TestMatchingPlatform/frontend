@@ -1,11 +1,19 @@
 <template>
   <v-row>
+    <v-col cols="12">
+      <v-row align="center" class="font-weight-bold teal--text">
+        <v-col cols="2">수행인원 Nickname </v-col>
+        <v-col cols="2">Test 수행 여부</v-col>
+        <v-col cols="2">평점</v-col>
+        <v-col cols="5">Comment</v-col>
+      </v-row>
+    </v-col>
     <v-col
       v-for="completeTester in completeTesters.completeTesterDTOList"
       :key="completeTester.id"
       cols="12"
     >
-      <v-row align="center">
+      <v-row align="center" class="font-weight-bold">
         <v-col cols="2">{{ completeTester.nickname }}</v-col>
         <v-col cols="2">{{ completeTester.status }}</v-col>
         <v-col cols="2">
@@ -13,7 +21,7 @@
             v-model="completeTester.starPoint"
             background-color="indigo lighten-3"
             color="indigo"
-            size="20"
+            size="15"
           ></v-rating>
         </v-col>
         <v-col cols="5">
@@ -26,7 +34,7 @@
       </v-row>
     </v-col>
     <v-col cols="12">
-      <v-btn @click="performEvent">리뷰 작성하고 보상 받기</v-btn>
+      <v-btn @click="performEvent">리뷰 작성하고 테스트 종료하기</v-btn>
     </v-col>
   </v-row>
 </template>
