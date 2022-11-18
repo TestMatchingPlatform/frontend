@@ -1,11 +1,20 @@
 <template>
   <v-row>
+    <v-col col="12">
+      <v-row align="center" class="teal--text font-weight-bold">
+        <v-col cols="2">수행 Check Box</v-col>
+        <v-col cols="2">Nickname</v-col>
+        <v-col cols="3">개인 전화</v-col>
+        <v-col cols="3">이메일</v-col>
+        <v-col cols="2">수행 상태</v-col>
+      </v-row>
+    </v-col>
     <v-col
       v-for="performTester in performTesters.performDTOList"
       :key="performTester.id"
       cols="12"
     >
-      <v-row align="center">
+      <v-row align="center" class="font-weight-bold">
         <v-col cols="2">
           <v-checkbox v-model="performId" :value="performTester.id" dense>
           </v-checkbox>
