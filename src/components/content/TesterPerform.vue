@@ -10,7 +10,7 @@
       </v-row>
     </v-col>
     <v-col
-      v-for="performTester in performTesters.performDTOList"
+      v-for="performTester in performTesters"
       :key="performTester.id"
       cols="12"
     >
@@ -54,7 +54,7 @@ export default {
   methods: {
     async performEvent() {
       const request = {
-        completeTesterIdDTOList: this.performId,
+        approveTestIdList: this.performId,
       };
       console.log(request);
 

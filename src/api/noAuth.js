@@ -7,17 +7,17 @@ function findCounts() {
 }
 
 function findDeadLineTests() {
-  return instance.get('/tests/fast_deadline');
+  return instance.get('/missions/fast_deadline');
 }
 
 function findPopularTests() {
-  return instance.get('/tests/many_apply');
+  return instance.get('/missions/many_apply');
 }
 
 function findDetailTest(testId) {
-  return instance.get('/tests/', {
+  return instance.get('/missions/', {
     params: {
-      test_id: testId,
+      mission_id: testId,
     },
   });
 }

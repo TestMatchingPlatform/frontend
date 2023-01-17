@@ -125,8 +125,8 @@ export default {
         testData.append('durationTimeLimit', this.durationTimeLimit);
         testData.append('content', this.content);
         testData.append('reward', this.reward);
-        testData.append('participantCapacity', this.participantCapacity);
-        testData.append('symbolImage', this.representImage);
+        testData.append('limitPerformer', this.participantCapacity);
+        testData.append('image', this.representImage);
 
         for (let key of testData.entries()) {
           console.log(`${key}`);
@@ -155,6 +155,8 @@ export default {
     },
     fileInput(file) {
       this.representImage = file;
+      console.log('occur');
+      console.log(file);
     },
 
     changeRecruitmentTimeStart() {

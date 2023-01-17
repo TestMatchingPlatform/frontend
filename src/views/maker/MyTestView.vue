@@ -118,10 +118,10 @@ export default {
       const myTests = await findMyTests(this.$store.state.UserID);
       console.log(myTests.data);
       const myTestsData = myTests.data;
-      this.items[0].component = myTestsData.applyPeriodTestList;
-      this.items[1].component = myTestsData.approvePeriodTestList;
-      this.items[2].component = myTestsData.progressPeriodTestList;
-      this.items[3].component = myTestsData.completePeriodTestList;
+      this.items[0].component = myTestsData.applyPeriodTestDTOList;
+      this.items[1].component = myTestsData.approvePeriodTestDTOList;
+      this.items[2].component = myTestsData.progressPeriodTestDTOList;
+      this.items[3].component = myTestsData.completePeriodTestDTOList;
     },
   },
   created() {

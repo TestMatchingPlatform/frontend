@@ -20,10 +20,6 @@ function testerRegister(userData) {
   return testerAuthInstance.post('/register', userData);
 }
 
-function testerLogin(userData) {
-  return testerAuthInstance.post('/login', userData);
-}
-
 function showPointFromTester(testerId) {
   return testerAuthInstance.get(`/${testerId}/exchange`);
 }
@@ -58,7 +54,6 @@ function changePointToCashFromTester(testerId, pointData) {
 }
 
 export {
-  testerLogin,
   testerRegister,
   applyTest,
   cancelApplyTest,

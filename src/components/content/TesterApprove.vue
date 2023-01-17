@@ -1,10 +1,6 @@
 <template>
   <v-row>
-    <v-col
-      v-for="applyTester in applyTesters.applyDTOList"
-      :key="applyTester.id"
-      cols="6"
-    >
+    <v-col v-for="applyTester in applyTesters" :key="applyTester.id" cols="6">
       <v-row align="center">
         <v-col cols="2">
           <v-checkbox v-model="approveId" :value="applyTester.id" dense>
@@ -40,7 +36,7 @@
             <div>리뷰 내용</div>
           </v-col>
           <v-col
-            v-for="beforeTest in approveTester.beforeTests"
+            v-for="beforeTest in approveTester.beforeMissions"
             :key="beforeTest.title"
             cols="12"
           >
@@ -103,7 +99,7 @@ export default {
   methods: {
     async approveEvent() {
       const request = {
-        approveTesterList: this.approveId,
+        approveTesterIdList: this.approveId,
       };
       console.log(request);
       const res = await this.$dialog.warning({

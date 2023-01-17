@@ -189,9 +189,9 @@ export default {
       symbolImageURL: '',
       state: '',
       contentState: '',
-      applyTesters: [],
-      performTesters: [],
-      completeTesters: [],
+      applyTesters: '',
+      performTesters: '',
+      completeTesters: '',
       applyInformationId: '',
     };
   },
@@ -275,19 +275,20 @@ export default {
     async showApplyTesters() {
       const applyTestersResponse = await findApplyTesters(this.id);
       console.log(applyTestersResponse.data);
-      this.applyTesters = applyTestersResponse.data;
+      this.applyTesters = applyTestersResponse.data.applyTesterDTOList;
       this.contentState = 'approve';
     },
     async showPerformTesters() {
       const performTesterResponse = await findPerformTesters(this.id);
       console.log(performTesterResponse.data);
-      this.performTesters = performTesterResponse.data;
+      this.performTesters = performTesterResponse.data.performTesterDTOList;
       this.contentState = 'perform';
     },
     async showReviewTesters() {
       const completeTesterResponse = await findCompleteTesters(this.id);
       console.log(completeTesterResponse.data);
-      this.completeTesters = completeTesterResponse.data;
+      this.completeTesters =
+        completeTesterResponse.data.testerListOfClosedTestList;
       this.contentState = 'reviewFromMaker';
     },
     async showReviewMaker() {
@@ -300,6 +301,7 @@ export default {
       this.contentState = 'reviewFromTester';
     },
   },
+
   created() {
     this.insertValue();
   },

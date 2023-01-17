@@ -5,55 +5,54 @@ function makerRegister(userData) {
   return makerAuthInstance.post('/register', userData);
 }
 
-function makerLogin(userData) {
-  return makerAuthInstance.post('/login', userData);
-}
-
 function showPointFromMaker(makerId) {
   return makerAuthInstance.get(`/${makerId}/exchange`);
 }
 
 function createTest(makerId, testData) {
-  return makerAuthInstance.post(`/${makerId}/tests`, testData);
+  return makerAuthInstance.post(`/${makerId}/missions`, testData);
 }
 
 function updateTest(makerId, testId, testData) {
-  return makerAuthInstance.patch(`/${makerId}/tests/${testId}`, testData);
+  return makerAuthInstance.patch(`/${makerId}/missions/${testId}`, testData);
 }
 
 function updateTestExceptImage(makerId, testId, testData) {
   return makerAuthInstance.patch(
-    `/${makerId}/tests/${testId}/noImage`,
+    `/${makerId}/missions/${testId}/no_image`,
     testData,
   );
 }
 
 function findMyTests(makerId) {
-  return makerAuthInstance.get(`/${makerId}/tests`);
+  return makerAuthInstance.get(`/${makerId}/missions`);
 }
 
 function findApplyTesters(testId) {
-  return makerAuthInstance.get(`/tests/${testId}/apply`);
+  return makerAuthInstance.get(`/missions/${testId}/apply`);
 }
 
 function findPerformTesters(testId) {
-  return makerAuthInstance.get(`/tests/${testId}/perform`);
+  return makerAuthInstance.get(`/missions/${testId}/perform`);
 }
 
 function approveTesters(testId, approveData) {
-  return makerAuthInstance.post(`/tests/${testId}/perform`, approveData);
+  return makerAuthInstance.post(`/missions/${testId}/perform`, approveData);
 }
 
 function completeTesters(testId, completeData) {
-  return makerAuthInstance.post(`/tests/${testId}/complete`, completeData);
+  return makerAuthInstance.post(`/missions/${testId}/complete`, completeData);
 }
 
 function findCompleteTesters(testId) {
-  return makerAuthInstance.get(`/tests/${testId}/perform/review`);
+  return makerAuthInstance.get(`/missions/${testId}/perform/review`);
 }
 
 function createReviewTesters(makerId, reviewData) {
-  return makerAuthInstance.post(`/${makerId}/tests/perform/review`, reviewData);
+  return makerAuthInstance.post(
+    `/${makerId}/missions/perform/review`,
+    reviewData,
+  );
 }
 
 function changeAccountNumberFromMaker(makerId, accountData) {
@@ -65,12 +64,11 @@ function changePointToCashFromMaker(makerId, pointData) {
 }
 
 function changeCashToPointFromMaker(makerId, cashData) {
-  return makerAuthInstance.post(`/${makerId}/add/point`, cashData);
+  return makerAuthInstance.post(`/${makerId}/exchange/cash`, cashData);
 }
 
 export {
   makerRegister,
-  makerLogin,
   showPointFromMaker,
   createTest,
   updateTest,

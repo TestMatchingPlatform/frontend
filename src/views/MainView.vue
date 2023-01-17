@@ -241,12 +241,12 @@ export default {
     async fetchDeadLineTests() {
       const deadLineTestsData = await findDeadLineTests();
       console.log(deadLineTestsData.data);
-      this.deadLineTests = deadLineTestsData.data;
+      this.deadLineTests = deadLineTestsData.data.simpleMissionDTOList;
     },
     async fetchPopularTests() {
       const popularTestsData = await findPopularTests();
       console.log(popularTestsData.data);
-      this.popularTests = popularTestsData.data;
+      this.popularTests = popularTestsData.data.simpleMissionDTOList;
     },
   },
   created() {

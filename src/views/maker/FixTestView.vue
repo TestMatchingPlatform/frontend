@@ -1,4 +1,3 @@
-<script src="../../api/makerAuth.js"></script>
 <template>
   <v-container>
     <div class="text-h3 ma-5">Test 생성하기</div>
@@ -112,13 +111,14 @@ export default {
       overlay: '',
       dateState: '',
       picker: new Date().toISOString().substr(0, 10),
+      changeImage: false,
     };
   },
   methods: {
     async validate() {
       this.$refs.form.validate();
-
-      if (this.representImage[0]) {
+      console.log(this.representImage[0] + 'representImage');
+      if (this.changeImage) {
         try {
           const testData = new FormData();
           testData.append('title', this.title);
@@ -128,8 +128,8 @@ export default {
           testData.append('durationTimeLimit', this.durationTimeLimit);
           testData.append('content', this.content);
           testData.append('reward', this.reward);
-          testData.append('participantCapacity', this.participantCapacity);
-          testData.append('symbolImage', this.representImage);
+          testData.append('limitPerformer', this.participantCapacity);
+          testData.append('image', this.representImage);
 
           for (let key of testData.entries()) {
             console.log(`${key}`);
@@ -161,7 +161,7 @@ export default {
           testData.append('durationTimeLimit', this.durationTimeLimit);
           testData.append('content', this.content);
           testData.append('reward', this.reward);
-          testData.append('participantCapacity', this.participantCapacity);
+          testData.append('limitPerformer', this.participantCapacity);
 
           for (let key of testData.entries()) {
             console.log(`${key}`);
@@ -190,6 +190,7 @@ export default {
     },
     fileInput(file) {
       this.representImage = file;
+      this.changeImage = true;
     },
 
     changeRecruitmentTimeStart() {
