@@ -1,19 +1,19 @@
 import { testerAuthInstance } from '@/api/index';
 
 function findDeadlineTests(testerId) {
-  return testerAuthInstance.get(`/${testerId}/tests/deadline`);
+  return testerAuthInstance.get(`/${testerId}/missions/deadline`);
 }
 
 function findCreatedTests(testerId) {
-  return testerAuthInstance.get(`/${testerId}/tests/created`);
+  return testerAuthInstance.get(`/${testerId}/missions/created`);
 }
 
 function findPopularTests(testerId) {
-  return testerAuthInstance.get(`/${testerId}/tests/popular`);
+  return testerAuthInstance.get(`/${testerId}/missions/popular`);
 }
 
 function findSearchTests(testerId, keyword) {
-  return testerAuthInstance.get(`/${testerId}/tests?title=${keyword}`);
+  return testerAuthInstance.get(`/${testerId}/missions?title=${keyword}`);
 }
 
 function testerRegister(userData) {
@@ -28,16 +28,19 @@ function findApplyTests(testerId) {
   return testerAuthInstance.get(`/${testerId}/apply`);
 }
 
-function applyTest(testerId, testData) {
-  return testerAuthInstance.post(`/${testerId}/apply`, testData);
+function applyTest(testerId, missionId, testData) {
+  return testerAuthInstance.post(
+    `/${testerId}/missions/${missionId}/apply`,
+    testData,
+  );
 }
 
-function cancelApplyTest(testerId, testId) {
-  return testerAuthInstance.delete(`/${testerId}/apply/${testId}`);
+function cancelApplyTest(testerId, missionId) {
+  return testerAuthInstance.delete(`/${testerId}/missions/${missionId}/apply`);
 }
 
 function findApplyInformationId(testerId, testId) {
-  return testerAuthInstance.get(`/${testerId}/tests/${testId}`);
+  return testerAuthInstance.get(`/${testerId}/missions/${testId}`);
 }
 
 function createMakerReview(applyId, makerReviewData) {
