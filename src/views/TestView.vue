@@ -84,7 +84,7 @@
               class="primary"
               v-else-if="isTesterComplete"
               @click="showReviewMaker"
-              >리뷰 작성하기
+              >메이커 리뷰 작성하기
             </v-btn>
             <v-btn
               class="primary"
@@ -189,9 +189,9 @@ export default {
       symbolImageURL: '',
       state: '',
       contentState: '',
-      applyTesters: [],
-      performTesters: [],
-      completeTesters: [],
+      applyTesters: '',
+      performTesters: '',
+      completeTesters: '',
       applyInformationId: '',
     };
   },
@@ -223,14 +223,14 @@ export default {
     },
     async testerApply() {
       const testData = {
-        testId: this.id,
+        missionId: this.id,
       };
       const process = await this.$dialog.confirm({
         title: '신청',
         text: '해당 테스트를 정말로 신청하시겠습니까?.',
       });
       if (process) {
-        applyTest(this.$store.state.UserID, testData)
+        applyTest(this.$store.state.UserID, this.id, testData)
           .then(async response => {
             console.log(response.data);
             await this.$router.push(
@@ -275,19 +275,20 @@ export default {
     async showApplyTesters() {
       const applyTestersResponse = await findApplyTesters(this.id);
       console.log(applyTestersResponse.data);
-      this.applyTesters = applyTestersResponse.data;
+      this.applyTesters = applyTestersResponse.data.applyTesterDTOList;
       this.contentState = 'approve';
     },
     async showPerformTesters() {
       const performTesterResponse = await findPerformTesters(this.id);
       console.log(performTesterResponse.data);
-      this.performTesters = performTesterResponse.data;
+      this.performTesters = performTesterResponse.data.performTesterDTOList;
       this.contentState = 'perform';
     },
     async showReviewTesters() {
       const completeTesterResponse = await findCompleteTesters(this.id);
       console.log(completeTesterResponse.data);
-      this.completeTesters = completeTesterResponse.data;
+      this.completeTesters =
+        completeTesterResponse.data.testerListOfClosedTestList;
       this.contentState = 'reviewFromMaker';
     },
     async showReviewMaker() {
@@ -295,11 +296,11 @@ export default {
         this.$store.state.UserID,
         this.id,
       );
-      console.log(applyInformationResponse.data.id);
-      this.applyInformationId = applyInformationResponse.data.id;
+      this.applyInformationId = applyInformationResponse.data;
       this.contentState = 'reviewFromTester';
     },
   },
+
   created() {
     this.insertValue();
   },

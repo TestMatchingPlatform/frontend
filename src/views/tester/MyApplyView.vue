@@ -97,9 +97,9 @@ export default {
       const applyTests = await findApplyTests(this.$store.state.UserID);
       console.log(applyTests.data);
       const applyTestsData = applyTests.data;
-      this.items[0].component = applyTestsData.applyTestListResponseList;
-      this.items[1].component = applyTestsData.approveTestListResponseList;
-      this.items[2].component = applyTestsData.quitTestListResponseList;
+      this.items[0].component = applyTestsData.appliedMissionDTOList;
+      this.items[1].component = applyTestsData.approvedMissionDTOList;
+      this.items[2].component = applyTestsData.executedMissionDTOList;
     },
   },
   created() {

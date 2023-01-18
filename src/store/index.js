@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
-import { makerLogin } from '@/api/makerAuth';
-import { testerLogin } from '@/api/testerAuth';
+import { makerLogin } from '@/api/visitor';
+import { testerLogin } from '@/api/visitor';
 
 Vue.use(Vuex);
 

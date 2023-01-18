@@ -158,13 +158,13 @@ export default {
         const testerPoint = await showPointFromTester(this.$store.state.UserID);
         const testerPointData = testerPoint.data;
         console.log(testerPointData);
-        this.accountNumber = testerPointData.accountNumber;
+        this.accountNumber = testerPointData.account;
         this.point = testerPointData.point;
       } else if (this.$store.state.UserType === 'maker') {
         const makerPoint = await showPointFromMaker(this.$store.state.UserID);
         const makerPointData = makerPoint.data;
         console.log(makerPointData);
-        this.accountNumber = makerPointData.accountNumber;
+        this.accountNumber = makerPointData.account;
         this.point = makerPointData.point;
       }
       this.changePoint = '0';

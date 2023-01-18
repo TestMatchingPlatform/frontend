@@ -82,7 +82,7 @@ export default {
     async initMockValue() {
       const deadlineTests = await findDeadlineTests(this.$store.state.UserID);
       console.log(deadlineTests.data);
-      this.tests = deadlineTests.data;
+      this.tests = deadlineTests.data.dtoList;
     },
     async searchTests() {
       console.log('searching event occur');

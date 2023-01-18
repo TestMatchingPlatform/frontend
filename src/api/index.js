@@ -2,9 +2,11 @@ import axios from 'axios';
 import { setInterceptors } from '@/api/common/interceptors';
 
 function createInstance() {
-  return axios.create({
+  const instance = axios.create({
     baseURL: process.env.VUE_APP_API_URL,
+    withCredentials: true,
   });
+  return instance;
 }
 
 function createInstanceWithAuth(url) {
@@ -16,5 +18,6 @@ function createInstanceWithAuth(url) {
 }
 
 export const instance = createInstance();
+export const instanceForAuth = createInstanceWithAuth('');
 export const testerAuthInstance = createInstanceWithAuth('testers');
 export const makerAuthInstance = createInstanceWithAuth('makers');

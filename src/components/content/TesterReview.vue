@@ -9,7 +9,7 @@
       </v-row>
     </v-col>
     <v-col
-      v-for="completeTester in completeTesters.completeTesterDTOList"
+      v-for="completeTester in completeTesters"
       :key="completeTester.id"
       cols="12"
     >
@@ -53,7 +53,7 @@ export default {
   methods: {
     async performEvent() {
       const request = {
-        testerReviewDTOList: this.completeTesters.completeTesterDTOList,
+        testerReviewDTOList: this.completeTesters,
       };
       console.log(request);
       const res = await this.$dialog.warning({
