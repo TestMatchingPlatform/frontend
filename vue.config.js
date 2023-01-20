@@ -6,6 +6,6 @@ module.exports = defineConfig({
     client: {
       overlay: false,
     },
-    disableHostCheck: true,
+    allowedHosts: 'all',
   },
 });
