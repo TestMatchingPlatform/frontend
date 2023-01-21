@@ -1,9 +1,6 @@
 import { makerAuthInstance } from '@/api/index';
 
 // maker
-function makerRegister(userData) {
-  return makerAuthInstance.post('/register', userData);
-}
 
 function showPointFromMaker(makerId) {
   return makerAuthInstance.get(`/${makerId}/exchange`);
@@ -68,7 +65,6 @@ function changeCashToPointFromMaker(makerId, cashData) {
 }
 
 export {
-  makerRegister,
   showPointFromMaker,
   createTest,
   updateTest,

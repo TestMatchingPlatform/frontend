@@ -118,8 +118,8 @@
 </template>
 
 <script>
-import { makerRegister } from '@/api/makerAuth';
-import { testerRegister } from '@/api/testerAuth';
+import { makerRegister } from '@/api/visitor';
+import { testerRegister } from '@/api/visitor';
 export default {
   name: 'RegisterView',
   data() {

@@ -16,10 +16,6 @@ function findSearchTests(testerId, keyword) {
   return testerAuthInstance.get(`/${testerId}/missions?title=${keyword}`);
 }
 
-function testerRegister(userData) {
-  return testerAuthInstance.post('/register', userData);
-}
-
 function showPointFromTester(testerId) {
   return testerAuthInstance.get(`/${testerId}/exchange`);
 }
@@ -57,7 +53,6 @@ function changePointToCashFromTester(testerId, pointData) {
 }
 
 export {
-  testerRegister,
   applyTest,
   cancelApplyTest,
   findApplyTests,
